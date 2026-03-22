@@ -389,16 +389,16 @@ footer{background:var(--black);border-top:1px solid var(--bd);padding:70px 5% 26
 <div id="cur"></div>
 <div id="ring"></div>
 <nav id="nv">
-  <a class="logo" href="index.html">
+  <a class="logo" href="index">
     <img id="nav-logo" src="logoforwhite.png" alt="SAPZCODES" onerror="this.style.display='none'">
   </a>
   <div class="nav-right">
     <ul class="nl">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="sap.html">About SAP</a></li>
-      <li><a href="career.html">Career</a></li>
-      <li><a href="contact.html" class="on">Enquiry</a></li>
-      <li><a href="terms.html">T&amp;C</a></li>
+      <li><a href="index">Home</a></li>
+      <li><a href="sap">About SAP</a></li>
+      <li><a href="career">Career</a></li>
+      <li><a href="contact" class="on">Enquiry</a></li>
+      <li><a href="terms">T&amp;C</a></li>
       <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
     </ul>
     <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
@@ -408,11 +408,11 @@ footer{background:var(--black);border-top:1px solid var(--bd);padding:70px 5% 26
   </div>
 </nav>
 <div class="mm" id="mob">
-  <a href="index.html">Home</a>
-  <a href="sap.html">About SAP</a>
-  <a href="career.html">Career</a>
-  <a href="contact.html">Enquiry</a>
-  <a href="terms.html">T&C</a>
+  <a href="index">Home</a>
+  <a href="sap">About SAP</a>
+  <a href="career">Career</a>
+  <a href="contact">Enquiry</a>
+  <a href="terms">T&C</a>
   <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
   <div class="mm-theme">
     <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
@@ -483,20 +483,20 @@ footer{background:var(--black);border-top:1px solid var(--bd);padding:70px 5% 26
       </div>
     </div>
     <div class="fco"><h4>Navigate</h4><ul>
-      <li><a href="index.html">Home</a></li><li><a href="sap.html">About SAP</a></li>
-      <li><a href="career.html">Career & Courses</a></li><li><a href="contact.html">Enquiry</a></li>
-      <li><a href="terms.html">Terms & Conditions</a></li>
+      <li><a href="index">Home</a></li><li><a href="sap">About SAP</a></li>
+      <li><a href="career">Career & Courses</a></li><li><a href="contact">Enquiry</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
     </ul></div>
     <div class="fco"><h4>SAP Modules</h4><ul>
-      <li><a href="sap.html">SAP ABAP</a></li><li><a href="sap.html">SAP FICO</a></li>
-      <li><a href="sap.html">SAP MM</a></li><li><a href="sap.html">SAP SD</a></li>
-      <li><a href="sap.html">SAP HCM</a></li><li><a href="sap.html">SAP S/4HANA</a></li>
+      <li><a href="sap">SAP ABAP</a></li><li><a href="sap">SAP FICO</a></li>
+      <li><a href="sap">SAP MM</a></li><li><a href="sap">SAP SD</a></li>
+      <li><a href="sap">SAP HCM</a></li><li><a href="sap">SAP S/4HANA</a></li>
     </ul></div>
     <div class="fco"><h4>Contact</h4><ul>
       <li><a href="tel:+919952227377">+91 99522 27377</a></li>
       <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
       <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
-      <li><a href="contact.html">R.S. Puram, Coimbatore</a></li>
+      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
     </ul></div>
   </div>
   <div class="fb">
@@ -573,7 +573,7 @@ window.addEventListener('scroll', () => {
 
 // ── ACTIVE NAV LINK ────────────────────────────────────────
 (function() {
-  const page = location.pathname.split('/').pop() || 'index.html';
+  const page = location.pathname.split('/').pop() || 'index';
   document.querySelectorAll('.nl a[data-p], .mm a[data-p]').forEach(a => {
     if (a.dataset.p === page) a.classList.add('on');
   });
