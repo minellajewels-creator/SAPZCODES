@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enquiry – SAPZCODES | Coimbatore</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav id="nv">
+  <a class="logo" href="index.html">
+    <img src="logo.jpeg" alt="SAPZCODES" onerror="this.style.display='none'">
+    <span class="logo-t">SAP<span class="z">Z</span>CODES</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index.html"   data-p="index.html">Home</a></li>
+      <li><a href="sap.html"     data-p="sap.html">About SAP</a></li>
+      <li><a href="career.html"  data-p="career.html">Career</a></li>
+      <li><a href="contact.html" data-p="contact.html" class="on">Enquiry</a></li>
+      <li><a href="terms.html"   data-p="terms.html">T&amp;C</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <span class="icon-sun">☀️</span>
+      <span class="icon-moon">🌙</span>
+    </button>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mm" id="mob">
+  <a href="index.html">Home</a>
+  <a href="sap.html">About SAP</a>
+  <a href="career.html">Career</a>
+  <a href="contact.html">Enquiry</a>
+  <a href="terms.html">T&C</a>
+  <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
+  <div class="mm-theme">
+    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
+    Toggle Theme
+  </div>
+</div>
+
+<!-- CONTACT HERO -->
+<section class="conth">
+  <div class="tag c">Get In Touch</div>
+  <h1>Let's Talk <span>SAP</span></h1>
+  <p>Reach us on your preferred channel — counsellors respond fast. Usually within minutes!</p>
+</section>
+
+<!-- CONTACT LAYOUT -->
+<div class="contl">
+  <div>
+    <h3 style="font-family:var(--fh);font-size:1.2rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:22px">Send an Enquiry</h3>
+    <div class="cg">
+      <a href="https://wa.me/919952227377" target="_blank" class="cc wa">
+        <div class="cic">💬</div>
+        <div><div class="clbl">WhatsApp — Fastest Response</div><div class="cval">+91 99522 27377</div></div>
+        <div class="car">↗</div>
+      </a>
+      <a href="https://instagram.com/sapzcodes" target="_blank" class="cc ig">
+        <div class="cic">📸</div>
+        <div><div class="clbl">Instagram DM</div><div class="cval">@sapzcodes</div></div>
+        <div class="car">↗</div>
+      </a>
+      <a href="mailto:hr@sapzcodes.com" class="cc em">
+        <div class="cic">✉️</div>
+        <div><div class="clbl">Email</div><div class="cval">hr@sapzcodes.com</div></div>
+        <div class="car">↗</div>
+      </a>
+    </div>
+
+    <!-- Quick enquiry tip -->
+    <div style="margin-top:28px;padding:20px 22px;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r)">
+      <div style="font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--g);margin-bottom:8px">💡 Quick Tip</div>
+      <p style="font-size:.87rem;color:var(--gr);line-height:1.65">WhatsApp gives the fastest response — usually within minutes during working hours. For formal queries, email works great too.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="ic">
+      <h3>Find Us</h3>
+      <div class="ir"><div class="iico">📍</div><div><div class="ilbl">Address</div><div class="ival">1st Floor, Sasha Building,<br>E Venkatasamy Rd, R.S. Puram,<br>Coimbatore, Tamil Nadu 641002</div></div></div>
+      <div class="ir"><div class="iico">📞</div><div><div class="ilbl">Phone</div><div class="ival"><a href="tel:+919952227377">+91 99522 27377</a></div></div></div>
+      <div class="ir"><div class="iico">✉️</div><div><div class="ilbl">Email</div><div class="ival"><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></div></div></div>
+      <div class="ir"><div class="iico">📸</div><div><div class="ilbl">Instagram</div><div class="ival"><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></div></div></div>
+      <div class="ir"><div class="iico">🕘</div><div><div class="ilbl">Working Hours</div><div class="ival">Mon – Sat: 9:00 AM – 7:00 PM<br>Sunday: By appointment only</div></div></div>
+      <div class="mapb">
+        <iframe src="https://www.google.com/maps?q=E+Venkatasamy+Rd,+R.S.+Puram,+Coimbatore,+Tamil+Nadu+641002&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="sap.html">About SAP</a></li>
+      <li><a href="career.html">Career</a></li><li><a href="contact.html">Enquiry</a></li>
+      <li><a href="terms.html">T&C</a></li>
+    </ul></div>
+    <div class="fco"><h4>SAP Modules</h4><ul>
+      <li><a href="sap.html">SAP ABAP</a></li><li><a href="sap.html">SAP FICO</a></li>
+      <li><a href="sap.html">SAP MM</a></li><li><a href="sap.html">SAP S/4HANA</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · Coimbatore, Tamil Nadu · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+
+<script src="_shared.js"></script>
+</body>
+</html>
