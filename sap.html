@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About SAP – SAPZCODES | Coimbatore</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SAPZCODES — SHARED STYLES (included in every page)
+   ============================================================ */
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+/* ── DARK THEME (default) ── */
+:root{
+  --black:#000;
+  --bg:#060806;
+  --s1:#0b0f0b;
+  --s2:#111611;
+  --g:#3ddc50;
+  --w:#fff;
+  --gr:#9ca89c;
+  --mu:#4e5e4e;
+  --bd:rgba(61,220,80,.1);
+  --bd2:rgba(255,255,255,.06);
+  --text:#fff;
+  --r:12px;
+  --glow:0 0 36px rgba(61,220,80,.2);
+  --glow-s:0 0 18px rgba(61,220,80,.14);
+  --fh:'Rajdhani',sans-serif;
+  --fb:'Exo 2',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --nav-bg:rgba(0,0,0,.72);
+  --nav-border:rgba(61,220,80,.1);
+  --shadow:none;
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"]{
+  --black:#f0f4f0;
+  --bg:#f5f9f5;
+  --s1:#eaf2ea;
+  --s2:#ddeedd;
+  --w:#0a100a;
+  --gr:#3a4a3a;
+  --mu:#5a6e5a;
+  --bd:rgba(34,160,50,.18);
+  --bd2:rgba(0,0,0,.08);
+  --text:#0a100a;
+  --nav-bg:rgba(245,249,245,.85);
+  --nav-border:rgba(34,160,50,.15);
+  --shadow:0 2px 20px rgba(0,0,0,.06);
+}
+
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--fb);overflow-x:hidden;cursor:none;
+  transition:background .35s,color .35s;
+}
+
+/* ── CURSOR ── */
+#cur{width:10px;height:10px;background:var(--g);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--g),0 0 4px var(--g);transition:width .15s,height .15s}
+#ring{width:32px;height:32px;border:1.5px solid rgba(61,220,80,.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
+body.hov #cur{width:18px;height:18px}
+
+/* ── SCANLINES (dark only) ── */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);animation:sc 10s linear infinite;opacity:1;transition:opacity .35s}
+[data-theme="light"] body::before{opacity:0}
+@keyframes sc{from{background-position:0 0}to{background-position:0 80px}}
+
+/* ── DOT MATRIX ── */
+.dots{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.dots::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(61,220,80,.11) 1px,transparent 1px);background-size:28px 28px;animation:dp 35s linear infinite}
+.dots::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 25%,var(--bg) 72%)}
+@keyframes dp{from{background-position:0 0}to{background-position:28px 28px}}
+[data-theme="light"] .dots::before{background-image:radial-gradient(circle,rgba(34,160,50,.09) 1px,transparent 1px)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:9000;height:66px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--nav-border);transition:all .3s;box-shadow:var(--shadow)}
+nav.sc{height:56px}
+[data-theme="light"] nav.sc{background:rgba(245,249,245,.95)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:none}
+.logo img{height:38px;width:38px;object-fit:cover;border-radius:50%;border:1.5px solid var(--bd)}
+.logo-t{font-family:var(--fh);font-size:1.32rem;font-weight:700;letter-spacing:.04em;color:var(--text)}
+.logo-t .z{color:var(--g)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nl{display:flex;align-items:center;gap:4px;list-style:none}
+.nl a{font-family:var(--fm);font-size:.67rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);text-decoration:none;padding:8px 13px;border-radius:6px;transition:color .2s;cursor:none;position:relative}
+.nl a::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:1.5px;background:var(--g);border-radius:2px;transition:width .25s}
+.nl a:hover,.nl a.on{color:var(--g)}
+.nl a:hover::after,.nl a.on::after{width:55%}
+.nl .cta{background:var(--g)!important;color:#000!important;font-family:var(--fh)!important;font-weight:700!important;font-size:.8rem!important;letter-spacing:.06em!important;padding:9px 20px!important;border-radius:6px!important;transition:all .2s!important}
+.nl .cta:hover{background:#fff!important;box-shadow:var(--glow-s)!important}
+.nl .cta::after{display:none!important}
+
+/* ── THEME TOGGLE ── */
+.theme-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(61,220,80,.08);
+  border:1.5px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;transition:all .25s;flex-shrink:0;
+  position:relative;overflow:hidden;
+}
+.theme-btn:hover{background:rgba(61,220,80,.15);border-color:var(--g);box-shadow:var(--glow-s);transform:scale(1.08)}
+.theme-btn .icon-sun,.theme-btn .icon-moon{
+  position:absolute;transition:all .35s cubic-bezier(.68,-.55,.265,1.55);
+  font-size:1.1rem;line-height:1;
+}
+.theme-btn .icon-sun{transform:translateY(0) rotate(0deg);opacity:1}
+.theme-btn .icon-moon{transform:translateY(28px) rotate(-90deg);opacity:0}
+[data-theme="light"] .theme-btn .icon-sun{transform:translateY(-28px) rotate(90deg);opacity:0}
+[data-theme="light"] .theme-btn .icon-moon{transform:translateY(0) rotate(0deg);opacity:1}
+[data-theme="light"] .theme-btn{background:rgba(34,160,50,.08);border-color:rgba(34,160,50,.2)}
+
+/* ── HAMBURGER ── */
+.hb{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:8px}
+.hb span{width:25px;height:1.5px;background:var(--text);border-radius:2px;transition:all .3s}
+.hb.op span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+.hb.op span:nth-child(2){opacity:0}
+.hb.op span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+.mm{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:8999;flex-direction:column;align-items:center;justify-content:center;gap:32px;backdrop-filter:blur(20px)}
+[data-theme="light"] .mm{background:rgba(245,249,245,.98)}
+.mm.op{display:flex}
+.mm a{font-family:var(--fh);font-size:2rem;font-weight:700;letter-spacing:.05em;color:var(--text);text-decoration:none;cursor:none;transition:color .2s}
+.mm a:hover{color:var(--g)}
+.mm-theme{display:flex;align-items:center;gap:12px;font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;color:var(--mu);margin-top:8px}
+
+/* ── BUTTONS ── */
+.bg{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#000;font-family:var(--fh);font-weight:700;font-size:.93rem;letter-spacing:.05em;padding:12px 30px;border-radius:6px;text-decoration:none;cursor:none;border:none;transition:all .25s;position:relative;overflow:hidden}
+.bg::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.14);transform:translateX(-101%);transition:transform .3s}
+.bg:hover::before{transform:translateX(0)}
+.bg:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.bo{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--bd);color:var(--text);font-family:var(--fh);font-weight:600;font-size:.93rem;letter-spacing:.04em;padding:12px 30px;border-radius:6px;text-decoration:none;cursor:none;background:transparent;transition:all .25s}
+.bo:hover{border-color:var(--g);color:var(--g);background:rgba(61,220,80,.05);transform:translateY(-2px)}
+
+/* ── UTILS ── */
+.tag{font-family:var(--fm);font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--g);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.tag::before{content:'';width:18px;height:1px;background:var(--g);display:inline-block}
+.tag.c{justify-content:center}
+.tag.c::before{display:none}
+.h1{font-family:var(--fh);font-weight:700;font-size:clamp(1.9rem,4vw,3rem);line-height:1.06;letter-spacing:.02em;color:var(--text);margin-bottom:16px}
+.h1 .g{color:var(--g)}
+.h1 .sk{-webkit-text-stroke:1.5px var(--g);color:transparent}
+[data-theme="light"] .h1 .sk{-webkit-text-stroke:1.5px var(--g)}
+.sub{color:var(--gr);font-size:1rem;line-height:1.75;max-width:560px}
+.sec{padding:100px 5%}
+.sec.t0{padding-top:0}
+
+/* ── SCROLL REVEAL ── */
+@keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.fu.vis{opacity:1;transform:translateY(0)}
+
+/* ── MARQUEE ── */
+.mq-wrap{overflow:hidden;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);background:var(--s1);padding:17px 0}
+.mq-tr{display:flex;animation:mq 28s linear infinite;white-space:nowrap}
+.mq-tr:hover{animation-play-state:paused}
+.mq-i{display:inline-flex;align-items:center;gap:18px;padding:0 28px;font-family:var(--fh);font-weight:600;font-size:.93rem;letter-spacing:.06em;color:var(--mu);text-transform:uppercase;transition:color .2s;cursor:default}
+.mq-i:hover{color:var(--g)}
+.md{width:4px;height:4px;background:var(--g);border-radius:50%;opacity:.55;flex-shrink:0}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--bd2);border-bottom:1px solid var(--bd2)}
+.sb{padding:44px 16px;text-align:center;border-right:1px solid var(--bd2);position:relative;overflow:hidden;transition:background .3s}
+.sb:last-child{border-right:none}
+.sb:hover{background:rgba(61,220,80,.03)}
+.sb::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--g);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.sb:hover::after{transform:scaleX(1)}
+.sn{font-family:var(--fh);font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--g);line-height:1;letter-spacing:.02em}
+.sl{font-size:.78rem;color:var(--mu);margin-top:8px;font-family:var(--fm);letter-spacing:.06em}
+
+/* ── MODULE CARDS ── */
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:1px;margin-top:52px;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.mc{background:var(--s1);padding:28px 22px;transition:all .3s;cursor:none;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--g);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.mc:hover{background:var(--s2)}
+.mc:hover::before{transform:scaleX(1)}
+.mi{font-size:1.7rem;margin-bottom:12px}
+.mn{font-family:var(--fh);font-size:1.08rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:6px}
+.mt_{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--g);margin-bottom:8px}
+.md2{font-size:.85rem;color:var(--gr);line-height:1.65}
+
+/* ── FEATURE CARDS ── */
+.fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:52px}
+.fc_{background:var(--s1);border:1px solid var(--bd2);border-radius:var(--r);padding:28px 22px;transition:all .3s;cursor:none;position:relative;overflow:hidden}
+.fc_::after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--g);transform:scaleY(0);transition:transform .3s}
+.fc_:hover{border-color:rgba(61,220,80,.15);transform:translateY(-3px);box-shadow:var(--glow-s)}
+.fc_:hover::after{transform:scaleY(1)}
+.fi{width:46px;height:46px;border-radius:8px;background:rgba(61,220,80,.08);border:1px solid rgba(61,220,80,.14);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:16px}
+.ft_{font-family:var(--fh);font-size:.98rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:7px}
+.fd{font-size:.84rem;color:var(--gr);line-height:1.65}
+
+/* ── CTA BANNER ── */
+.cta-b{margin:0 5% 100px;background:var(--s1);border:1px solid rgba(61,220,80,.18);border-radius:var(--r);padding:52px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px;position:relative;overflow:hidden}
+.cta-b::before{content:'SAPZCODES';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:var(--fh);font-size:6.5rem;font-weight:700;color:rgba(61,220,80,.03);letter-spacing:.08em;pointer-events:none;white-space:nowrap}
+.ct{font-family:var(--fh);font-size:clamp(1.4rem,3vw,2rem);font-weight:700;letter-spacing:.03em;color:var(--text);margin-bottom:10px}
+.cs{color:var(--gr);font-size:.95rem;line-height:1.65;max-width:500px}
+.cbs{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ── ORBIT ── */
+.orbit-wrap{display:flex;justify-content:center}
+.orb{width:290px;height:290px;position:relative}
+.or_{position:absolute;border-radius:50%;border:1px solid rgba(61,220,80,.18);animation:os 18s linear infinite}
+.or_:nth-child(1){inset:0}
+.or_:nth-child(2){inset:40px;animation-duration:12s;animation-direction:reverse;border-color:rgba(61,220,80,.1)}
+.or_:nth-child(3){inset:80px;animation-duration:8s;border-color:rgba(61,220,80,.07)}
+@keyframes os{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.od{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--g);top:-4px;left:50%;transform:translateX(-50%);box-shadow:0 0 8px var(--g)}
+.or_:nth-child(2) .od{background:var(--w);box-shadow:0 0 6px var(--w);width:7px;height:7px;top:-3.5px}
+.or_:nth-child(3) .od{width:6px;height:6px;top:-3px}
+.oc{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;background:var(--s1);border:2px solid rgba(61,220,80,.28);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.55rem;font-weight:700;color:var(--g);box-shadow:var(--glow)}
+
+/* ── SAP INFO CARDS ── */
+.sic-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin:0 5% 80px}
+.sic{background:var(--s1);padding:34px 26px;cursor:none;transition:background .3s}
+.sic:hover{background:var(--s2)}
+.sic-n{font-family:var(--fm);font-size:.62rem;color:var(--g);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.sic-t{font-family:var(--fh);font-size:1.12rem;font-weight:700;letter-spacing:.03em;color:var(--text);margin-bottom:12px}
+.sic-d{font-size:.87rem;color:var(--gr);line-height:1.7}
+
+/* ── FACT PILLS ── */
+.fp-g{padding:0 5% 100px;display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:14px}
+.fp{display:flex;align-items:center;gap:16px;background:var(--s1);border:1px solid var(--bd2);border-radius:10px;padding:20px 22px;cursor:none;transition:all .3s}
+.fp:hover{border-color:rgba(61,220,80,.15);background:var(--s2)}
+.fp-ic{font-size:1.35rem;flex-shrink:0}
+.fp-t strong{color:var(--text);display:block;font-family:var(--fh);font-size:.97rem;letter-spacing:.03em}
+.fp-t{font-size:.86rem;color:var(--gr);line-height:1.55}
+
+/* ── CAREER ── */
+.ch_{padding:140px 5% 80px;position:relative;overflow:hidden;text-align:center}
+.ch-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(61,220,80,.07) 0%,transparent 65%);pointer-events:none}
+.ch_ h1{font-family:var(--fh);font-size:clamp(2.5rem,7vw,5rem);font-weight:700;letter-spacing:.02em;color:var(--text);position:relative;z-index:1;margin-bottom:20px}
+.ch_ p{color:var(--gr);font-size:1.02rem;max-width:560px;margin:0 auto 40px;position:relative;z-index:1}
+.br-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative;z-index:1}
+.badge_{font-family:var(--fm);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--g);background:rgba(61,220,80,.07);border:1px solid rgba(61,220,80,.16);border-radius:4px;padding:8px 15px}
+.cspl{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:60px 5% 80px}
+.rm-title{font-family:var(--fh);font-size:1.45rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:34px}
+.rs{display:flex;gap:18px;position:relative;padding-bottom:30px}
+.rs:last-child{padding-bottom:0}
+.rs::before{content:'';position:absolute;left:15px;top:34px;width:1px;height:calc(100% - 8px);background:var(--bd)}
+.rs:last-child::before{display:none}
+.rn{width:32px;height:32px;flex-shrink:0;border-radius:6px;background:rgba(61,220,80,.08);border:1px solid rgba(61,220,80,.18);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.68rem;color:var(--g)}
+.rb{padding-top:4px}
+.rt{font-family:var(--fh);font-size:.98rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:6px}
+.rx{font-size:.85rem;color:var(--gr);line-height:1.65}
+.sal-title{font-family:var(--fh);font-size:1.45rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:22px}
+.stbl{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-bottom:1px solid var(--bd2);transition:background .2s;cursor:none}
+.sr:last-child{border-bottom:none}
+.sr:hover{background:rgba(61,220,80,.04)}
+.sr-role{font-size:.89rem;color:var(--text);font-weight:500}
+.sr-exp{font-family:var(--fm);font-size:.62rem;color:var(--mu);margin-top:3px;letter-spacing:.05em}
+.sr-pkg{font-family:var(--fm);font-size:.78rem;font-weight:500;color:var(--g);background:rgba(61,220,80,.08);border:1px solid rgba(61,220,80,.14);padding:6px 13px;border-radius:4px}
+.pb{margin:0 5% 100px;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:52px 5%;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.pb-t{font-family:var(--fh);font-size:2rem;font-weight:700;letter-spacing:.03em;color:var(--text);margin-bottom:14px}
+.pb-t .g{color:var(--g)}
+.pb-s{color:var(--gr);line-height:1.75;margin-bottom:24px;font-size:.95rem}
+.cl{list-style:none;display:flex;flex-direction:column;gap:13px}
+.cl li{display:flex;align-items:flex-start;gap:12px;font-size:.87rem;color:var(--gr)}
+.cl li::before{content:'';width:18px;height:18px;flex-shrink:0;border-radius:4px;background:rgba(61,220,80,.09);border:1px solid rgba(61,220,80,.18);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%233ddc50' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+
+/* ── CONTACT ── */
+.conth{padding:140px 5% 60px;text-align:center}
+.conth h1{font-family:var(--fh);font-size:clamp(2.5rem,6vw,4rem);font-weight:700;letter-spacing:.03em;color:var(--text);margin-bottom:14px}
+.conth h1 span{color:var(--g)}
+.conth p{color:var(--gr);font-size:1rem}
+.contl{display:grid;grid-template-columns:1fr 1fr;gap:36px;padding:44px 5% 100px}
+.cg{display:flex;flex-direction:column;gap:13px}
+.cc{display:flex;align-items:center;gap:18px;background:var(--s1);border:1px solid var(--bd2);border-radius:var(--r);padding:20px 22px;text-decoration:none;cursor:none;transition:all .3s}
+.cc:hover{transform:translateY(-2px)}
+.cc.wa:hover{border-color:#25d366;box-shadow:0 0 22px rgba(37,211,102,.1)}
+.cc.ig:hover{border-color:#c13584;box-shadow:0 0 22px rgba(193,53,132,.1)}
+.cc.em:hover{border-color:var(--g);box-shadow:var(--glow-s)}
+.cic{width:48px;height:48px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.wa .cic{background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.14)}
+.ig .cic{background:rgba(193,53,132,.08);border:1px solid rgba(193,53,132,.14)}
+.em .cic{background:rgba(61,220,80,.06);border:1px solid rgba(61,220,80,.11)}
+.clbl{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);margin-bottom:4px}
+.cval{font-family:var(--fh);font-size:1.05rem;font-weight:600;letter-spacing:.03em;color:var(--text)}
+.car{margin-left:auto;color:var(--mu);font-size:1rem}
+.ic{background:var(--s1);border:1px solid var(--bd2);border-radius:var(--r);padding:30px 26px;display:flex;flex-direction:column;gap:22px}
+.ic h3{font-family:var(--fh);font-size:1.15rem;font-weight:700;letter-spacing:.04em;color:var(--text)}
+.ir{display:flex;gap:13px;align-items:flex-start}
+.iico{width:38px;height:38px;flex-shrink:0;border-radius:7px;background:rgba(61,220,80,.05);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.ilbl{font-family:var(--fm);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);margin-bottom:4px}
+.ival{font-size:.89rem;color:var(--gr);line-height:1.55}
+.ival a{color:var(--g);text-decoration:none;cursor:none}
+.mapb{border-radius:8px;overflow:hidden;border:1px solid var(--bd);height:195px}
+.mapb iframe{width:100%;height:100%;border:none;filter:grayscale(100%) invert(1) hue-rotate(170deg) brightness(.68)}
+[data-theme="light"] .mapb iframe{filter:grayscale(50%) brightness(1)}
+
+/* ── TERMS ── */
+.tw{padding:140px 5% 100px;max-width:880px}
+.tw h1{font-family:var(--fh);font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:.03em;color:var(--text);margin-bottom:8px}
+.tdate{font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.08em;margin-bottom:60px}
+.ts{margin-bottom:44px}
+.ts h2{font-family:var(--fh);font-size:1.12rem;font-weight:700;letter-spacing:.04em;color:var(--g);margin-bottom:13px;display:flex;align-items:center;gap:12px}
+.ts h2::before{content:'';width:14px;height:1.5px;background:var(--g);display:inline-block}
+.ts p,.ts li{font-size:.88rem;color:var(--gr);line-height:1.85;margin-bottom:8px}
+.ts ul{list-style:none;padding:0}
+.ts li{padding-left:16px;position:relative}
+.ts li::before{content:'›';position:absolute;left:0;color:var(--g)}
+
+/* ── INNER HERO ── */
+.ih{padding:140px 5% 80px;position:relative;overflow:hidden;max-width:1100px}
+.ih h1{font-family:var(--fh);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;letter-spacing:.02em;color:var(--text);margin-bottom:20px}
+.ih p{color:var(--gr);font-size:1.02rem;line-height:1.75;max-width:640px}
+
+/* ── HERO (index only) ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;position:relative;overflow:hidden}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(61,220,80,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(61,220,80,.045) 1px,transparent 1px);background-size:52px 52px;animation:gd 22s linear infinite}
+[data-theme="light"] .hgrid{background-image:linear-gradient(rgba(34,160,50,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(34,160,50,.06) 1px,transparent 1px)}
+@keyframes gd{from{background-position:0 0}to{background-position:52px 52px}}
+.hrad{position:absolute;width:680px;height:680px;background:radial-gradient(circle,rgba(61,220,80,.07) 0%,transparent 68%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:br 7s ease-in-out infinite}
+@keyframes br{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+.hc{position:relative;z-index:1;max-width:860px;text-align:center}
+.chip{display:inline-flex;align-items:center;gap:10px;background:rgba(61,220,80,.07);border:1px solid rgba(61,220,80,.2);border-radius:4px;padding:7px 18px;margin-bottom:36px;font-family:var(--fm);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--g);animation:fup .6s ease both}
+.cdot{width:6px;height:6px;background:var(--g);border-radius:50%;animation:bl 1.4s infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.15}}
+.ht{font-family:var(--fh);font-weight:700;font-size:clamp(2.8rem,7.5vw,5.8rem);line-height:1.02;letter-spacing:.02em;color:var(--text);margin-bottom:24px;animation:fup .6s .1s ease both}
+.hsub{font-size:1.1rem;color:var(--gr);line-height:1.75;max-width:540px;margin:0 auto 44px;animation:fup .6s .2s ease both}
+.hbtns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fup .6s .3s ease both}
+.corner{position:absolute;width:55px;height:55px;opacity:.35}
+.tl{top:80px;left:5%;border-top:1.5px solid var(--g);border-left:1.5px solid var(--g)}
+.tr{top:80px;right:5%;border-top:1.5px solid var(--g);border-right:1.5px solid var(--g)}
+.bl_{bottom:40px;left:5%;border-bottom:1.5px solid var(--g);border-left:1.5px solid var(--g)}
+.br_{bottom:40px;right:5%;border-bottom:1.5px solid var(--g);border-right:1.5px solid var(--g)}
+
+/* ── FOOTER ── */
+footer{background:var(--black);border-top:1px solid var(--bd);padding:70px 5% 26px;transition:background .35s}
+.ft{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px}
+.fbl{font-family:var(--fh);font-size:1.3rem;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:10px}
+.fbl .z{color:var(--g)}
+.ftag{color:var(--mu);font-size:.85rem;line-height:1.65;max-width:270px;margin-bottom:22px}
+.sr_{display:flex;gap:10px}
+.sb_{width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.03);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:.9rem;text-decoration:none;cursor:none;transition:all .2s}
+[data-theme="light"] .sb_{background:rgba(0,0,0,.03)}
+.sb_:hover{border-color:var(--g);box-shadow:var(--glow-s)}
+.fco h4{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--g);margin-bottom:18px}
+.fco ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.fco ul li a{font-size:.85rem;color:var(--mu);text-decoration:none;cursor:none;transition:color .2s}
+.fco ul li a:hover{color:var(--text)}
+.fb{border-top:1px solid var(--bd2);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fc-copy{font-family:var(--fm);font-size:.65rem;color:var(--mu);letter-spacing:.06em}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .sb:nth-child(2){border-right:none}
+  .sb:nth-child(3){border-top:1px solid var(--bd2)}
+  .sic-g{grid-template-columns:1fr}
+  .cspl{grid-template-columns:1fr;gap:48px}
+  .pb{grid-template-columns:1fr}
+  .contl{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr 1fr;gap:30px}
+  .sec{padding:70px 5%}
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:40px!important}
+}
+@media(max-width:700px){
+  .nl{display:none}
+  .hb{display:flex}
+  .mg{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr}
+  .ft{grid-template-columns:1fr}
+  .fb{flex-direction:column;align-items:center;text-align:center}
+  .cta-b{text-align:center;justify-content:center}
+  .cbs{justify-content:center}
+  .corner{display:none}
+  .ih{max-width:100%}
+}
+@media(max-width:480px){
+  .fg{grid-template-columns:1fr}
+  .fp-g{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="ring"></div>
+<nav id="nv">
+  <a class="logo" href="index.html">
+    <img src="logo.jpeg" alt="SAPZCODES" onerror="this.style.display='none'">
+    <span class="logo-t">SAP<span class="z">Z</span>CODES</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="sap.html" class="on">About SAP</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="contact.html">Enquiry</a></li>
+      <li><a href="terms.html">T&amp;C</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+    </button>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mm" id="mob">
+  <a href="index.html">Home</a>
+  <a href="sap.html">About SAP</a>
+  <a href="career.html">Career</a>
+  <a href="contact.html">Enquiry</a>
+  <a href="terms.html">T&C</a>
+  <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
+  <div class="mm-theme">
+    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
+    Toggle Theme
+  </div>
+</div>
+
+<section class="ih">
+  <div class="dots"></div>
+  <div style="position:relative;z-index:1">
+    <div class="tag">What is SAP?</div>
+    <h1>The <span style="color:var(--g)">Backbone</span> of Global<br>Enterprise Business</h1>
+    <p>SAP — Systems, Applications & Products in Data Processing — is the world's leading ERP software. It manages business operations for 77% of the Fortune 500 across 180+ countries. SAP professionals are never out of demand.</p>
+  </div>
+</section>
+
+<div class="sic-g fu">
+  <div class="sic"><div class="sic-n">01 / ABAP</div><div class="sic-t">Technical Programming</div><div class="sic-d">ABAP is SAP's proprietary programming language. Used to build custom reports, forms, interfaces, enhancements, BAPIs, BDCs & S/4HANA apps. It's the most in-demand SAP technical skill — and our core speciality at SAPZCODES.</div></div>
+  <div class="sic"><div class="sic-n">02 / FICO</div><div class="sic-t">Finance & Controlling</div><div class="sic-d">The most widely implemented SAP module. FICO covers the entire financial operations of an organisation — from journal entries to management reporting. Consistently the #1 most hired SAP functional role.</div></div>
+  <div class="sic"><div class="sic-n">03 / S/4HANA</div><div class="sic-t">Next-Generation ERP</div><div class="sic-d">SAP S/4HANA is the intelligent ERP built on in-memory computing. Every major company is migrating right now — creating massive demand for S/4HANA consultants.</div></div>
+</div>
+
+<section class="sec" style="padding-top:20px">
+  <div class="tag">All Modules</div>
+  <h2 class="h1">Every Module. <span class="g">Every Domain.</span></h2>
+  <div class="mg" style="margin-top:44px">
+    <div class="mc fu"><div class="mi">📦</div><div class="mt_">Functional</div><div class="mn">SAP MM</div><div class="md2">Entire procurement cycle, inventory management, vendor evaluation, material valuation & invoice verification.</div></div>
+    <div class="mc fu"><div class="mi">🛒</div><div class="mt_">Functional</div><div class="mn">SAP SD</div><div class="md2">Sales order to delivery to billing. Pricing, credit management, customer master data and distribution.</div></div>
+    <div class="mc fu"><div class="mi">🏭</div><div class="mt_">Functional</div><div class="mn">SAP PP</div><div class="md2">MRP, Bill of Materials, Production Orders, Capacity Planning & Shop Floor Control for manufacturing.</div></div>
+    <div class="mc fu"><div class="mi">👥</div><div class="mt_">Functional</div><div class="mn">SAP HCM</div><div class="md2">End-to-end HR — Payroll, Personnel Admin, Time Management, Travel Management & Org structure.</div></div>
+    <div class="mc fu"><div class="mi">🖥️</div><div class="mt_">Technical</div><div class="mn">SAP BASIS</div><div class="md2">SAP system landscape, user administration, Transport Management, performance tuning & security.</div></div>
+    <div class="mc fu"><div class="mi">🏪</div><div class="mt_">Functional</div><div class="mn">SAP WM</div><div class="md2">Warehouse & Extended Warehouse Management — storage bins, goods movement, picking, packing, shipping.</div></div>
+    <div class="mc fu"><div class="mi">✅</div><div class="mt_">Functional</div><div class="mn">SAP QM</div><div class="md2">Quality Management — Inspection Plans, Quality Certificates, Notifications, audit trails and reporting.</div></div>
+    <div class="mc fu"><div class="mi">💻</div><div class="mt_">Technical</div><div class="mn">SAP ABAP</div><div class="md2">ABAP 7.5, Reports, BAPIs, BDC, BADI, User Exits, Module Pool, Enhancement Framework, S/4HANA.</div></div>
+    <div class="mc fu"><div class="mi">⚡</div><div class="mt_">Next-Gen</div><div class="mn">SAP S/4HANA</div><div class="md2">In-memory computing, Fiori UX, real-time analytics & brownfield / greenfield migration paths.</div></div>
+  </div>
+</section>
+
+<div class="fp-g fu">
+  <div class="fp"><div class="fp-ic">🌏</div><div class="fp-t"><strong>180+ Countries</strong>Enterprises worldwide across every industry run on SAP.</div></div>
+  <div class="fp"><div class="fp-ic">🏢</div><div class="fp-t"><strong>440,000+ Companies</strong>From SMEs to Fortune 500 conglomerates — all on SAP.</div></div>
+  <div class="fp"><div class="fp-ic">💼</div><div class="fp-t"><strong>Recession-Proof Career</strong>SAP skills remain in demand even during economic downturns.</div></div>
+  <div class="fp"><div class="fp-ic">📈</div><div class="fp-t"><strong>S/4HANA Migration Boom</strong>Massive migration wave creating thousands of new jobs globally.</div></div>
+  <div class="fp"><div class="fp-ic">💰</div><div class="fp-t"><strong>Top-Tier Salaries</strong>SAP consultants earn among the highest packages in enterprise IT.</div></div>
+  <div class="fp"><div class="fp-ic">🎓</div><div class="fp-t"><strong>No IT Background Needed</strong>Any graduate from any domain can learn SAP and build a career.</div></div>
+</div>
+
+<div class="cta-b fu" style="margin-bottom:80px">
+  <div>
+    <div class="ct">Which SAP module is right for you?</div>
+    <p class="cs">Our counsellors will match you to the perfect module based on your background — for free.</p>
+  </div>
+  <a href="https://wa.me/919952227377" target="_blank" class="bg">Get Free Counselling 📲</a>
+</div>
+
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute. Turning freshers and professionals into SAP experts.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="sap.html">About SAP</a></li>
+      <li><a href="career.html">Career & Courses</a></li><li><a href="contact.html">Enquiry</a></li>
+      <li><a href="terms.html">Terms & Conditions</a></li>
+    </ul></div>
+    <div class="fco"><h4>SAP Modules</h4><ul>
+      <li><a href="sap.html">SAP ABAP</a></li><li><a href="sap.html">SAP FICO</a></li>
+      <li><a href="sap.html">SAP MM</a></li><li><a href="sap.html">SAP SD</a></li>
+      <li><a href="sap.html">SAP HCM</a></li><li><a href="sap.html">SAP S/4HANA</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
+      <li><a href="contact.html">R.S. Puram, Coimbatore</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · Coimbatore, Tamil Nadu · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+<script>
+/* ============================================================
+   SAPZCODES — SHARED JS
+   ============================================================ */
+
+// ── THEME ──────────────────────────────────────────────────
+const html = document.documentElement;
+const savedTheme = localStorage.getItem('sz-theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+
+function toggleTheme() {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('sz-theme', next);
+}
+
+// ── CURSOR ─────────────────────────────────────────────────
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top  = my + 'px';
+});
+(function tick() {
+  rx += (mx - rx) * .11;
+  ry += (my - ry) * .11;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(tick);
+})();
+
+document.querySelectorAll('a, button, .mc, .fc_, .cc, .sr, .fp, .sic, .sb').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+// ── HAMBURGER ──────────────────────────────────────────────
+function togM() {
+  document.getElementById('hb').classList.toggle('op');
+  document.getElementById('mob').classList.toggle('op');
+}
+
+// ── NAVBAR SCROLL ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nv').classList.toggle('sc', scrollY > 36);
+});
+
+// ── ACTIVE NAV LINK ────────────────────────────────────────
+(function() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nl a[data-p], .mm a[data-p]').forEach(a => {
+    if (a.dataset.p === page) a.classList.add('on');
+  });
+})();
+
+// ── SCROLL REVEAL ──────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: .1 });
+
+document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+// ── PREVENT DEFAULT ON # ───────────────────────────────────
+document.querySelectorAll('a[href="#"]').forEach(a =>
+  a.addEventListener('click', e => e.preventDefault())
+);
+
+</script>
+</body>
+</html>
