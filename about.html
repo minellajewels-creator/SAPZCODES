@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — SAPZCODES | Coimbatore SAP Institute</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* === PASTE THE ENTIRE <style> BLOCK FROM index.html HERE === */
+/* (everything between <style> and </style> in the <head>) */
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav id="nv">
+  <a class="logo" href="index">
+    <img id="nav-logo" src="logoforwhite.png" alt="SAPZCODES" onerror="this.style.display='none'">
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index">Home</a></li>
+      <li><a href="about" class="on">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+    </button>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mm" id="mob">
+  <a href="index">Home</a>
+  <a href="about">About Us</a>
+  <a href="services">Services</a>
+  <a href="academy">Academy</a>
+  <a href="contact">Contact</a>
+  <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
+  <div class="mm-theme">
+    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
+    Toggle Theme
+  </div>
+</div>
+
+<script>
+(function(){
+  var t=localStorage.getItem('sz-theme')||'dark';
+  var l=document.getElementById('nav-logo');
+  if(l) l.src=t==='light'?'logoforblack.png':'logoforwhite.png';
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="ih" style="text-align:left;padding-bottom:40px">
+  <div class="dots"></div>
+  <div class="tag fu">About SAPZCODES</div>
+  <h1 class="fu">We Build <span class="g">SAP Careers.</span><br>We Solve <span class="sk">Real Problems.</span></h1>
+  <p class="fu" style="color:var(--gr);font-size:1.05rem;line-height:1.8;max-width:660px;margin-top:16px">
+    SAPZCODES is Coimbatore's leading SAP training institute and consulting firm — built by consultants,
+    run by practitioners, and fully dedicated to making SAP accessible for everyone.
+  </p>
+</section>
+
+<!-- ══════════ WHO WE ARE ══════════ -->
+<section class="sec" style="padding-top:20px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start">
+    <div class="fu">
+      <div class="tag">Who We Are</div>
+      <h2 class="h1">Not Just a Training<br>Institute. A <span class="g">Launchpad.</span></h2>
+      <p style="color:var(--gr);line-height:1.8;margin-bottom:18px;font-size:.95rem">
+        Founded in Coimbatore, SAPZCODES was born out of one frustration — freshers and career switchers
+        had no real, affordable path into SAP. Big institutes were expensive and theoretical. Online courses
+        lacked mentorship. We built the alternative.
+      </p>
+      <p style="color:var(--gr);line-height:1.8;font-size:.95rem">
+        Today we train students across SAP ABAP, FICO, MM, SD, HCM, BASIS, PP, QM and S/4HANA —
+        with hands-on access to live SAP systems, mentorship from active industry consultants, and
+        a dedicated placement team that works until you land your job.
+      </p>
+    </div>
+    <div>
+      <div class="fg" style="margin-top:0;grid-template-columns:1fr">
+        <div class="fc_ fu">
+          <div class="fi">🏙️</div>
+          <div class="ft_">Based in Coimbatore</div>
+          <div class="fd">R.S. Puram, Coimbatore — Tamil Nadu's tech hub. Accessible, central, and connected to the city's growing IT ecosystem.</div>
+        </div>
+        <div class="fc_ fu">
+          <div class="fi">👨‍💼</div>
+          <div class="ft_">Practitioner-Led</div>
+          <div class="fd">Every trainer at SAPZCODES is an active SAP consultant with live project experience. No freshers teaching freshers.</div>
+        </div>
+        <div class="fc_ fu">
+          <div class="fi">🎓</div>
+          <div class="ft_">500+ Students Placed</div>
+          <div class="fd">Our alumni work at MNCs, SAP partners and IT companies across India. Their success is our track record.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ VISION & MISSION ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="tag c fu" style="justify-content:center">Our Direction</div>
+  <h2 class="h1 fu" style="text-align:center;margin-bottom:48px">Vision &amp; <span class="g">Mission</span></h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+    <div class="fc_ fu" style="padding:36px 30px">
+      <div class="fi" style="font-size:1.6rem;width:54px;height:54px">🔭</div>
+      <div class="ft_" style="font-size:1.15rem;margin-bottom:12px">Our Vision</div>
+      <div class="fd" style="font-size:.95rem;line-height:1.85">
+        To be South India's most trusted SAP talent engine — a place where every aspirant, regardless
+        of background or budget, gets a genuine shot at a high-value SAP career. We envision a future
+        where Coimbatore is recognised as a major SAP talent hub.
+      </div>
+    </div>
+
+    <div class="fc_ fu" style="padding:36px 30px">
+      <div class="fi" style="font-size:1.6rem;width:54px;height:54px">🎯</div>
+      <div class="ft_" style="font-size:1.15rem;margin-bottom:12px">Our Mission</div>
+      <div class="fd" style="font-size:.95rem;line-height:1.85">
+        To deliver industry-grade SAP training with real system access, mentor-led learning, and
+        end-to-end placement support — while offering businesses reliable SAP consulting and
+        implementation services that actually get delivered on time.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ WHY US ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="tag fu">Why Choose Us</div>
+  <h2 class="h1 fu">What Makes SAPZCODES <span class="g">Different</span></h2>
+  <div class="fg" style="margin-top:36px">
+    <div class="fc_ fu">
+      <div class="fi">🛠️</div>
+      <div class="ft_">Real SAP System, Day 1</div>
+      <div class="fd">Not slides. Not screenshots. You log into a live SAP environment from your very first class.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🤝</div>
+      <div class="ft_">Mentorship, Not Just Teaching</div>
+      <div class="fd">Our trainers stay reachable after class. Doubt at 10pm? WhatsApp them. That's the SAPZCODES difference.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">📋</div>
+      <div class="ft_">Resume & Interview Prep</div>
+      <div class="fd">We don't just train — we prep your resume, mock-interview you and coach you until you're offer-ready.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">💼</div>
+      <div class="ft_">Consulting Exposure</div>
+      <div class="fd">Selected students get exposure to live consulting projects — giving your resume real project experience, not just training.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">💰</div>
+      <div class="ft_">Honest Pricing</div>
+      <div class="fd">No hidden fees, no inflated course costs. Transparent fee structure with EMI options available on request.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🌐</div>
+      <div class="ft_">Online & Offline Both</div>
+      <div class="fd">Attend at our Coimbatore centre or join online from anywhere in India. Same quality, same trainer, same system access.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<div class="cta-b fu">
+  <div>
+    <div class="ct">Want to know more about us?</div>
+    <p class="cs">Talk to our team — free counselling, zero pressure, honest answers.</p>
+  </div>
+  <div class="cbs">
+    <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp Us</a>
+    <a href="contact" class="bo">Contact Page →</a>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute. Turning freshers and professionals into SAP experts.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
+    </ul></div>
+    <div class="fco"><h4>SAP Modules</h4><ul>
+      <li><a href="academy">SAP ABAP</a></li><li><a href="academy">SAP FICO</a></li>
+      <li><a href="academy">SAP MM</a></li><li><a href="academy">SAP SD</a></li>
+      <li><a href="academy">SAP HCM</a></li><li><a href="academy">SAP S/4HANA</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
+      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · Coimbatore, Tamil Nadu · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+
+<!-- PASTE THE ENTIRE <script> BLOCK FROM index.html HERE -->
+<script>
+/* paste shared JS from index.html */
+</script>
+</body>
+</html>
