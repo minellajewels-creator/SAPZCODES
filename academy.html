@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academy — SAPZCODES | SAP Training Courses</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* === PASTE FULL <style> BLOCK FROM index.html === */
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav id="nv">
+  <a class="logo" href="index">
+    <img id="nav-logo" src="logoforwhite.png" alt="SAPZCODES" onerror="this.style.display='none'">
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy" class="on">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+    </button>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mm" id="mob">
+  <a href="index">Home</a>
+  <a href="about">About Us</a>
+  <a href="services">Services</a>
+  <a href="academy">Academy</a>
+  <a href="contact">Contact</a>
+  <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
+  <div class="mm-theme">
+    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
+    Toggle Theme
+  </div>
+</div>
+
+<script>
+(function(){
+  var t=localStorage.getItem('sz-theme')||'dark';
+  var l=document.getElementById('nav-logo');
+  if(l) l.src=t==='light'?'logoforblack.png':'logoforwhite.png';
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="ih" style="text-align:center;max-width:100%;padding-bottom:40px">
+  <div class="dots"></div>
+  <div class="tag c fu">SAPZCODES Academy</div>
+  <h1 class="fu" style="text-align:center">Your SAP Career<br>Starts <span class="g">Right Here.</span></h1>
+  <p class="fu" style="color:var(--gr);font-size:1.05rem;line-height:1.8;max-width:580px;margin:16px auto 0;text-align:center">
+    Courses, fees and batch schedules coming soon.
+    In the meantime, WhatsApp us for the latest batch details and a free counselling session.
+  </p>
+  <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="fu">
+    <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 Get Batch Details</a>
+    <a href="contact" class="bo">Enquire Now →</a>
+  </div>
+</section>
+
+<!-- ══════════ COMING SOON PLACEHOLDER ══════════ -->
+<section class="sec" style="padding-top:20px;text-align:center">
+  <div style="max-width:700px;margin:0 auto">
+    <div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:72px 40px" class="fu">
+      <div style="font-size:3rem;margin-bottom:20px">🚧</div>
+      <div class="tag c" style="justify-content:center;margin-bottom:16px">Coming Soon</div>
+      <h2 class="h1" style="font-size:1.8rem;margin-bottom:16px">Full Course Catalogue<br>is Being Built</h2>
+      <p style="color:var(--gr);line-height:1.8;margin-bottom:32px;font-size:.95rem">
+        We're putting together detailed course pages with curriculum, fees, batch schedules and trainer profiles.
+        Until then, reach out directly — our counsellors will walk you through everything personally.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp for Details</a>
+        <a href="mailto:hr@sapzcodes.com" class="bo">✉ Email Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MODULES PREVIEW ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="tag fu">What You Can Learn</div>
+  <h2 class="h1 fu">10+ SAP Modules.<br>One <span class="g">Academy.</span></h2>
+  <div class="mg">
+    <div class="mc fu"><div class="mi">💻</div><div class="mt_">Technical</div><div class="mn">SAP ABAP</div><div class="md2">Our flagship. ABAP 7.5, S/4HANA, CDS Views, BAPI, BDC, RAP, OData — end to end.</div></div>
+    <div class="mc fu"><div class="mi">💰</div><div class="mt_">Functional</div><div class="mn">SAP FICO</div><div class="md2">GL, AP, AR, Asset Accounting, Controlling — the most in-demand functional module.</div></div>
+    <div class="mc fu"><div class="mi">📦</div><div class="mt_">Functional</div><div class="mn">SAP MM</div><div class="md2">Procurement, Inventory, Vendor Management and Material Master data management.</div></div>
+    <div class="mc fu"><div class="mi">🛒</div><div class="mt_">Functional</div><div class="mn">SAP SD</div><div class="md2">Order-to-Cash, Pricing, Billing, Delivery and Customer Master configuration.</div></div>
+    <div class="mc fu"><div class="mi">👥</div><div class="mt_">Functional</div><div class="mn">SAP HCM</div><div class="md2">Payroll, Personnel Admin, Time Management and Organisational Management.</div></div>
+    <div class="mc fu"><div class="mi">🖥️</div><div class="mt_">Technical</div><div class="mn">SAP BASIS</div><div class="md2">System admin, User management, TMS, Performance and Security.</div></div>
+    <div class="mc fu"><div class="mi">🏭</div><div class="mt_">Functional</div><div class="mn">SAP PP</div><div class="md2">MRP, BOM, Work Centers, Production Orders and Capacity Planning.</div></div>
+    <div class="mc fu"><div class="mi">✅</div><div class="mt_">Functional</div><div class="mn">SAP QM</div><div class="md2">Inspection Plans, Quality Certs, Notifications and QM Reporting.</div></div>
+    <div class="mc fu"><div class="mi">⚡</div><div class="mt_">Next-Gen</div><div class="mn">SAP S/4HANA</div><div class="md2">In-memory computing, Fiori UX, real-time analytics and migration paths.</div></div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<div class="cta-b fu">
+  <div>
+    <div class="ct">Don't wait for the page — talk to us now.</div>
+    <p class="cs">Free counselling. Honest answers. No pressure to enrol.</p>
+  </div>
+  <div class="cbs">
+    <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp Now</a>
+    <a href="contact" class="bo">Contact Page →</a>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
+    </ul></div>
+    <div class="fco"><h4>SAP Modules</h4><ul>
+      <li><a href="academy">SAP ABAP</a></li><li><a href="academy">SAP FICO</a></li>
+      <li><a href="academy">SAP MM</a></li><li><a href="academy">SAP SD</a></li>
+      <li><a href="academy">SAP HCM</a></li><li><a href="academy">SAP S/4HANA</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
+      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · Coimbatore, Tamil Nadu · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+
+<script>/* paste shared JS from index.html */</script>
+</body>
+</html>
