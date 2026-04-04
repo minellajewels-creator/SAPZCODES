@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — SAPZCODES | SAP Training & Consulting</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* === PASTE FULL <style> BLOCK FROM index.html === */
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav id="nv">
+  <a class="logo" href="index">
+    <img id="nav-logo" src="logoforwhite.png" alt="SAPZCODES" onerror="this.style.display='none'">
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services" class="on">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+    </button>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mm" id="mob">
+  <a href="index">Home</a>
+  <a href="about">About Us</a>
+  <a href="services">Services</a>
+  <a href="academy">Academy</a>
+  <a href="contact">Contact</a>
+  <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
+  <div class="mm-theme">
+    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
+    Toggle Theme
+  </div>
+</div>
+
+<script>
+(function(){
+  var t=localStorage.getItem('sz-theme')||'dark';
+  var l=document.getElementById('nav-logo');
+  if(l) l.src=t==='light'?'logoforblack.png':'logoforwhite.png';
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="ih" style="padding-bottom:40px">
+  <div class="dots"></div>
+  <div class="tag fu">What We Offer</div>
+  <h1 class="fu">Training. Consulting.<br><span class="g">End-to-End SAP.</span></h1>
+  <p class="fu" style="color:var(--gr);font-size:1.05rem;line-height:1.8;max-width:620px;margin-top:16px">
+    Whether you need to upskill your team, implement SAP from scratch, or optimise an existing system —
+    SAPZCODES delivers. Two core service lines. One trusted partner.
+  </p>
+</section>
+
+<!-- ══════════ SERVICE LINE 1 — TRAINING ══════════ -->
+<section class="sec" style="padding-top:20px">
+  <div class="tag fu">Service Line 01</div>
+  <h2 class="h1 fu">SAP <span class="g">Training</span> Academy</h2>
+  <p class="sub fu" style="margin-bottom:40px">
+    Industry-led, hands-on SAP training for freshers, career switchers and working professionals.
+    Real system access. Real mentorship. Real placements.
+  </p>
+  <div class="mg">
+    <div class="mc fu">
+      <div class="mi">🎓</div>
+      <div class="mt_">Classroom & Online</div>
+      <div class="mn">Instructor-Led Training</div>
+      <div class="md2">Live sessions with active SAP consultants. Ask questions, get real answers — not canned responses.</div>
+    </div>
+    <div class="mc fu">
+      <div class="mi">🖥️</div>
+      <div class="mt_">Hands-On</div>
+      <div class="mn">Live SAP System Access</div>
+      <div class="md2">Practice on a real SAP environment from Day 1. Every module, every transaction — live.</div>
+    </div>
+    <div class="mc fu">
+      <div class="mi">📜</div>
+      <div class="mt_">Certification</div>
+      <div class="mn">SAP Global Cert Prep</div>
+      <div class="md2">Full preparation support for SAP Global Certification exams — mock tests, study guides and expert coaching.</div>
+    </div>
+    <div class="mc fu">
+      <div class="mi">💼</div>
+      <div class="mt_">Placement</div>
+      <div class="mn">100% Placement Assist</div>
+      <div class="md2">Resume building, mock interviews, referrals and tie-ups with MNCs and SAP partners across India.</div>
+    </div>
+    <div class="mc fu">
+      <div class="mi">📅</div>
+      <div class="mt_">Flexible</div>
+      <div class="mn">Batch Options</div>
+      <div class="md2">Weekday, weekend and fast-track batches. Learn at your pace without disrupting work or college.</div>
+    </div>
+    <div class="mc fu">
+      <div class="mi">🗂️</div>
+      <div class="mt_">All Modules</div>
+      <div class="mn">10+ SAP Tracks</div>
+      <div class="md2">ABAP, FICO, MM, SD, HCM, BASIS, PP, QM, S/4HANA — one institute, every module.</div>
+    </div>
+  </div>
+  <div style="margin-top:36px" class="fu">
+    <a href="academy" class="bg">Explore Academy →</a>
+  </div>
+</section>
+
+<!-- ══════════ SERVICE LINE 2 — CONSULTING ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="tag fu">Service Line 02</div>
+  <h2 class="h1 fu">SAP <span class="g">Consulting</span> &amp; Implementation</h2>
+  <p class="sub fu" style="margin-bottom:40px">
+    End-to-end SAP consulting for businesses — from requirement analysis and system design
+    to implementation, go-live and post-go-live support. Delivered by experienced consultants, not juniors.
+  </p>
+  <div class="fg">
+    <div class="fc_ fu">
+      <div class="fi">🏗️</div>
+      <div class="ft_">SAP Implementation</div>
+      <div class="fd">Greenfield and brownfield S/4HANA implementations. Full lifecycle — Blueprint to Go-Live.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🔧</div>
+      <div class="ft_">ABAP Development</div>
+      <div class="fd">Custom ABAP development — Reports, BAPIs, BDC, User Exits, BADIs, Module Pool, ABAP on HANA, RAP, OData.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🔗</div>
+      <div class="ft_">System Integration</div>
+      <div class="fd">SAP integration with third-party systems via IDoc, RFC, REST APIs and SAP Integration Suite.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🛠️</div>
+      <div class="ft_">Support & AMS</div>
+      <div class="fd">Application Management Support — bug fixes, enhancements, performance tuning and ongoing system health.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">📊</div>
+      <div class="ft_">Rollout & Migration</div>
+      <div class="fd">SAP rollouts to new company codes, plant expansions and data migration from legacy systems to S/4HANA.</div>
+    </div>
+    <div class="fc_ fu">
+      <div class="fi">🧪</div>
+      <div class="ft_">Testing & QA</div>
+      <div class="fd">Unit testing, integration testing and UAT support — ensuring your SAP system goes live without surprises.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ INDUSTRIES ══════════ -->
+<section class="sec" style="padding-top:0">
+  <div class="tag fu">Industries We Serve</div>
+  <h2 class="h1 fu">Built for <span class="g">Every Sector</span></h2>
+  <div class="fp-g" style="padding:36px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px">
+    <div class="fp fu"><div class="fp-ic">🏭</div><div class="fp-t"><strong>Manufacturing</strong>PP, MM, QM, ABAP customisation for plant operations</div></div>
+    <div class="fp fu"><div class="fp-ic">🛒</div><div class="fp-t"><strong>Retail & Distribution</strong>SD, MM, FICO for end-to-end supply chain visibility</div></div>
+    <div class="fp fu"><div class="fp-ic">🏥</div><div class="fp-t"><strong>Healthcare</strong>HCM, FICO for hospitals and healthcare organisations</div></div>
+    <div class="fp fu"><div class="fp-ic">🏗️</div><div class="fp-t"><strong>Construction & EPC</strong>PS, MM, FICO for project-based companies</div></div>
+    <div class="fp fu"><div class="fp-ic">🏦</div><div class="fp-t"><strong>BFSI</strong>FICO, custom ABAP for banking and financial services</div></div>
+    <div class="fp fu"><div class="fp-ic">💻</div><div class="fp-t"><strong>IT & Services</strong>S/4HANA, RAP, OData — next-gen SAP for tech companies</div></div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<div class="cta-b fu">
+  <div>
+    <div class="ct">Need SAP consulting for your business?</div>
+    <p class="cs">Talk to our consultants — free discovery call, no commitment.</p>
+  </div>
+  <div class="cbs">
+    <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp Now</a>
+    <a href="mailto:hr@sapzcodes.com" class="bo">✉ Email Us</a>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="terms">Terms & Conditions</a></li>
+    </ul></div>
+    <div class="fco"><h4>SAP Modules</h4><ul>
+      <li><a href="academy">SAP ABAP</a></li><li><a href="academy">SAP FICO</a></li>
+      <li><a href="academy">SAP MM</a></li><li><a href="academy">SAP SD</a></li>
+      <li><a href="academy">SAP HCM</a></li><li><a href="academy">SAP S/4HANA</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
+      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · Coimbatore, Tamil Nadu · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+
+<script>/* paste shared JS from index.html */</script>
+</body>
+</html>
