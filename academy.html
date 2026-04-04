@@ -3,62 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academy — SAPZCODES | SAP Training Courses</title>
+<title>Academy — SAPZCODES | SAP Training Courses Coimbatore</title>
+<meta name="description" content="SAPZCODES Academy — SAP training courses in Coimbatore. ABAP, FICO, MM, SD, HCM, BASIS, S/4HANA. Hands-on, placement-assured."/>
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-/* === PASTE FULL <style> BLOCK FROM index.html === */
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div id="cur"></div>
 <div id="ring"></div>
 
 <nav id="nv">
-  <a class="logo" href="index">
-    <img id="nav-logo" src="logoforwhite.png" alt="SAPZCODES" onerror="this.style.display='none'">
-  </a>
+  <a class="logo" href="index.html"><img src="logoforblack.png" alt="SAPZCODES"></a>
   <div class="nav-right">
     <ul class="nl">
-      <li><a href="index">Home</a></li>
-      <li><a href="about">About Us</a></li>
-      <li><a href="services">Services</a></li>
-      <li><a href="academy" class="on">Academy</a></li>
-      <li><a href="contact">Contact</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="academy.html" class="on">Academy</a></li>
+      <li><a href="contact.html">Contact</a></li>
       <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
     </ul>
-    <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">
-      <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
-    </button>
     <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
 <div class="mm" id="mob">
-  <a href="index">Home</a>
-  <a href="about">About Us</a>
-  <a href="services">Services</a>
-  <a href="academy">Academy</a>
-  <a href="contact">Contact</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="services.html">Services</a>
+  <a href="academy.html">Academy</a>
+  <a href="contact.html">Contact</a>
   <a href="https://wa.me/919952227377" target="_blank">📲 WhatsApp Us</a>
-  <div class="mm-theme">
-    <button class="theme-btn" onclick="toggleTheme()"><span class="icon-sun">☀️</span><span class="icon-moon">🌙</span></button>
-    Toggle Theme
-  </div>
 </div>
 
-<script>
-(function(){
-  var t=localStorage.getItem('sz-theme')||'dark';
-  var l=document.getElementById('nav-logo');
-  if(l) l.src=t==='light'?'logoforblack.png':'logoforwhite.png';
-  document.documentElement.setAttribute('data-theme',t);
-})();
-</script>
-
-<!-- ══════════ HERO ══════════ -->
+<!-- HERO -->
 <section class="ih" style="text-align:center;max-width:100%;padding-bottom:40px">
   <div class="dots"></div>
   <div class="tag c fu">SAPZCODES Academy</div>
@@ -69,11 +50,11 @@
   </p>
   <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="fu">
     <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 Get Batch Details</a>
-    <a href="contact" class="bo">Enquire Now →</a>
+    <a href="contact.html" class="bo">Enquire Now →</a>
   </div>
 </section>
 
-<!-- ══════════ COMING SOON PLACEHOLDER ══════════ -->
+<!-- COMING SOON -->
 <section class="sec" style="padding-top:20px;text-align:center">
   <div style="max-width:700px;margin:0 auto">
     <div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:72px 40px" class="fu">
@@ -92,7 +73,7 @@
   </div>
 </section>
 
-<!-- ══════════ MODULES PREVIEW ══════════ -->
+<!-- MODULES -->
 <section class="sec" style="padding-top:0">
   <div class="tag fu">What You Can Learn</div>
   <h2 class="h1 fu">10+ SAP Modules.<br>One <span class="g">Academy.</span></h2>
@@ -109,7 +90,32 @@
   </div>
 </section>
 
-<!-- ══════════ CTA ══════════ -->
+<!-- CAREER ROADMAP -->
+<section class="sec t0">
+  <div class="cspl">
+    <div class="fu">
+      <div class="rm-title">Your SAP Learning Roadmap</div>
+      <div class="rs"><div class="rn">01</div><div class="rb"><div class="rt">Free Counselling</div><div class="rx">Experts understand your background, goals and recommend the best SAP module for you — no pressure.</div></div></div>
+      <div class="rs"><div class="rn">02</div><div class="rb"><div class="rt">Structured Training</div><div class="rx">Learn from scratch. Theory + real SAP system access. Project scenarios from Day 1.</div></div></div>
+      <div class="rs"><div class="rn">03</div><div class="rb"><div class="rt">Certification Prep</div><div class="rx">Full SAP Global Certification guidance — mock tests, study material & trainer revision sessions.</div></div></div>
+      <div class="rs"><div class="rn">04</div><div class="rb"><div class="rt">Resume &amp; Interview Prep</div><div class="rx">We craft your resume, coach you for SAP interviews and run mock sessions until you are confident.</div></div></div>
+      <div class="rs"><div class="rn">05</div><div class="rb"><div class="rt">Placement Drive</div><div class="rx">Direct referrals to MNCs, IT companies & SAP partners. 100% placement assistance — every step.</div></div></div>
+    </div>
+    <div class="fu">
+      <div class="sal-title">SAP Salary Insights</div>
+      <div class="stbl">
+        <div class="sr"><div><div class="sr-role">SAP ABAP Developer</div><div class="sr-exp">Fresher · 0–1 yr</div></div><div class="sr-pkg">₹4–7 LPA</div></div>
+        <div class="sr"><div><div class="sr-role">SAP FICO Consultant</div><div class="sr-exp">Junior · 1–3 yrs</div></div><div class="sr-pkg">₹6–12 LPA</div></div>
+        <div class="sr"><div><div class="sr-role">SAP MM / SD Consultant</div><div class="sr-exp">Mid · 2–4 yrs</div></div><div class="sr-pkg">₹8–14 LPA</div></div>
+        <div class="sr"><div><div class="sr-role">SAP S/4HANA Consultant</div><div class="sr-exp">Senior · 3–5 yrs</div></div><div class="sr-pkg">₹12–22 LPA</div></div>
+        <div class="sr"><div><div class="sr-role">SAP Solution Architect</div><div class="sr-exp">Lead · 7+ yrs</div></div><div class="sr-pkg">₹25–50 LPA</div></div>
+      </div>
+      <p style="font-size:.68rem;color:var(--mu);margin-top:10px;font-family:var(--fm);letter-spacing:.04em">* Indicative figures. Actual packages vary by company, location &amp; skills.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <div class="cta-b fu">
   <div>
     <div class="ct">Don't wait for the page — talk to us now.</div>
@@ -117,11 +123,11 @@
   </div>
   <div class="cbs">
     <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp Now</a>
-    <a href="contact" class="bo">Contact Page →</a>
+    <a href="contact.html" class="bo">Contact Page →</a>
   </div>
 </div>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="ft">
     <div>
@@ -134,23 +140,20 @@
       </div>
     </div>
     <div class="fco"><h4>Navigate</h4><ul>
-      <li><a href="index">Home</a></li>
-      <li><a href="about">About Us</a></li>
-      <li><a href="services">Services</a></li>
-      <li><a href="academy">Academy</a></li>
-      <li><a href="contact">Contact</a></li>
-      <li><a href="terms">Terms & Conditions</a></li>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li><li><a href="academy.html">Academy</a></li>
+      <li><a href="contact.html">Contact</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li>
     </ul></div>
     <div class="fco"><h4>SAP Modules</h4><ul>
-      <li><a href="academy">SAP ABAP</a></li><li><a href="academy">SAP FICO</a></li>
-      <li><a href="academy">SAP MM</a></li><li><a href="academy">SAP SD</a></li>
-      <li><a href="academy">SAP HCM</a></li><li><a href="academy">SAP S/4HANA</a></li>
+      <li><a href="academy.html">SAP ABAP</a></li><li><a href="academy.html">SAP FICO</a></li>
+      <li><a href="academy.html">SAP MM</a></li><li><a href="academy.html">SAP SD</a></li>
+      <li><a href="academy.html">SAP HCM</a></li><li><a href="academy.html">SAP S/4HANA</a></li>
     </ul></div>
     <div class="fco"><h4>Contact</h4><ul>
       <li><a href="tel:+919952227377">+91 99522 27377</a></li>
       <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
       <li><a href="https://instagram.com/sapzcodes" target="_blank">@sapzcodes</a></li>
-      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
+      <li><a href="contact.html">R.S. Puram, Coimbatore</a></li>
     </ul></div>
   </div>
   <div class="fb">
@@ -159,6 +162,6 @@
   </div>
 </footer>
 
-<script>/* paste shared JS from index.html */</script>
+<script src="main.js"></script>
 </body>
 </html>
