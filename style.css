@@ -525,3 +525,29 @@ footer {
   .fg   { grid-template-columns:1fr }
   .fp-g { grid-template-columns:1fr }
 }
+/* ── MOBILE TYPOGRAPHY ── */
+@media(max-width:700px) {
+  .ih h1 { font-size:clamp(2rem,9vw,3rem); line-height:1.1 }
+  .ih p  { font-size:.92rem; line-height:1.75 }
+  .sub   { font-size:.92rem }
+  .h1    { font-size:clamp(1.6rem,7vw,2.4rem) }
+  .tag   { font-size:.6rem; letter-spacing:.1em }
+  .chip  { font-size:.6rem; padding:6px 14px }
+  .ht    { font-size:clamp(2.2rem,10vw,3.5rem) }
+  .hsub  { font-size:.95rem }
+  .ft_   { font-size:.92rem }
+  .fd    { font-size:.82rem }
+  .mn    { font-size:1rem }
+  .md2   { font-size:.82rem }
+  .fcard { padding:28px 18px }
+  .perks { grid-template-columns:1fr 1fr }
+  .perk  { padding:12px 13px; font-size:.8rem }
+  .perk strong { font-size:.86rem }
+  .optg  { gap:8px }
+  .opt   { padding:9px 14px; font-size:.82rem }
+}
+
+@media(max-width:400px) {
+  .perks { grid-template-columns:1fr }
+  .fgrid2, .fgrid3 { grid-template-columns:1fr }
+}
