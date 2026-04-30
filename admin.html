@@ -125,9 +125,7 @@ body{
 .tb-l { display:flex; gap:10px; flex-wrap:wrap; align-items:center }
 .tb-r { display:flex; gap:10px; flex-wrap:wrap; align-items:center }
 
-.search {
-  position:relative;
-}
+.search { position:relative; }
 .search input {
   background:var(--s1); border:1px solid var(--bd2);
   padding:10px 14px 10px 38px; border-radius:7px;
@@ -170,10 +168,7 @@ body{
   border-radius:var(--r); overflow:hidden;
   box-shadow:0 1px 3px rgba(0,0,0,.04);
 }
-.tbl {
-  width:100%; border-collapse:collapse;
-  font-size:.85rem;
-}
+.tbl { width:100%; border-collapse:collapse; font-size:.85rem; }
 .tbl thead th {
   background:var(--s1);
   text-align:left; padding:14px 16px;
@@ -214,13 +209,6 @@ body{
 .st-enrolled  { background:rgba(160,90,34,.08); color:#a06022;   border:1px solid rgba(160,90,34,.2) }
 .st-dropped   { background:rgba(140,140,140,.1);color:#888;       border:1px solid rgba(140,140,140,.25) }
 
-.mini-link {
-  font-family:var(--fm); font-size:.78rem;
-  color:var(--g); text-decoration:none;
-  display:inline-flex; align-items:center; gap:5px;
-}
-.mini-link:hover { text-decoration:underline }
-
 .empty {
   text-align:center; padding:80px 20px; color:var(--mu);
   font-size:.9rem;
@@ -229,8 +217,7 @@ body{
 
 /* ── DETAIL DRAWER ── */
 .bd-back {
-  display:none;
-  position:fixed; inset:0;
+  display:none; position:fixed; inset:0;
   background:rgba(10,16,10,.4);
   backdrop-filter:blur(4px);
   z-index:200;
@@ -254,10 +241,7 @@ body{
   padding:18px 24px;
   display:flex; align-items:center; justify-content:space-between;
 }
-.drw-h .name {
-  font-family:var(--fh); font-size:1.3rem; font-weight:700;
-  letter-spacing:.03em;
-}
+.drw-h .name { font-family:var(--fh); font-size:1.3rem; font-weight:700; letter-spacing:.03em }
 .drw-h .sub { font-family:var(--fm); font-size:.7rem; color:var(--mu); letter-spacing:.08em; margin-top:2px; text-transform:uppercase }
 .drw-x {
   width:32px; height:32px; border-radius:6px;
@@ -294,7 +278,7 @@ body{
   letter-spacing:.04em; border-radius:7px;
   text-decoration:none; transition:all .2s;
 }
-.act-wa { background:#25d366; color:#fff }
+.act-wa   { background:#25d366; color:#fff }
 .act-wa:hover { background:#1eb852 }
 .act-call { background:var(--g); color:#fff }
 .act-call:hover { background:#1a8028 }
@@ -303,17 +287,162 @@ body{
 
 .tags-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px }
 
+/* ── ADD ENROLLMENT MODAL ── */
+.modal-back {
+  display:none; position:fixed; inset:0;
+  background:rgba(10,16,10,.55);
+  backdrop-filter:blur(6px);
+  z-index:300;
+  align-items:center; justify-content:center;
+  padding:20px;
+}
+.modal-back.show { display:flex }
+
+.modal {
+  background:var(--bg);
+  border:1px solid var(--bd);
+  border-radius:14px;
+  width:100%; max-width:640px;
+  max-height:90vh;
+  overflow-y:auto;
+  box-shadow:0 30px 80px rgba(0,0,0,.2);
+  position:relative;
+  animation:mslide .25s ease;
+}
+@keyframes mslide {
+  from { opacity:0; transform:translateY(18px) }
+  to   { opacity:1; transform:translateY(0) }
+}
+.modal::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:3px; background:linear-gradient(90deg,var(--g),var(--glt));
+  border-radius:14px 14px 0 0;
+}
+.modal-h {
+  padding:22px 24px 16px;
+  border-bottom:1px solid var(--bd2);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.modal-h .title {
+  font-family:var(--fh); font-size:1.25rem; font-weight:700; letter-spacing:.03em;
+}
+.modal-h .subtitle {
+  font-family:var(--fm); font-size:.65rem; color:var(--mu); letter-spacing:.1em; text-transform:uppercase; margin-top:3px;
+}
+.modal-x {
+  width:32px; height:32px; border-radius:6px;
+  background:var(--s1); border:1px solid var(--bd2);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:1.1rem; color:var(--gr);
+  transition:all .2s; flex-shrink:0;
+}
+.modal-x:hover { border-color:var(--g); color:var(--g) }
+
+.modal-body { padding:24px }
+
+.form-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
+}
+.form-grid .full { grid-column:1/-1 }
+
+.fg {
+  display:flex; flex-direction:column; gap:5px;
+}
+.fg label {
+  font-family:var(--fm); font-size:.62rem;
+  text-transform:uppercase; letter-spacing:.1em; color:var(--mu);
+}
+.fg input, .fg select, .fg textarea {
+  padding:10px 13px;
+  background:var(--s1); border:1px solid var(--bd2);
+  border-radius:7px;
+  font-family:var(--fb); font-size:.88rem;
+  color:var(--text); outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color:var(--g); box-shadow:0 0 0 3px rgba(34,160,50,.1);
+}
+.fg select { cursor:pointer; }
+.fg textarea { resize:vertical; min-height:70px; }
+
+.check-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+  margin-top:2px;
+}
+.chk-item {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 12px;
+  background:var(--s1); border:1px solid var(--bd2);
+  border-radius:6px; cursor:pointer;
+  transition:border-color .15s;
+  user-select:none;
+}
+.chk-item:hover { border-color:var(--g) }
+.chk-item input[type=checkbox] { accent-color:var(--g); width:15px; height:15px; }
+.chk-item span { font-family:var(--fm); font-size:.72rem; letter-spacing:.04em; color:var(--gr); }
+
+.section-label {
+  font-family:var(--fm); font-size:.65rem;
+  text-transform:uppercase; letter-spacing:.12em; color:var(--g);
+  margin:20px 0 12px;
+  padding-bottom:6px; border-bottom:1px solid var(--bd2);
+}
+
+.modal-footer {
+  padding:18px 24px;
+  border-top:1px solid var(--bd2);
+  display:flex; gap:10px; justify-content:flex-end;
+  align-items:center;
+}
+.modal-err { font-size:.8rem; color:#c92929; flex:1 }
+
+.btn-cancel {
+  font-family:var(--fh); font-weight:600; font-size:.85rem; letter-spacing:.05em;
+  background:transparent; border:1px solid var(--bd2);
+  color:var(--gr); padding:10px 20px; border-radius:7px;
+  cursor:pointer; transition:all .2s;
+}
+.btn-cancel:hover { border-color:var(--g); color:var(--g) }
+.btn-submit {
+  font-family:var(--fh); font-weight:700; font-size:.88rem; letter-spacing:.05em;
+  background:var(--g); color:#fff; border:none;
+  padding:10px 24px; border-radius:7px;
+  cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; gap:8px;
+}
+.btn-submit:hover { background:#1a8028; box-shadow:0 0 14px rgba(34,160,50,.25) }
+.btn-submit:disabled { opacity:.6; cursor:not-allowed }
+
+/* toast */
+.toast {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:#0a100a; color:#fff;
+  padding:12px 22px; border-radius:8px;
+  font-family:var(--fm); font-size:.8rem; letter-spacing:.06em;
+  opacity:0; transition:all .3s; z-index:999;
+  pointer-events:none; white-space:nowrap;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0) }
+.toast.ok   { background:#22a032 }
+.toast.err  { background:#c92929 }
+
 @media(max-width:900px) {
   .strip { grid-template-columns:repeat(2,1fr) }
   .search input { width:200px }
   .tbl tbody td, .tbl thead th { padding:11px 12px; font-size:.82rem }
   .hide-sm { display:none }
+  .form-grid { grid-template-columns:1fr }
+  .form-grid .full { grid-column:1 }
 }
 @media(max-width:560px) {
   .toolbar { flex-direction:column; align-items:stretch }
   .tb-l, .tb-r { width:100%; justify-content:flex-start }
   .search input { width:100% }
   .strip { grid-template-columns:1fr 1fr }
+  .check-grid { grid-template-columns:1fr }
+  .modal-body { padding:16px }
+  .modal-h { padding:16px }
 }
 </style>
 </head>
@@ -343,29 +472,18 @@ body{
   <div class="hdr-r">
     <button class="hdr-btn" id="refresh">↻ Refresh</button>
     <button class="hdr-btn" id="export">⇓ Export CSV</button>
-    <button class="hdr-btn pri" id="logout">Sign Out</button>
+    <button class="hdr-btn pri" id="add-btn">+ Add Enrollment</button>
+    <button class="hdr-btn" id="logout">Sign Out</button>
   </div>
 </header>
 
 <main class="dash" id="dash">
 
   <div class="strip">
-    <div class="scell">
-      <div class="sn" id="stat-total">0</div>
-      <div class="sl">Total Enquiries</div>
-    </div>
-    <div class="scell">
-      <div class="sn" id="stat-new">0</div>
-      <div class="sl">New / Pending</div>
-    </div>
-    <div class="scell">
-      <div class="sn" id="stat-week">0</div>
-      <div class="sl">This Week</div>
-    </div>
-    <div class="scell">
-      <div class="sn" id="stat-enrolled">0</div>
-      <div class="sl">Enrolled</div>
-    </div>
+    <div class="scell"><div class="sn" id="stat-total">0</div><div class="sl">Total Enquiries</div></div>
+    <div class="scell"><div class="sn" id="stat-new">0</div><div class="sl">New / Pending</div></div>
+    <div class="scell"><div class="sn" id="stat-week">0</div><div class="sl">This Week</div></div>
+    <div class="scell"><div class="sn" id="stat-enrolled">0</div><div class="sl">Enrolled</div></div>
   </div>
 
   <div class="toolbar">
@@ -400,7 +518,6 @@ body{
       <div>No enquiries match your filters.</div>
     </div>
   </div>
-
 </main>
 
 <!-- ───── DETAIL DRAWER ───── -->
@@ -416,16 +533,144 @@ body{
   <div class="drw-b" id="d-body"></div>
 </aside>
 
+<!-- ───── ADD ENROLLMENT MODAL ───── -->
+<div class="modal-back" id="modal-back">
+  <div class="modal" id="modal">
+    <div class="modal-h">
+      <div>
+        <div class="title">Add Enrollment</div>
+        <div class="subtitle">Manually add a student · Emails sent automatically</div>
+      </div>
+      <button class="modal-x" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="section-label">Personal Information</div>
+      <div class="form-grid">
+        <div class="fg">
+          <label>Full Name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Arjun Sharma">
+        </div>
+        <div class="fg">
+          <label>Father's Name *</label>
+          <input type="text" id="f-father" placeholder="e.g. Suresh Sharma">
+        </div>
+        <div class="fg">
+          <label>Phone *</label>
+          <input type="tel" id="f-phone" placeholder="10-digit number">
+        </div>
+        <div class="fg">
+          <label>Email *</label>
+          <input type="email" id="f-email" placeholder="student@email.com">
+        </div>
+        <div class="fg full">
+          <label>Address *</label>
+          <textarea id="f-address" placeholder="Full address"></textarea>
+        </div>
+      </div>
+
+      <div class="section-label">Academic Details</div>
+      <div class="form-grid">
+        <div class="fg">
+          <label>Department *</label>
+          <input type="text" id="f-dept" placeholder="e.g. CSE, ECE, MBA">
+        </div>
+        <div class="fg">
+          <label>Year *</label>
+          <select id="f-year">
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>Passed Out</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-label">Course Preferences</div>
+      <div class="form-grid">
+        <div class="fg">
+          <label>Mode *</label>
+          <select id="f-mode">
+            <option value="">Select mode</option>
+            <option>Online</option>
+            <option>Offline</option>
+            <option>Hybrid</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Slot *</label>
+          <select id="f-slot">
+            <option value="">Select slot</option>
+            <option>Morning (9 AM – 12 PM)</option>
+            <option>Afternoon (1 PM – 4 PM)</option>
+            <option>Evening (5 PM – 8 PM)</option>
+            <option>Weekend</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg full" id="other-slot-group" style="display:none">
+          <label>Specify Slot</label>
+          <input type="text" id="f-other-slot" placeholder="Describe preferred slot">
+        </div>
+        <div class="fg">
+          <label>Source</label>
+          <select id="f-source">
+            <option value="">Select source</option>
+            <option>Walk-in</option>
+            <option>Website</option>
+            <option>Referral</option>
+            <option>Social Media</option>
+            <option>College Campaign</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Status</label>
+          <select id="f-status">
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Enrolled">Enrolled</option>
+            <option value="Dropped">Dropped</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-label">Additional Interests</div>
+      <div class="check-grid">
+        <label class="chk-item"><input type="checkbox" id="f-ps"> <span>Practice Server</span></label>
+        <label class="chk-item"><input type="checkbox" id="f-et"> <span>Expert Training</span></label>
+        <label class="chk-item"><input type="checkbox" id="f-pa"> <span>Placement Assistance</span></label>
+        <label class="chk-item"><input type="checkbox" id="f-in"> <span>Internship</span></label>
+      </div>
+
+      <div class="section-label" style="margin-top:20px">Internal Notes</div>
+      <div class="fg">
+        <textarea id="f-notes" placeholder="Optional internal notes (not sent in emails)"></textarea>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div class="modal-err" id="modal-err"></div>
+      <button class="btn-cancel" id="modal-cancel">Cancel</button>
+      <button class="btn-submit" id="modal-submit">
+        <span id="submit-txt">Submit Enrollment</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ───── TOAST ───── -->
+<div class="toast" id="toast"></div>
+
 <script>
-/* ============== CONFIG ==============
-   Paste the SAME Apps Script Web App URL used in enroll.html.
-   The ADMIN_KEY must match what you set in Code.gs.
-   ===================================== */
+/* ============== CONFIG ============== */
 const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZBgDSCGHJUlCuCcnWbsUqY6DJrgSQlJLqvXRLMkkh-9gThhwH9bznY19hw9J-B8k7cA/exec';
 const STORAGE_KEY = 'sapz_admin_key_v1';
 /* ===================================== */
 
-const $ = (id) => document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 let allRows = [];
 let activeFilter = 'all';
@@ -433,45 +678,31 @@ let activeQuery = '';
 let adminKey = '';
 
 /* ── login ── */
-function showGate()  { $('gate').style.display = 'flex'; $('hdr').style.display = 'none'; $('dash').classList.remove('show'); }
-function showDash()  { $('gate').style.display = 'none'; $('hdr').style.display = 'flex'; $('dash').classList.add('show'); }
+function showGate() { $('gate').style.display='flex'; $('hdr').style.display='none'; $('dash').classList.remove('show'); }
+function showDash() { $('gate').style.display='none'; $('hdr').style.display='flex'; $('dash').classList.add('show'); }
 
 async function tryLogin(key) {
   $('gate-err').textContent = '';
   if (!key) { $('gate-err').textContent = 'Please enter the admin key.'; return; }
-  if (ENDPOINT.startsWith('PASTE_')) { $('gate-err').textContent = 'ENDPOINT not configured in admin.html.'; return; }
-
   $('login-btn').textContent = 'Verifying…';
   $('login-btn').disabled = true;
   try {
-    const res = await fetch(`${ENDPOINT}?action=list&key=${encodeURIComponent(key)}`, { method: 'GET' });
+    const res = await fetch(`${ENDPOINT}?action=list&key=${encodeURIComponent(key)}`);
     const data = await res.json();
     if (data.ok) {
       adminKey = key;
       sessionStorage.setItem(STORAGE_KEY, key);
       allRows = data.rows || [];
-      showDash();
-      render();
+      showDash(); render();
     } else {
       $('gate-err').textContent = data.error || 'Invalid admin key.';
     }
-  } catch (err) {
-    $('gate-err').textContent = 'Network error. Try again.';
-  } finally {
-    $('login-btn').textContent = 'Sign In';
-    $('login-btn').disabled = false;
-  }
+  } catch { $('gate-err').textContent = 'Network error. Try again.'; }
+  finally { $('login-btn').textContent = 'Sign In'; $('login-btn').disabled = false; }
 }
-
 $('login-btn').addEventListener('click', () => tryLogin($('key-in').value.trim()));
-$('key-in').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin($('key-in').value.trim()) });
-
-$('logout').addEventListener('click', () => {
-  sessionStorage.removeItem(STORAGE_KEY);
-  adminKey = '';
-  $('key-in').value = '';
-  showGate();
-});
+$('key-in').addEventListener('keydown', e => { if (e.key==='Enter') tryLogin($('key-in').value.trim()) });
+$('logout').addEventListener('click', () => { sessionStorage.removeItem(STORAGE_KEY); adminKey=''; $('key-in').value=''; showGate(); });
 
 /* ── refresh ── */
 async function refresh() {
@@ -481,8 +712,8 @@ async function refresh() {
     const res = await fetch(`${ENDPOINT}?action=list&key=${encodeURIComponent(adminKey)}`);
     const data = await res.json();
     if (data.ok) { allRows = data.rows || []; render(); }
-    else { alert(data.error || 'Failed to load'); }
-  } catch (e) { alert('Network error'); }
+    else alert(data.error || 'Failed to load');
+  } catch { alert('Network error'); }
   finally { $('refresh').textContent = '↻ Refresh'; }
 }
 $('refresh').addEventListener('click', refresh);
@@ -493,190 +724,225 @@ function fmtDate(s) {
   const d = new Date(s);
   if (isNaN(d)) return s;
   const today = new Date();
-  const sameDay = d.toDateString() === today.toDateString();
-  const yest = new Date(today); yest.setDate(today.getDate() - 1);
-  const isYest = d.toDateString() === yest.toDateString();
-  if (sameDay) return 'Today, ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-  if (isYest) return 'Yesterday, ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-  return d.toLocaleDateString([], {day:'2-digit',month:'short'}) + ', ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  const yest = new Date(today); yest.setDate(today.getDate()-1);
+  if (d.toDateString()===today.toDateString()) return 'Today, '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  if (d.toDateString()===yest.toDateString())  return 'Yesterday, '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  return d.toLocaleDateString([],{day:'2-digit',month:'short'})+', '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
 }
-
-function modeClass(m) {
-  m = (m||'').toLowerCase();
-  if (m.includes('online'))  return 'tp-online';
-  if (m.includes('offline')) return 'tp-offline';
-  return 'tp-hybrid';
-}
-function statusClass(s) {
-  s = (s||'').toLowerCase();
-  if (s === 'contacted') return 'st-contacted';
-  if (s === 'enrolled')  return 'st-enrolled';
-  if (s === 'dropped')   return 'st-dropped';
-  return 'st-new';
-}
-
-function passQuery(r, q) {
-  if (!q) return true;
-  q = q.toLowerCase();
-  return [r.name, r.phone, r.email, r.department, r.fatherName, r.address]
-    .some(v => String(v||'').toLowerCase().includes(q));
-}
-function passFilter(r, f) {
-  if (f === 'all') return true;
-  return String(r.status||'New').toLowerCase() === f.toLowerCase();
-}
+function modeClass(m) { m=(m||'').toLowerCase(); if(m.includes('online')) return 'tp-online'; if(m.includes('offline')) return 'tp-offline'; return 'tp-hybrid'; }
+function statusClass(s) { s=(s||'').toLowerCase(); if(s==='contacted') return 'st-contacted'; if(s==='enrolled') return 'st-enrolled'; if(s==='dropped') return 'st-dropped'; return 'st-new'; }
+function passQuery(r,q) { if(!q) return true; q=q.toLowerCase(); return [r.name,r.phone,r.email,r.department,r.fatherName,r.address].some(v=>String(v||'').toLowerCase().includes(q)); }
+function passFilter(r,f) { if(f==='all') return true; return String(r.status||'New').toLowerCase()===f.toLowerCase(); }
 
 function render() {
-  // counters
-  const counts = { all:0, New:0, Contacted:0, Enrolled:0, Dropped:0 };
-  const now = Date.now();
-  let weekCount = 0;
+  const counts = {all:0,New:0,Contacted:0,Enrolled:0,Dropped:0};
+  const now = Date.now(); let weekCount=0;
   allRows.forEach(r => {
     counts.all++;
-    const s = (r.status || 'New');
-    if (counts[s] !== undefined) counts[s]++;
-    const t = new Date(r.timestamp).getTime();
-    if (!isNaN(t) && now - t < 7*24*3600*1000) weekCount++;
+    const s=r.status||'New'; if(counts[s]!==undefined) counts[s]++;
+    const t=new Date(r.timestamp).getTime();
+    if(!isNaN(t) && now-t<7*24*3600*1000) weekCount++;
   });
+  $('stat-total').textContent=counts.all; $('stat-new').textContent=counts.New;
+  $('stat-week').textContent=weekCount;   $('stat-enrolled').textContent=counts.Enrolled;
+  $('c-all').textContent=counts.all; $('c-new').textContent=counts.New;
+  $('c-c').textContent=counts.Contacted; $('c-e').textContent=counts.Enrolled; $('c-d').textContent=counts.Dropped;
 
-  $('stat-total').textContent = counts.all;
-  $('stat-new').textContent = counts.New;
-  $('stat-week').textContent = weekCount;
-  $('stat-enrolled').textContent = counts.Enrolled;
-  $('c-all').textContent = counts.all;
-  $('c-new').textContent = counts.New;
-  $('c-c').textContent = counts.Contacted;
-  $('c-e').textContent = counts.Enrolled;
-  $('c-d').textContent = counts.Dropped;
+  const visible = allRows.filter(r=>passFilter(r,activeFilter)&&passQuery(r,activeQuery))
+    .sort((a,b)=>(new Date(b.timestamp).getTime()||0)-(new Date(a.timestamp).getTime()||0));
 
-  // filtered rows (newest first)
-  const visible = allRows
-    .filter(r => passFilter(r, activeFilter) && passQuery(r, activeQuery))
-    .sort((a, b) => {
-      const ta = new Date(a.timestamp).getTime() || 0;
-      const tb = new Date(b.timestamp).getTime() || 0;
-      return tb - ta;
-    });
+  const tbody=$('rows'); tbody.innerHTML='';
+  if(visible.length===0){ $('empty').style.display='block'; return; }
+  $('empty').style.display='none';
 
-  const tbody = $('rows');
-  tbody.innerHTML = '';
-  if (visible.length === 0) {
-    $('empty').style.display = 'block';
-    return;
-  }
-  $('empty').style.display = 'none';
-
-  visible.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>
-        <div class="tnm">${esc(r.name)}</div>
-        <div class="tdept">${esc(r.department)} · ${esc(r.email)}</div>
-      </td>
+  visible.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><div class="tnm">${esc(r.name)}</div><div class="tdept">${esc(r.department)} · ${esc(r.email)}</div></td>
       <td class="hide-sm"><span style="font-family:var(--fm);font-size:.82rem;color:var(--text)">${esc(r.phone)}</span></td>
-      <td class="hide-sm">
-        <span class="tag-pill ${modeClass(r.mode)}">${esc(r.mode)}</span>
-        <div class="tdept" style="margin-top:4px">${esc(r.slot)}${r.otherSlot ? ' · '+esc(r.otherSlot) : ''}</div>
-      </td>
+      <td class="hide-sm"><span class="tag-pill ${modeClass(r.mode)}">${esc(r.mode)}</span><div class="tdept" style="margin-top:4px">${esc(r.slot)}${r.otherSlot?' · '+esc(r.otherSlot):''}</div></td>
       <td class="hide-sm"><span style="font-size:.82rem">${esc(r.year)}</span></td>
       <td><span class="st-pill ${statusClass(r.status)}">${esc(r.status||'New')}</span></td>
-      <td class="hide-sm"><span class="tts">${fmtDate(r.timestamp)}</span></td>
-    `;
-    tr.addEventListener('click', () => openDrawer(r));
+      <td class="hide-sm"><span class="tts">${fmtDate(r.timestamp)}</span></td>`;
+    tr.addEventListener('click',()=>openDrawer(r));
     tbody.appendChild(tr);
   });
 }
 
-function esc(s) {
-  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ── drawer ── */
 function openDrawer(r) {
-  $('d-name').textContent = r.name || '—';
-  $('d-sub').textContent  = (r.department || '') + (r.year ? ' · ' + r.year : '');
-
-  const interests = [];
-  if (yes(r.practiceServer))      interests.push('Practice Server');
-  if (yes(r.expertTraining))      interests.push('Expert Training');
-  if (yes(r.placementAssistance)) interests.push('Placement');
-  if (yes(r.internship))          interests.push('Internship');
-  const interestsHTML = interests.length
-    ? `<div class="tags-row">${interests.map(i=>`<span class="tag-pill tp-online">${esc(i)}</span>`).join('')}</div>`
-    : `<span style="color:var(--mu);font-size:.85rem">None marked</span>`;
-
-  const phoneClean = String(r.phone||'').replace(/\D/g,'');
-  const wa  = phoneClean ? `https://wa.me/${phoneClean.length===10 ? '91'+phoneClean : phoneClean}` : '#';
-  const tel = phoneClean ? `tel:${phoneClean}` : '#';
-  const mail= r.email ? `mailto:${r.email}` : '#';
-
-  $('d-body').innerHTML = `
+  $('d-name').textContent=r.name||'—';
+  $('d-sub').textContent=(r.department||'')+(r.year?' · '+r.year:'');
+  const interests=[];
+  if(yes(r.practiceServer)) interests.push('Practice Server');
+  if(yes(r.expertTraining)) interests.push('Expert Training');
+  if(yes(r.placementAssistance)) interests.push('Placement');
+  if(yes(r.internship)) interests.push('Internship');
+  const interestsHTML=interests.length
+    ?`<div class="tags-row">${interests.map(i=>`<span class="tag-pill tp-online">${esc(i)}</span>`).join('')}</div>`
+    :`<span style="color:var(--mu);font-size:.85rem">None marked</span>`;
+  const phoneClean=String(r.phone||'').replace(/\D/g,'');
+  const wa=phoneClean?`https://wa.me/${phoneClean.length===10?'91'+phoneClean:phoneClean}`:'#';
+  const tel=phoneClean?`tel:${phoneClean}`:'#';
+  const mail=r.email?`mailto:${r.email}`:'#';
+  $('d-body').innerHTML=`
     <div class="dline"><div class="dico">📞</div><div><div class="dlbl">Phone</div><div class="dval"><a href="${tel}">${esc(r.phone)}</a></div></div></div>
     <div class="dline"><div class="dico">✉</div><div><div class="dlbl">Email</div><div class="dval"><a href="${mail}">${esc(r.email)}</a></div></div></div>
     <div class="dline"><div class="dico">👤</div><div><div class="dlbl">Father's Name</div><div class="dval">${esc(r.fatherName)}</div></div></div>
     <div class="dline"><div class="dico">📍</div><div><div class="dlbl">Address</div><div class="dval">${esc(r.address)}</div></div></div>
     <div class="dline"><div class="dico">🎓</div><div><div class="dlbl">Department / Year</div><div class="dval">${esc(r.department)} · ${esc(r.year)}</div></div></div>
     <div class="dline"><div class="dico">⚙</div><div><div class="dlbl">Mode</div><div class="dval"><span class="tag-pill ${modeClass(r.mode)}">${esc(r.mode)}</span></div></div></div>
-    <div class="dline"><div class="dico">🕒</div><div><div class="dlbl">Slot</div><div class="dval">${esc(r.slot)}${r.otherSlot ? ' — '+esc(r.otherSlot) : ''}</div></div></div>
+    <div class="dline"><div class="dico">🕒</div><div><div class="dlbl">Slot</div><div class="dval">${esc(r.slot)}${r.otherSlot?' — '+esc(r.otherSlot):''}</div></div></div>
     <div class="dline"><div class="dico">★</div><div><div class="dlbl">Interests</div><div class="dval">${interestsHTML}</div></div></div>
-    <div class="dline"><div class="dico">↗</div><div><div class="dlbl">Source</div><div class="dval">${esc(r.source) || '—'}</div></div></div>
+    <div class="dline"><div class="dico">↗</div><div><div class="dlbl">Source</div><div class="dval">${esc(r.source)||'—'}</div></div></div>
     <div class="dline"><div class="dico">⏱</div><div><div class="dlbl">Submitted</div><div class="dval">${fmtDate(r.timestamp)}</div></div></div>
-    ${r.notes ? `<div class="dline"><div class="dico">📝</div><div><div class="dlbl">Internal Notes</div><div class="dval">${esc(r.notes)}</div></div></div>` : ''}
-
+    ${r.notes?`<div class="dline"><div class="dico">📝</div><div><div class="dlbl">Internal Notes</div><div class="dval">${esc(r.notes)}</div></div></div>`:''}
     <div class="drw-actions">
-      <a class="act-wa"   href="${wa}"  target="_blank" rel="noopener">WhatsApp</a>
+      <a class="act-wa" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>
       <a class="act-call" href="${tel}">Call</a>
       <a class="act-mail" href="${mail}">Email</a>
     </div>
-
     <div style="margin-top:18px;font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.06em">
       To change status / add notes, edit row ${r._rowIndex} directly in the Google Sheet.
-    </div>
-  `;
-  $('drw').classList.add('show');
-  $('bdback').classList.add('show');
+    </div>`;
+  $('drw').classList.add('show'); $('bdback').classList.add('show');
 }
-function closeDrawer() {
-  $('drw').classList.remove('show');
-  $('bdback').classList.remove('show');
-}
+function closeDrawer() { $('drw').classList.remove('show'); $('bdback').classList.remove('show'); }
 $('d-close').addEventListener('click', closeDrawer);
 $('bdback').addEventListener('click', closeDrawer);
-addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer() });
 
-function yes(v) { return v === 'Yes' || v === true || v === 'yes' }
+/* ── ADD ENROLLMENT MODAL ── */
+$('add-btn').addEventListener('click', openModal);
+$('modal-close').addEventListener('click', closeModal);
+$('modal-cancel').addEventListener('click', closeModal);
+$('modal-back').addEventListener('click', e => { if(e.target===$('modal-back')) closeModal(); });
+
+function openModal() {
+  resetModal();
+  $('modal-back').classList.add('show');
+}
+function closeModal() {
+  $('modal-back').classList.remove('show');
+}
+function resetModal() {
+  ['f-name','f-father','f-phone','f-email','f-address','f-dept','f-other-slot','f-notes'].forEach(id=>$(id).value='');
+  ['f-year','f-mode','f-slot','f-source'].forEach(id=>$(id).value='');
+  $('f-status').value='New';
+  ['f-ps','f-et','f-pa','f-in'].forEach(id=>$(id).checked=false);
+  $('modal-err').textContent='';
+  $('submit-txt').textContent='Submit Enrollment';
+  $('modal-submit').disabled=false;
+  $('other-slot-group').style.display='none';
+}
+
+// Show/hide "other slot" field
+$('f-slot').addEventListener('change', () => {
+  $('other-slot-group').style.display = $('f-slot').value==='Other' ? 'block' : 'none';
+});
+
+$('modal-submit').addEventListener('click', async () => {
+  const name        = $('f-name').value.trim();
+  const fatherName  = $('f-father').value.trim();
+  const phone       = $('f-phone').value.trim();
+  const email       = $('f-email').value.trim();
+  const address     = $('f-address').value.trim();
+  const department  = $('f-dept').value.trim();
+  const year        = $('f-year').value;
+  const mode        = $('f-mode').value;
+  const slot        = $('f-slot').value;
+  const otherSlot   = $('f-other-slot').value.trim();
+  const source      = $('f-source').value;
+  const status      = $('f-status').value;
+  const notes       = $('f-notes').value.trim();
+
+  // Client-side validation
+  const missing = [];
+  if (!name)       missing.push('Full Name');
+  if (!fatherName) missing.push("Father's Name");
+  if (!phone)      missing.push('Phone');
+  if (!email)      missing.push('Email');
+  if (!address)    missing.push('Address');
+  if (!department) missing.push('Department');
+  if (!year)       missing.push('Year');
+  if (!mode)       missing.push('Mode');
+  if (!slot)       missing.push('Slot');
+
+  if (missing.length) { $('modal-err').textContent = 'Required: ' + missing.join(', '); return; }
+  if (!/^\d{10}$/.test(phone.replace(/\D/g,''))) { $('modal-err').textContent = 'Enter a valid 10-digit phone number.'; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('modal-err').textContent = 'Enter a valid email address.'; return; }
+
+  $('modal-err').textContent = '';
+  $('submit-txt').textContent = 'Saving…';
+  $('modal-submit').disabled = true;
+
+  const payload = {
+    name, fatherName, phone, email, address, department, year,
+    mode, slot, otherSlot, source, status, notes,
+    practiceServer:    $('f-ps').checked ? 'Yes' : 'No',
+    expertTraining:    $('f-et').checked ? 'Yes' : 'No',
+    placementAssistance: $('f-pa').checked ? 'Yes' : 'No',
+    internship:        $('f-in').checked ? 'Yes' : 'No',
+    adminKey:          adminKey   // sent so backend can verify & skip duplicate email logic if needed
+  };
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.ok) {
+      closeModal();
+      showToast('Enrollment added & emails sent ✓', 'ok');
+      await refresh();
+    } else {
+      $('modal-err').textContent = data.error || 'Failed to save. Try again.';
+      $('submit-txt').textContent = 'Submit Enrollment';
+      $('modal-submit').disabled = false;
+    }
+  } catch {
+    $('modal-err').textContent = 'Network error. Please try again.';
+    $('submit-txt').textContent = 'Submit Enrollment';
+    $('modal-submit').disabled = false;
+  }
+});
+
+/* ── toast ── */
+function showToast(msg, type='ok') {
+  const t=$('toast'); t.textContent=msg; t.className='toast '+type+' show';
+  setTimeout(()=>t.className='toast',3200);
+}
 
 /* ── filters / search ── */
-document.querySelectorAll('.fchip').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.fchip').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    activeFilter = b.dataset.f;
-    render();
+document.querySelectorAll('.fchip').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.fchip').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); activeFilter=b.dataset.f; render();
   });
 });
-$('q').addEventListener('input', e => { activeQuery = e.target.value.trim(); render(); });
+$('q').addEventListener('input', e=>{ activeQuery=e.target.value.trim(); render(); });
 
 /* ── export ── */
-$('export').addEventListener('click', () => {
-  if (allRows.length === 0) { alert('No data to export'); return; }
-  const cols = ['timestamp','name','fatherName','phone','email','department','year','address','mode','slot','otherSlot','practiceServer','expertTraining','placementAssistance','internship','source','status','notes'];
-  const csv = [cols.join(',')].concat(
-    allRows.map(r => cols.map(c => `"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))
-  ).join('\n');
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `sapzcodes-enrollments-${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
+$('export').addEventListener('click',()=>{
+  if(!allRows.length){ alert('No data to export'); return; }
+  const cols=['timestamp','name','fatherName','phone','email','department','year','address','mode','slot','otherSlot','practiceServer','expertTraining','placementAssistance','internship','source','status','notes'];
+  const csv=[cols.join(',')].concat(allRows.map(r=>cols.map(c=>`"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`sapzcodes-enrollments-${new Date().toISOString().slice(0,10)}.csv`; a.click();
   URL.revokeObjectURL(url);
 });
 
-/* ── auto-login if key cached for this session ── */
-const cached = sessionStorage.getItem(STORAGE_KEY);
-if (cached) tryLogin(cached);
-</script>
+/* ── misc ── */
+function yes(v){ return v==='Yes'||v===true||v==='yes' }
+addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeDrawer(); closeModal(); } });
 
+/* ── auto-login ── */
+const cached=sessionStorage.getItem(STORAGE_KEY);
+if(cached) tryLogin(cached);
+</script>
 </body>
 </html>
