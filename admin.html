@@ -273,7 +273,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 .inst-row-lbl{font-family:var(--fm);font-size:.7rem;color:var(--mu);min-width:90px;letter-spacing:.06em}
 .inst-row input{flex:1;padding:8px 12px;background:var(--bg);border:1px solid var(--bd2);border-radius:6px;font-family:var(--fm);font-size:.82rem;color:var(--text);outline:none;transition:border-color .2s}
 .inst-row input:focus{border-color:var(--g)}
-.inst-row-status{font-family:var(--fm);font-size:.64rem;padding:3px 8px;border-radius:4px;border:1px solid var(--bd2);background:var(--bg);color:var(--mu);cursor:pointer}
+.inst-row-status{font-family:var(--fm);font-size:.64rem;padding:5px 12px;border-radius:4px;border:1px solid var(--bd2);background:var(--bg);color:var(--mu);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.inst-row-status.paid{background:rgba(34,160,50,.12);color:#1a8028;border-color:rgba(34,160,50,.3)}
+.inst-row-status.unpaid{background:rgba(220,100,20,.08);color:#c05010;border-color:rgba(220,100,20,.2)}
+.inst-sum-info{font-family:var(--fm);font-size:.72rem;margin-top:10px;padding:8px 12px;border-radius:6px;border:1px solid var(--bd2);background:var(--s1);color:var(--mu)}
+.inst-sum-info.ok{border-color:rgba(34,160,50,.3);background:rgba(34,160,50,.08);color:#1a8028}
+.inst-sum-info.bad{border-color:rgba(220,100,20,.3);background:rgba(220,100,20,.08);color:#c05010}
 
 /* toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#0a100a;color:#fff;padding:12px 22px;border-radius:8px;font-family:var(--fm);font-size:.8rem;letter-spacing:.06em;opacity:0;transition:all .3s;z-index:999;pointer-events:none;white-space:nowrap}
@@ -536,7 +541,63 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
         <div class="fg"><label>Email *</label><input type="email" id="sf-email" placeholder="student@email.com"></div>
         <div class="fg"><label>Phone *</label><input type="tel" id="sf-phone" placeholder="10-digit number"></div>
         <div class="fg full"><label>Address</label><textarea id="sf-address" placeholder="Full address"></textarea></div>
-        <div class="fg"><label>Department *</label><input type="text" id="sf-dept" placeholder="e.g. CSE, MBA, MCA"></div>
+        <div class="fg"><label>Department *</label>
+          <select id="sf-dept">
+            <option value="">Select department</option>
+            <optgroup label="Engineering">
+              <option>B.E / B.Tech – CSE</option>
+              <option>B.E / B.Tech – IT</option>
+              <option>B.E / B.Tech – ECE</option>
+              <option>B.E / B.Tech – EEE</option>
+              <option>B.E / B.Tech – Mechanical</option>
+              <option>B.E / B.Tech – Civil</option>
+              <option>B.E / B.Tech – Aeronautical</option>
+              <option>B.E / B.Tech – Biomedical</option>
+              <option>B.E / B.Tech – Chemical</option>
+              <option>B.E / B.Tech – Automobile</option>
+            </optgroup>
+            <optgroup label="Postgraduate Engineering">
+              <option>M.E / M.Tech – CSE</option>
+              <option>M.E / M.Tech – VLSI</option>
+              <option>M.E / M.Tech – Embedded Systems</option>
+              <option>M.E / M.Tech – Power Electronics</option>
+            </optgroup>
+            <optgroup label="Management">
+              <option>MBA – Finance</option>
+              <option>MBA – HR</option>
+              <option>MBA – Marketing</option>
+              <option>MBA – Operations</option>
+              <option>MBA – Systems / IT</option>
+              <option>BBA</option>
+            </optgroup>
+            <optgroup label="Computer Applications">
+              <option>MCA</option>
+              <option>BCA</option>
+              <option>M.Sc – Computer Science</option>
+              <option>B.Sc – Computer Science</option>
+              <option>B.Sc – IT</option>
+            </optgroup>
+            <optgroup label="Science">
+              <option>M.Sc – Mathematics</option>
+              <option>M.Sc – Physics</option>
+              <option>M.Sc – Chemistry</option>
+              <option>B.Sc – Mathematics</option>
+            </optgroup>
+            <optgroup label="Commerce &amp; Arts">
+              <option>B.Com</option>
+              <option>M.Com</option>
+              <option>B.A</option>
+              <option>M.A</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option>Diploma – CSE</option>
+              <option>Diploma – ECE</option>
+              <option>Diploma – Mechanical</option>
+              <option>Working Professional</option>
+              <option>Other</option>
+            </optgroup>
+          </select>
+        </div>
         <div class="fg"><label>Batch *</label><input type="text" id="sf-batch" placeholder="e.g. Batch 2025-A"></div>
         <div class="fg"><label>Trainer Name *</label>
           <select id="sf-trainer">
@@ -553,7 +614,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 
       <div class="section-label">Fee Details</div>
       <div class="form-grid">
-        <div class="fg"><label>Total Fee (₹) *</label><input type="number" id="sf-fee" placeholder="e.g. 45000" min="0"></div>
+        <div class="fg"><label>Total Fee (₹) *</label><input type="number" id="sf-fee" placeholder="e.g. 15000" min="0" oninput="updateInstSum()"></div>
         <div class="fg"><label>Fee Mode *</label>
           <select id="sf-feemode">
             <option value="">Select mode</option>
@@ -604,7 +665,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 
 <script>
 /* ═══ CONFIG ═══ */
-const ENDPOINT   = 'https://script.google.com/macros/s/AKfycbwW2iBfFOFqXzCxvDY7UHjmgZBDmDuD6neLgXIDUvZzt2du2eR5SAwssav0fQdXgQ2WhQ/exec';
+const ENDPOINT   = 'https://script.google.com/macros/s/AKfycbwZBgDSCGHJUlCuCcnWbsUqY6DJrgSQlJLqvXRLMkkh-9gThhwH9bznY19hw9J-B8k7cA/exec';
 const STORAGE_KEY = 'sapz_admin_key_v2';
 
 const $ = id => document.getElementById(id);
@@ -820,11 +881,11 @@ $('em-submit').addEventListener('click', async ()=>{
   if(!name) missing.push('Full Name'); if(!fatherName) missing.push("Father's Name"); if(!phone) missing.push('Phone'); if(!email) missing.push('Email'); if(!address) missing.push('Address'); if(!department) missing.push('Department'); if(!year) missing.push('Year'); if(!mode) missing.push('Mode'); if(!slot) missing.push('Slot');
   if(missing.length){ $('em-err').textContent='Required: '+missing.join(', '); return; }
   if(!/^\d{10}$/.test(phone.replace(/\D/g,''))){ $('em-err').textContent='Enter a valid 10-digit phone.'; return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ $('em-err').textContent='Enter a valid email.'; return; }
+  if(!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)){ $('em-err').textContent='Enter a valid email address (e.g. name@gmail.com).'; return; }
   $('em-err').textContent=''; $('em-submit-txt').textContent='Saving…'; $('em-submit').disabled=true;
   const payload={ name,fatherName,phone,email,address,department,year,mode,slot, otherSlot:$('ef-other-slot').value.trim(), source:$('ef-source').value, status:$('ef-status').value, notes:$('ef-notes').value.trim(), practiceServer:$('ef-ps').checked?'Yes':'No', expertTraining:$('ef-et').checked?'Yes':'No', placementAssistance:$('ef-pa').checked?'Yes':'No', internship:$('ef-in').checked?'Yes':'No', adminKey };
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
+    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const d=await res.json();
     if(d.ok){ closeEnrollModal(); showToast('Enrollment added ✓','ok'); await refreshEnrollments(); }
     else { $('em-err').textContent=d.error||'Failed.'; $('em-submit-txt').textContent='Submit Enrollment'; $('em-submit').disabled=false; }
@@ -896,11 +957,13 @@ function openStudentDrawer(r){
     let amounts=[];
     try{ amounts=JSON.parse(r.installmentAmounts||'[]'); }catch(e){}
     const n=parseInt(r.installmentType)||amounts.length;
-    instHTML=`<table class="inst-table"><thead><tr><th>#</th><th>Amount (₹)</th></tr></thead><tbody>`;
+    instHTML=`<table class="inst-table"><thead><tr><th>#</th><th>Amount (₹)</th><th>Status</th></tr></thead><tbody>`;
     for(let i=0;i<n;i++){
       const amt=amounts[i]||{amount:'',paid:false};
       const amtVal=typeof amt==='object'?amt.amount:amt;
-      instHTML+=`<tr><td>Installment ${i+1}</td><td>₹${esc(amtVal)||'—'}</td></tr>`;
+      const isPaid=typeof amt==='object'?(amt.paid===true||amt.paid==='true'):false;
+      const badge=isPaid?`<span class="st-pill fs-paid">✓ Paid</span>`:`<span class="st-pill fs-pending">✗ Unpaid</span>`;
+      instHTML+=`<tr><td>Installment ${i+1}</td><td>₹${esc(String(amtVal))||'—'}</td><td>${badge}</td></tr>`;
     }
     instHTML+='</tbody></table>';
   }
@@ -942,7 +1005,10 @@ function openStudentModal(idOrNull){
     $('sm-subtitle').textContent='Update student record';
     $('sf-id').value=r.id;
     $('sf-name').value=r.name; $('sf-email').value=r.email; $('sf-phone').value=r.phone;
-    $('sf-address').value=r.address; $('sf-dept').value=r.department; $('sf-batch').value=r.batch;
+    $('sf-address').value=r.address; 
+    // dept is now a select; set value, if no match leave as-is (browser keeps empty)
+    $('sf-dept').value=r.department;
+    $('sf-batch').value=r.batch;
     $('sf-trainer').value=r.trainerName; $('sf-fee').value=r.fee; $('sf-feemode').value=r.feeMode;
     $('sf-feedate').value=r.feeDate; $('sf-feestatus').value=r.feeStatus||'Pending';
     $('sf-installment').checked=r.installment==='Yes';
@@ -966,6 +1032,7 @@ function resetStudentModal(){
   $('sf-feestatus').value='Pending';
   $('sf-installment').checked=false; $('sf-inst-group').style.display='none';
   $('sf-inst-rows').innerHTML='';
+  const sumEl=$('sf-inst-sum'); if(sumEl) sumEl.remove();
   $('sm-err').textContent=''; $('sm-submit-txt').textContent='Save Student'; $('sm-submit').disabled=false;
 }
 $('sm-close').addEventListener('click',closeStudentModal);
@@ -988,16 +1055,49 @@ function buildInstRows(n, existingJSON){
   for(let i=0;i<n;i++){
     const e=existing[i]||{amount:'',paid:false};
     const amt=typeof e==='object'?e.amount:e;
+    const isPaid=typeof e==='object'?e.paid===true||e.paid==='true':false;
     const row=document.createElement('div'); row.className='inst-row';
     row.innerHTML=`<span class="inst-row-lbl">Installment ${i+1}</span>
-      <input type="number" min="0" placeholder="Amount (₹)" value="${esc(String(amt))}" data-inst-idx="${i}">`;
+      <input type="number" min="0" placeholder="Amount (₹)" value="${esc(String(amt))}" data-inst-idx="${i}" oninput="updateInstSum()">
+      <button type="button" class="inst-row-status ${isPaid?'paid':'unpaid'}" data-paid="${isPaid}" onclick="toggleInstPaid(this)">${isPaid?'✓ Paid':'✗ Unpaid'}</button>`;
     container.appendChild(row);
   }
+  // sum display
+  let sumEl=$('sf-inst-sum');
+  if(!sumEl){
+    sumEl=document.createElement('div'); sumEl.id='sf-inst-sum'; sumEl.className='inst-sum-info';
+    container.parentNode.appendChild(sumEl);
+  }
+  updateInstSum();
+}
+
+function toggleInstPaid(btn){
+  const isPaid=btn.dataset.paid==='true';
+  btn.dataset.paid=String(!isPaid);
+  btn.className='inst-row-status '+((!isPaid)?'paid':'unpaid');
+  btn.textContent=(!isPaid)?'✓ Paid':'✗ Unpaid';
+}
+
+function updateInstSum(){
+  const inputs=[...$('sf-inst-rows').querySelectorAll('input[type=number]')];
+  const total=parseFloat($('sf-fee').value)||0;
+  const sum=inputs.reduce((a,inp)=>a+(parseFloat(inp.value)||0),0);
+  const el=$('sf-inst-sum');
+  if(!el||!inputs.length) return;
+  const diff=total-sum;
+  if(total===0){ el.className='inst-sum-info'; el.textContent='Enter total fee above first.'; return; }
+  if(Math.abs(diff)<0.01){ el.className='inst-sum-info ok'; el.textContent=`✓ Installments sum ₹${sum.toLocaleString('en-IN')} matches total fee.`; }
+  else if(diff>0){ el.className='inst-sum-info bad'; el.textContent=`✗ Sum ₹${sum.toLocaleString('en-IN')} — short by ₹${diff.toLocaleString('en-IN')} vs total ₹${total.toLocaleString('en-IN')}.`; }
+  else{ el.className='inst-sum-info bad'; el.textContent=`✗ Sum ₹${sum.toLocaleString('en-IN')} exceeds total fee ₹${total.toLocaleString('en-IN')} by ₹${(-diff).toLocaleString('en-IN')}.`; }
 }
 
 function collectInstAmounts(){
-  const inputs=[...$('sf-inst-rows').querySelectorAll('input')];
-  return JSON.stringify(inputs.map(inp=>({ amount:inp.value.trim(), paid:false })));
+  const rows=[...$('sf-inst-rows').querySelectorAll('.inst-row')];
+  return JSON.stringify(rows.map(row=>{
+    const inp=row.querySelector('input[type=number]');
+    const btn=row.querySelector('.inst-row-status');
+    return { amount:(inp?inp.value.trim():''), paid:(btn?btn.dataset.paid==='true':false) };
+  }));
 }
 
 $('sm-submit').addEventListener('click', async ()=>{
@@ -1014,6 +1114,15 @@ $('sm-submit').addEventListener('click', async ()=>{
   if(!fee) missing.push('Fee'); if(!feeMode) missing.push('Fee Mode');
   if(installment==='Yes'&&!installmentType) missing.push('Installment Type');
   if(missing.length){ $('sm-err').textContent='Required: '+missing.join(', '); return; }
+  // email: must have @ and a valid TLD (at least 2 chars after last dot)
+  if(!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)){ $('sm-err').textContent='Enter a valid email address (e.g. name@gmail.com).'; return; }
+  // installment sum must match total fee
+  if(installment==='Yes'){
+    const inputs=[...$('sf-inst-rows').querySelectorAll('input[type=number]')];
+    const sum=inputs.reduce((a,inp)=>a+(parseFloat(inp.value)||0),0);
+    const totalFee=parseFloat(fee)||0;
+    if(Math.abs(sum-totalFee)>0.01){ $('sm-err').textContent=`Installment amounts sum ₹${sum.toLocaleString('en-IN')} must equal total fee ₹${totalFee.toLocaleString('en-IN')}.`; return; }
+  }
 
   $('sm-err').textContent=''; $('sm-submit-txt').textContent='Saving…'; $('sm-submit').disabled=true;
 
@@ -1027,7 +1136,7 @@ $('sm-submit').addEventListener('click', async ()=>{
   if(editingStudentId) payload.id=editingStudentId;
 
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
+    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const d=await res.json();
     if(d.ok){
       closeStudentModal(); closeStudentDrawer();
@@ -1042,7 +1151,7 @@ $('sm-submit').addEventListener('click', async ()=>{
 async function deleteStudent(id, name){
   if(!confirm(`Delete student "${name}" (${id})? This cannot be undone.`)) return;
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({action:'student_delete',id,adminKey})});
+    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'student_delete',id,adminKey})});
     const d=await res.json();
     if(d.ok){ closeStudentDrawer(); showToast('Student deleted','ok'); await loadStudents(); }
     else showToast(d.error||'Failed','err');
