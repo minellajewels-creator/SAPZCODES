@@ -142,7 +142,7 @@ nav.sc { height:56px; background:rgba(245,249,245,.97) }
 }
 .mm.op { display:flex }
 .mm a {
-  font-family:var(--fh); font-size:2rem; font-weight:700;
+  font-family:var(--fh); font-size:2rem; font-weight:500;
   letter-spacing:.05em; color:var(--text);
   text-decoration:none; cursor:none; transition:color .2s;
 }
@@ -152,7 +152,7 @@ nav.sc { height:56px; background:rgba(245,249,245,.97) }
 .bg {
   display:inline-flex; align-items:center; gap:8px;
   background:var(--g); color:#fff;
-  font-family:var(--fh); font-weight:700;
+  font-family:var(--fh); font-weight:500;
   font-size:.93rem; letter-spacing:.05em;
   padding:12px 30px; border-radius:6px;
   text-decoration:none; cursor:none; border:none;
@@ -169,7 +169,7 @@ nav.sc { height:56px; background:rgba(245,249,245,.97) }
 .bo {
   display:inline-flex; align-items:center; gap:8px;
   border:1.5px solid var(--bd); color:var(--text);
-  font-family:var(--fh); font-weight:600;
+  font-family:var(--fh); font-weight:400;
   font-size:.93rem; letter-spacing:.04em;
   padding:12px 30px; border-radius:6px;
   text-decoration:none; cursor:none; background:transparent;
@@ -179,7 +179,7 @@ nav.sc { height:56px; background:rgba(245,249,245,.97) }
 
 /* ── UTILS ── */
 .tag {
-  font-family:var(--fm); font-size:.68rem;
+  font-family:var(--fm); font-size:.58rem;
   text-transform:uppercase; letter-spacing:.14em;
   color:var(--g); margin-bottom:14px;
   display:flex; align-items:center; gap:10px;
