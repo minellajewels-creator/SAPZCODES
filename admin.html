@@ -1136,7 +1136,7 @@ $('sm-submit').addEventListener('click', async ()=>{
   if(editingStudentId) payload.id=editingStudentId;
 
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
     const d=await res.json();
     if(d.ok){
       closeStudentModal(); closeStudentDrawer();
