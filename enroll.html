@@ -3,1173 +3,541 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="icon" href="favicon.png" type="image/png">
-<title>SAPZCODES — Admin Dashboard</title>
-<meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="favicon.png" type="image/png">
+<title>Enroll — SAPZCODES</title>
+<meta name="description" content="Enroll for SAP industrial expert-led training at SAPZCODES. 100% placement assistance, 3-6 month internships, flexible online/offline/hybrid slots.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+.fwrap { max-width:880px; margin:0 auto; padding:0 5% }
+.fcard {
+  background:var(--s1);
+  border:1px solid var(--bd);
+  border-radius:var(--r);
+  padding:44px 5%;
+  position:relative; overflow:hidden;
+}
+.fcard::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--g);
+}
+.fgroup { margin-bottom:22px }
+.fgrid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px }
+.fgrid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px }
+.flbl {
+  display:block;
+  font-family:var(--fm);
+  font-size:.66rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--g);
+  margin-bottom:8px;
+}
+.flbl .req { color:#d63a3a; margin-left:4px }
+.finp, .fsel, .ftxt {
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--bd2);
+  border-radius:7px;
+  padding:12px 15px;
+  font-family:var(--fb);
+  font-size:.92rem;
+  color:var(--text);
+  cursor:none;
+  transition:border-color .2s, box-shadow .2s;
+  outline:none;
+}
+.finp:focus, .fsel:focus, .ftxt:focus {
+  border-color:var(--g);
+  box-shadow:0 0 0 3px rgba(34,160,50,.1);
+}
+.ftxt { resize:vertical; min-height:80px; font-family:var(--fb) }
+.fsel { appearance:none; -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2322a032' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+}
+.fhint { font-size:.74rem; color:var(--mu); margin-top:6px; font-family:var(--fm) }
 
-:root {
-  --bg:#f5f9f5; --s1:#eaf2ea; --s2:#ddeedd;
-  --g:#22a032; --glt:#3ddc50;
-  --text:#0a100a; --gr:#3a4a3a; --mu:#5a6e5a;
-  --bd:rgba(34,160,50,.18); --bd2:rgba(0,0,0,.08);
-  --r:10px;
-  --fh:'Rajdhani',sans-serif;
-  --fb:'Exo 2',sans-serif;
-  --fm:'JetBrains Mono',monospace;
-  --shadow:0 2px 20px rgba(0,0,0,.06);
+.optg { display:flex; flex-wrap:wrap; gap:10px }
+.opt {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--bg);
+  border:1px solid var(--bd2);
+  border-radius:7px;
+  padding:11px 18px;
+  cursor:none;
+  transition:all .2s;
+  font-size:.88rem;
+  color:var(--gr);
+  user-select:none;
+}
+.opt:hover { border-color:rgba(34,160,50,.3); color:var(--text) }
+.opt input { position:absolute; opacity:0; pointer-events:none }
+.opt .box {
+  width:16px; height:16px; flex-shrink:0;
+  border:1.5px solid var(--bd2);
+  border-radius:4px;
+  background:var(--bg);
+  transition:all .2s;
+  position:relative;
+}
+.opt input[type="radio"] + .box { border-radius:50% }
+.opt input:checked + .box {
+  background:var(--g);
+  border-color:var(--g);
+}
+.opt input:checked + .box::after {
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+}
+.opt input[type="checkbox"]:checked + .box::after {
+  width:9px; height:5px;
+  border-left:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform:translate(-50%,-65%) rotate(-45deg);
+}
+.opt input[type="radio"]:checked + .box::after {
+  width:6px; height:6px;
+  background:#fff;
+  border-radius:50%;
+}
+.opt:has(input:checked) {
+  border-color:var(--g);
+  background:rgba(34,160,50,.06);
+  color:var(--text);
 }
 
-html{overflow-x:hidden}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh}
-
-/* ── HEADER ── */
-.hdr{
-  position:sticky;top:0;z-index:100;
-  background:rgba(245,249,245,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--bd);
-  padding:14px 5%;
-  display:flex;align-items:center;justify-content:space-between;
-  box-shadow:var(--shadow);
+.perks {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px; margin-bottom:34px;
 }
-.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
-.brand-logo{
-  width:34px;height:34px;
-  background:linear-gradient(135deg,var(--g),var(--glt));
+.perk {
+  display:flex; align-items:center; gap:12px;
+  background:var(--bg);
+  border:1px solid var(--bd2);
   border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-weight:700;color:#fff;font-size:.9rem;
-  letter-spacing:.04em;box-shadow:0 0 14px rgba(34,160,50,.3);
+  padding:14px 16px;
+  font-size:.85rem;
+  color:var(--gr);
 }
-.brand-t{font-family:var(--fh);font-size:1.05rem;font-weight:700;letter-spacing:.05em}
-.brand-t .z{color:var(--g)}
-.brand-sub{font-family:var(--fm);font-size:.6rem;color:var(--mu);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
-.hdr-r{display:flex;align-items:center;gap:10px}
-.hdr-btn{
-  font-family:var(--fh);font-weight:600;font-size:.78rem;letter-spacing:.05em;
-  background:transparent;border:1px solid var(--bd2);
-  color:var(--gr);padding:8px 16px;border-radius:6px;cursor:pointer;transition:all .2s;
-}
-.hdr-btn:hover{border-color:var(--g);color:var(--g)}
-.hdr-btn.pri{background:var(--g);color:#fff;border-color:var(--g)}
-.hdr-btn.pri:hover{background:#1a8028;box-shadow:0 0 14px rgba(34,160,50,.25);color:#fff}
-.nav-breadcrumb{font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;padding:8px 16px;border-radius:6px;border:1px solid transparent;transition:all .2s;cursor:pointer}
-.nav-breadcrumb:hover{border-color:var(--bd2);color:var(--g)}
+.perk-i { font-size:1.1rem; flex-shrink:0 }
+.perk strong { color:var(--text); display:block; font-family:var(--fh); font-size:.92rem; margin-bottom:2px; letter-spacing:.03em }
 
-/* ── LOGIN ── */
-.gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:0 5%}
-.gate-card{
-  background:var(--s1);border:1px solid var(--bd);border-radius:14px;
-  padding:44px 5%;max-width:440px;width:100%;
-  box-shadow:0 20px 60px rgba(0,0,0,.06);text-align:center;
-  position:relative;overflow:hidden;
+.stat {
+  display:none;
+  padding:14px 18px;
+  border-radius:8px;
+  font-size:.88rem;
+  margin-bottom:20px;
+  font-family:var(--fb);
+  align-items:center;
+  gap:10px;
 }
-.gate-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--glt))}
-.gate-tag{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--g);margin-bottom:14px}
-.gate-h{font-family:var(--fh);font-size:1.7rem;font-weight:700;letter-spacing:.03em;margin-bottom:8px}
-.gate-p{color:var(--gr);font-size:.9rem;margin-bottom:28px}
-.gate-inp{
-  width:100%;padding:13px 16px;background:var(--bg);border:1px solid var(--bd2);
-  border-radius:7px;font-family:var(--fm);font-size:.9rem;
-  color:var(--text);outline:none;margin-bottom:14px;
-  transition:border-color .2s,box-shadow .2s;
-}
-.gate-inp:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(34,160,50,.1)}
-.gate-btn{
-  width:100%;padding:13px;background:var(--g);color:#fff;border:none;
-  font-family:var(--fh);font-weight:700;font-size:.95rem;letter-spacing:.05em;
-  border-radius:7px;cursor:pointer;transition:all .2s;
-}
-.gate-btn:hover{background:#1a8028;box-shadow:0 0 18px rgba(34,160,50,.25)}
-.gate-err{color:#c92929;font-size:.82rem;margin-top:12px;min-height:20px}
+.stat.ok  { background:rgba(34,160,50,.08); border:1px solid rgba(34,160,50,.25); color:var(--g) }
+.stat.err { background:rgba(214,58,58,.07); border:1px solid rgba(214,58,58,.25); color:#c92929 }
+.stat.lod { background:rgba(34,160,50,.05); border:1px solid var(--bd); color:var(--gr) }
 
-/* ── PORTAL HOME ── */
-.portal{display:none;padding:48px 5% 80px}
-.portal.show{display:block}
-.portal-title{font-family:var(--fh);font-size:1.8rem;font-weight:700;letter-spacing:.03em;margin-bottom:6px}
-.portal-sub{color:var(--mu);font-family:var(--fm);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:40px}
-.portal-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px}
-.portal-card{
-  background:var(--bg);border:1px solid var(--bd2);border-radius:14px;
-  padding:36px 32px;cursor:pointer;
-  transition:all .25s;position:relative;overflow:hidden;
-}
-.portal-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--g),var(--glt));
-  transform:scaleX(0);transform-origin:left;transition:transform .3s;
-}
-.portal-card:hover::before{transform:scaleX(1)}
-.portal-card:hover{border-color:var(--g);box-shadow:0 8px 32px rgba(34,160,50,.1);transform:translateY(-2px)}
-.pc-icon{font-size:2rem;margin-bottom:20px;display:block}
-.pc-title{font-family:var(--fh);font-size:1.4rem;font-weight:700;letter-spacing:.03em;margin-bottom:8px}
-.pc-desc{color:var(--gr);font-size:.88rem;line-height:1.6;margin-bottom:20px}
-.pc-meta{display:flex;gap:8px;flex-wrap:wrap}
-.pc-tag{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;background:var(--s1);border:1px solid var(--bd2);color:var(--mu);padding:4px 10px;border-radius:4px}
-.pc-arrow{position:absolute;bottom:28px;right:28px;font-size:1.1rem;color:var(--g);opacity:0;transition:all .25s;transform:translateX(-6px)}
-.portal-card:hover .pc-arrow{opacity:1;transform:translateX(0)}
+.fsubmit { display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:8px }
+.fsubmit .bg[disabled] { opacity:.55; pointer-events:none }
 
-/* ── ENROLLMENTS PAGE ── */
-.enroll-pg{display:none;padding:28px 5% 60px}
-.enroll-pg.show{display:block}
-
-/* ── STUDENTS PAGE ── */
-.students-pg{display:none;padding:28px 5% 60px}
-.students-pg.show{display:block}
-
-/* ── SHARED DASHBOARD ELEMENTS ── */
-.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:20px}
-.tb-l{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.tb-r{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.search{position:relative}
-.search input{
-  background:var(--s1);border:1px solid var(--bd2);
-  padding:10px 14px 10px 38px;border-radius:7px;
-  font-family:var(--fb);font-size:.88rem;
-  color:var(--text);width:280px;outline:none;
-  transition:border-color .2s,box-shadow .2s;
+.thanks {
+  display:none;
+  text-align:center;
+  padding:60px 20px;
 }
-.search input:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(34,160,50,.1)}
-.search::before{content:'⌕';position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:1.05rem}
-.fchip{
-  font-family:var(--fm);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;
-  background:var(--s1);border:1px solid var(--bd2);color:var(--gr);
-  padding:8px 14px;border-radius:6px;cursor:pointer;transition:all .2s;
-  display:inline-flex;align-items:center;gap:6px;
+.thanks.show { display:block }
+.thanks-i {
+  width:72px; height:72px;
+  border-radius:50%;
+  background:rgba(34,160,50,.1);
+  border:2px solid var(--g);
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 24px;
+  font-size:1.8rem;
+  color:var(--g);
+  box-shadow:var(--glow);
 }
-.fchip:hover{border-color:var(--g);color:var(--g)}
-.fchip.on{background:var(--g);color:#fff;border-color:var(--g)}
-.fchip .ct{font-family:var(--fm);font-size:.66rem;opacity:.85}
-.strip{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  border:1px solid var(--bd2);border-radius:var(--r);
-  overflow:hidden;margin-bottom:24px;background:var(--bd2);
+.thanks h3 {
+  font-family:var(--fh); font-size:1.6rem; font-weight:700;
+  letter-spacing:.03em; color:var(--text); margin-bottom:10px;
 }
-.scell{background:var(--bg);padding:18px 20px}
-.sn{font-family:var(--fh);font-size:1.7rem;font-weight:700;color:var(--g);line-height:1}
-.sl{font-family:var(--fm);font-size:.66rem;color:var(--mu);margin-top:6px;letter-spacing:.08em;text-transform:uppercase}
-.tbl-wrap{background:var(--bg);border:1px solid var(--bd2);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.tbl{width:100%;border-collapse:collapse;font-size:.85rem}
-.tbl thead th{
-  background:var(--s1);text-align:left;padding:14px 16px;
-  font-family:var(--fm);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;
-  color:var(--g);border-bottom:1px solid var(--bd2);white-space:nowrap;
-}
-.tbl tbody td{padding:14px 16px;border-bottom:1px solid var(--bd2);vertical-align:top;color:var(--gr)}
-.tbl tbody tr{transition:background .15s;cursor:pointer}
-.tbl tbody tr:hover{background:rgba(34,160,50,.04)}
-.tbl tbody tr:last-child td{border-bottom:none}
-.tnm{font-family:var(--fh);font-weight:700;color:var(--text);font-size:.95rem;letter-spacing:.02em}
-.tdept{font-family:var(--fm);font-size:.7rem;color:var(--mu);margin-top:2px;letter-spacing:.04em}
-.tts{font-family:var(--fm);font-size:.72rem;color:var(--mu);white-space:nowrap}
-.tag-pill{display:inline-block;padding:3px 10px;border-radius:4px;font-family:var(--fm);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase}
-.tp-online{background:rgba(34,160,50,.1);color:var(--g);border:1px solid rgba(34,160,50,.2)}
-.tp-offline{background:rgba(160,90,34,.08);color:#a06022;border:1px solid rgba(160,90,34,.2)}
-.tp-hybrid{background:rgba(34,90,160,.08);color:#225aa0;border:1px solid rgba(34,90,160,.2)}
-.st-pill{display:inline-block;padding:3px 10px;border-radius:4px;font-family:var(--fm);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
-.st-new{background:rgba(34,160,50,.1);color:var(--g);border:1px solid rgba(34,160,50,.2)}
-.st-contacted{background:rgba(34,90,160,.08);color:#225aa0;border:1px solid rgba(34,90,160,.2)}
-.st-enrolled{background:rgba(160,90,34,.08);color:#a06022;border:1px solid rgba(160,90,34,.2)}
-.st-dropped{background:rgba(140,140,140,.1);color:#888;border:1px solid rgba(140,140,140,.25)}
-/* fee status pills */
-.fs-paid{background:rgba(34,160,50,.12);color:#1a8028;border:1px solid rgba(34,160,50,.25)}
-.fs-pending{background:rgba(220,100,20,.1);color:#c05010;border:1px solid rgba(220,100,20,.2)}
-.fs-partial{background:rgba(34,90,200,.08);color:#225aa0;border:1px solid rgba(34,90,200,.2)}
-.fs-overdue{background:rgba(180,30,30,.1);color:#b01a1a;border:1px solid rgba(180,30,30,.2)}
-.empty{text-align:center;padding:80px 20px;color:var(--mu);font-size:.9rem}
-.empty-i{font-size:2.4rem;opacity:.4;margin-bottom:14px}
+.thanks p { color:var(--gr); font-size:.95rem; line-height:1.7; max-width:460px; margin:0 auto 28px }
 
-/* ── DETAIL DRAWER (shared) ── */
-.bd-back{display:none;position:fixed;inset:0;background:rgba(10,16,10,.4);backdrop-filter:blur(4px);z-index:200}
-.bd-back.show{display:block}
-.drw{
-  position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);
-  background:var(--bg);border-left:1px solid var(--bd);z-index:201;
-  transform:translateX(100%);transition:transform .3s ease;
-  overflow-y:auto;box-shadow:-20px 0 60px rgba(0,0,0,.12);
-}
-.drw.show{transform:translateX(0)}
-.drw-h{
-  position:sticky;top:0;background:var(--s1);border-bottom:1px solid var(--bd);
-  padding:18px 24px;display:flex;align-items:center;justify-content:space-between;
-}
-.drw-h .name{font-family:var(--fh);font-size:1.3rem;font-weight:700;letter-spacing:.03em}
-.drw-h .sub{font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.08em;margin-top:2px;text-transform:uppercase}
-.drw-x{width:32px;height:32px;border-radius:6px;background:var(--bg);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--gr);transition:all .2s}
-.drw-x:hover{border-color:var(--g);color:var(--g)}
-.drw-b{padding:24px}
-.dline{display:flex;gap:14px;margin-bottom:18px}
-.dico{width:36px;height:36px;flex-shrink:0;background:var(--s1);border:1px solid var(--bd2);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--g)}
-.dlbl{font-family:var(--fm);font-size:.62rem;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
-.dval{font-size:.92rem;color:var(--text);line-height:1.5;word-break:break-word}
-.dval a{color:var(--g);text-decoration:none}
-.dval a:hover{text-decoration:underline}
-.drw-actions{display:flex;gap:10px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--bd2);margin-top:8px}
-.drw-actions a{flex:1;min-width:120px;text-align:center;padding:11px 14px;font-family:var(--fh);font-weight:700;font-size:.85rem;letter-spacing:.04em;border-radius:7px;text-decoration:none;transition:all .2s}
-.act-wa{background:#25d366;color:#fff}
-.act-wa:hover{background:#1eb852}
-.act-call{background:var(--g);color:#fff}
-.act-call:hover{background:#1a8028}
-.act-mail{background:transparent;color:var(--g);border:1px solid var(--g)}
-.act-mail:hover{background:rgba(34,160,50,.06)}
-.tags-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.drw-edit-btn{width:100%;padding:11px;background:var(--s1);border:1px solid var(--bd2);color:var(--gr);font-family:var(--fh);font-weight:700;font-size:.85rem;letter-spacing:.04em;border-radius:7px;cursor:pointer;transition:all .2s;text-align:center;margin-top:12px}
-.drw-edit-btn:hover{border-color:var(--g);color:var(--g)}
-.drw-del-btn{width:100%;padding:11px;background:transparent;border:1px solid rgba(180,30,30,.3);color:#b01a1a;font-family:var(--fh);font-weight:700;font-size:.85rem;letter-spacing:.04em;border-radius:7px;cursor:pointer;transition:all .2s;text-align:center;margin-top:8px}
-.drw-del-btn:hover{background:rgba(180,30,30,.06);border-color:#b01a1a}
-
-/* installment fee breakdown in drawer */
-.inst-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
-.inst-table th{text-align:left;padding:6px 10px;background:var(--s1);font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu)}
-.inst-table td{padding:8px 10px;border-bottom:1px solid var(--bd2);color:var(--text)}
-.inst-table tr:last-child td{border-bottom:none}
-
-/* ── MODAL (shared) ── */
-.modal-back{display:none;position:fixed;inset:0;background:rgba(10,16,10,.55);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center;padding:20px}
-.modal-back.show{display:flex}
-.modal{background:var(--bg);border:1px solid var(--bd);border-radius:14px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.2);position:relative;animation:mslide .25s ease}
-@keyframes mslide{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--glt));border-radius:14px 14px 0 0}
-.modal-h{padding:22px 24px 16px;border-bottom:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between}
-.modal-h .title{font-family:var(--fh);font-size:1.25rem;font-weight:700;letter-spacing:.03em}
-.modal-h .subtitle{font-family:var(--fm);font-size:.65rem;color:var(--mu);letter-spacing:.1em;text-transform:uppercase;margin-top:3px}
-.modal-x{width:32px;height:32px;border-radius:6px;background:var(--s1);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--gr);transition:all .2s;flex-shrink:0}
-.modal-x:hover{border-color:var(--g);color:var(--g)}
-.modal-body{padding:24px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-grid .full{grid-column:1/-1}
-.fg{display:flex;flex-direction:column;gap:5px}
-.fg label{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu)}
-.fg input,.fg select,.fg textarea{
-  padding:10px 13px;background:var(--s1);border:1px solid var(--bd2);
-  border-radius:7px;font-family:var(--fb);font-size:.88rem;color:var(--text);outline:none;
-  transition:border-color .2s,box-shadow .2s;
-}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(34,160,50,.1)}
-.fg select{cursor:pointer}
-.fg textarea{resize:vertical;min-height:70px}
-.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
-.chk-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--s1);border:1px solid var(--bd2);border-radius:6px;cursor:pointer;transition:border-color .15s;user-select:none}
-.chk-item:hover{border-color:var(--g)}
-.chk-item input[type=checkbox]{accent-color:var(--g);width:15px;height:15px}
-.chk-item span{font-family:var(--fm);font-size:.72rem;letter-spacing:.04em;color:var(--gr)}
-.section-label{font-family:var(--fm);font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--g);margin:20px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--bd2)}
-.modal-footer{padding:18px 24px;border-top:1px solid var(--bd2);display:flex;gap:10px;justify-content:flex-end;align-items:center}
-.modal-err{font-size:.8rem;color:#c92929;flex:1}
-.btn-cancel{font-family:var(--fh);font-weight:600;font-size:.85rem;letter-spacing:.05em;background:transparent;border:1px solid var(--bd2);color:var(--gr);padding:10px 20px;border-radius:7px;cursor:pointer;transition:all .2s}
-.btn-cancel:hover{border-color:var(--g);color:var(--g)}
-.btn-submit{font-family:var(--fh);font-weight:700;font-size:.88rem;letter-spacing:.05em;background:var(--g);color:#fff;border:none;padding:10px 24px;border-radius:7px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
-.btn-submit:hover{background:#1a8028;box-shadow:0 0 14px rgba(34,160,50,.25)}
-.btn-submit:disabled{opacity:.6;cursor:not-allowed}
-
-/* installment amount rows */
-.inst-rows{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.inst-row{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--bd2);border-radius:7px;padding:10px 14px}
-.inst-row-lbl{font-family:var(--fm);font-size:.7rem;color:var(--mu);min-width:90px;letter-spacing:.06em}
-.inst-row input{flex:1;padding:8px 12px;background:var(--bg);border:1px solid var(--bd2);border-radius:6px;font-family:var(--fm);font-size:.82rem;color:var(--text);outline:none;transition:border-color .2s}
-.inst-row input:focus{border-color:var(--g)}
-.inst-row-status{font-family:var(--fm);font-size:.64rem;padding:5px 12px;border-radius:4px;border:1px solid var(--bd2);background:var(--bg);color:var(--mu);cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
-.inst-row-status.paid{background:rgba(34,160,50,.12);color:#1a8028;border-color:rgba(34,160,50,.3)}
-.inst-row-status.unpaid{background:rgba(220,100,20,.08);color:#c05010;border-color:rgba(220,100,20,.2)}
-.inst-sum-info{font-family:var(--fm);font-size:.72rem;margin-top:10px;padding:8px 12px;border-radius:6px;border:1px solid var(--bd2);background:var(--s1);color:var(--mu)}
-.inst-sum-info.ok{border-color:rgba(34,160,50,.3);background:rgba(34,160,50,.08);color:#1a8028}
-.inst-sum-info.bad{border-color:rgba(220,100,20,.3);background:rgba(220,100,20,.08);color:#c05010}
-
-/* toast */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#0a100a;color:#fff;padding:12px 22px;border-radius:8px;font-family:var(--fm);font-size:.8rem;letter-spacing:.06em;opacity:0;transition:all .3s;z-index:999;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.toast.ok{background:#22a032}
-.toast.err{background:#c92929}
-
-@media(max-width:900px){
-  .strip{grid-template-columns:repeat(2,1fr)}
-  .search input{width:200px}
-  .tbl tbody td,.tbl thead th{padding:11px 12px;font-size:.82rem}
-  .hide-sm{display:none}
-  .form-grid{grid-template-columns:1fr}
-  .form-grid .full{grid-column:1}
-  .portal-cards{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-  .toolbar{flex-direction:column;align-items:stretch}
-  .tb-l,.tb-r{width:100%;justify-content:flex-start}
-  .search input{width:100%}
-  .strip{grid-template-columns:1fr 1fr}
-  .check-grid{grid-template-columns:1fr}
-  .modal-body{padding:16px}
-  .modal-h{padding:16px}
-  .portal{padding:28px 5% 60px}
+@media(max-width:700px){
+  .fgrid2, .fgrid3 { grid-template-columns:1fr }
+  .fcard { padding:32px 22px }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ LOGIN ═══════════ -->
-<div class="gate" id="gate">
-  <div class="gate-card">
-    <div class="gate-tag">Internal Access</div>
-    <h1 class="gate-h">SAPZ<span style="color:var(--g)">CODES</span> Admin</h1>
-    <p class="gate-p">Enter your admin key to access the portal.</p>
-    <input type="password" class="gate-inp" id="key-in" placeholder="Admin key" autocomplete="off" autofocus>
-    <button class="gate-btn" id="login-btn">Sign In</button>
-    <div class="gate-err" id="gate-err"></div>
+<div id="cur"></div>
+<div id="ring"></div>
+
+<nav id="nv">
+  <a href="/" class="logo">
+    <img src="logo.png" alt="SAPZCODES" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-t" style="font-family:var(--fh);font-weight:700;font-size:1.15rem;letter-spacing:.06em;color:var(--text)">SAPZ<span style="color:var(--g)">CODES</span></span>
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="enroll" class="on">Enroll</a></li>
+      <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+    </ul>
+    <button class="hb" id="hb" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+</nav>
+
+<div class="mm" id="mm">
+  <a href="index">Home</a>
+  <a href="about">About Us</a>
+  <a href="services">Services</a>
+  <a href="academy">Academy</a>
+  <a href="contact">Contact</a>
+  <a href="enroll" class="on">Enroll</a>
+  <a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a>
 </div>
 
-<!-- ═══════════ HEADER (shown after login) ═══════════ -->
-<header class="hdr" id="hdr" style="display:none">
-  <div class="brand" id="brand-home">
-    <div class="brand-logo">SZ</div>
-    <div>
-      <div class="brand-t">SAPZ<span class="z">CODES</span></div>
-      <div class="brand-sub" id="hdr-sub">Admin Portal</div>
-    </div>
+<section class="ih">
+  <div class="dots"></div>
+  <div style="position:relative;z-index:1">
+    <div class="tag">Student Enrollment</div>
+    <h1>Start your <span style="color:var(--g)">SAP journey</span><br>with SAPZCODES.</h1>
+    <p>Fill the form below and our team will reach out to confirm your batch, slot and onboarding details. Industrial expert-led training, real practice servers, and 100% placement assistance.</p>
   </div>
-  <div class="hdr-r" id="hdr-r">
-    <!-- buttons injected per page -->
-    <button class="hdr-btn" id="logout">Sign Out</button>
-  </div>
-</header>
+</section>
 
-<!-- ═══════════ PORTAL HOME ═══════════ -->
-<section class="portal" id="portal">
-  <div class="portal-title">Welcome back 👋</div>
-  <div class="portal-sub">Select a module to manage</div>
-  <div class="portal-cards">
-    <div class="portal-card" id="go-enrollments">
-      <span class="pc-icon">📋</span>
-      <div class="pc-title">Enrollments</div>
-      <div class="pc-desc">View and manage student enquiries submitted through the website form. Track follow-up status, search by name or contact, and add walk-in enrollments.</div>
-      <div class="pc-meta">
-        <span class="pc-tag">Enquiries</span>
-        <span class="pc-tag">Status Tracking</span>
-        <span class="pc-tag">CSV Export</span>
-      </div>
-      <span class="pc-arrow">→</span>
+<section class="sec t0" style="padding-top:20px">
+  <div class="fwrap">
+
+    <div class="perks fu">
+      <div class="perk"><div class="perk-i">🖥️</div><div><strong>Practice Server</strong>Hands-on real SAP environment</div></div>
+      <div class="perk"><div class="perk-i">👨‍🏫</div><div><strong>Expert-Led</strong>SAP industrial trainers</div></div>
+      <div class="perk"><div class="perk-i">🎯</div><div><strong>100% Placement</strong>Dedicated placement assistance</div></div>
+      <div class="perk"><div class="perk-i">💼</div><div><strong>Internship</strong>3 - 6 month structured programs</div></div>
     </div>
-    <div class="portal-card" id="go-students">
-      <span class="pc-icon">🎓</span>
-      <div class="pc-title">Student Details</div>
-      <div class="pc-desc">Full student records with fee management, trainer assignment, installment tracking, and payment status. Complete financial overview per student.</div>
-      <div class="pc-meta">
-        <span class="pc-tag">Fee Tracking</span>
-        <span class="pc-tag">Installments</span>
-        <span class="pc-tag">Trainer Assignment</span>
+
+    <div class="fcard fu">
+
+      <div class="thanks" id="thanks">
+        <div class="thanks-i">✓</div>
+        <h3>Enquiry Received</h3>
+        <p>Thanks <span id="thanks-name">there</span> — your details are with us. Our team will reach out within 24 hours on the phone number you've shared. For urgent queries, ping us on WhatsApp.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          <a href="/" class="bo">Back to Home</a>
+          <a href="https://wa.me/" class="bg" id="wa-link">WhatsApp Us →</a>
+        </div>
       </div>
-      <span class="pc-arrow">→</span>
+
+      <form id="frm" novalidate>
+
+        <div class="stat ok"  id="st-ok">✓ <span></span></div>
+        <div class="stat err" id="st-err">⚠ <span></span></div>
+        <div class="stat lod" id="st-lod">⏳ Submitting your enquiry…</div>
+
+        <div class="fgrid2">
+          <div class="fgroup">
+            <label class="flbl" for="name">Full Name<span class="req">*</span></label>
+            <input class="finp" id="name" name="name" type="text" required maxlength="80" autocomplete="name">
+          </div>
+          <div class="fgroup">
+            <label class="flbl" for="fatherName">Father's Name<span class="req">*</span></label>
+            <input class="finp" id="fatherName" name="fatherName" type="text" required maxlength="80">
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label class="flbl" for="address">Address<span class="req">*</span></label>
+          <textarea class="ftxt" id="address" name="address" required rows="2" maxlength="240"></textarea>
+        </div>
+
+        <div class="fgrid2">
+          <div class="fgroup">
+            <label class="flbl" for="phone">Phone Number<span class="req">*</span></label>
+            <input class="finp" id="phone" name="phone" type="tel" required maxlength="15" autocomplete="tel">
+            <div class="fhint">10 digits, with or without country code.</div>
+          </div>
+          <div class="fgroup">
+            <label class="flbl" for="email">Email ID<span class="req">*</span></label>
+            <input class="finp" id="email" name="email" type="email" required autocomplete="email">
+            <div class="fhint">e.g. name@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="fgrid2">
+          <div class="fgroup">
+            <label class="flbl" for="department">Department<span class="req">*</span></label>
+            <input class="finp" id="department" name="department" type="text" required placeholder="e.g. B.Tech CSE / MBA / B.Com">
+          </div>
+          <div class="fgroup">
+            <label class="flbl" for="year">Year<span class="req">*</span></label>
+            <select class="fsel" id="year" name="year" required>
+              <option value="" disabled selected>Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year / Final Year</option>
+              <option>Post Graduate</option>
+              <option>Working Professional</option>
+              <option>Graduated / Job Seeker</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label class="flbl">Preferred Mode<span class="req">*</span></label>
+          <div class="optg" role="radiogroup">
+            <label class="opt"><input type="radio" name="mode" value="Online"><span class="box"></span>Online</label>
+            <label class="opt"><input type="radio" name="mode" value="Offline"><span class="box"></span>Offline</label>
+            <label class="opt"><input type="radio" name="mode" value="Hybrid"><span class="box"></span>Hybrid</label>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label class="flbl">Preferred Slot<span class="req">*</span></label>
+          <div class="optg" role="radiogroup">
+            <label class="opt"><input type="radio" name="slot" value="9 - 11 AM"><span class="box"></span>9 - 11 AM</label>
+            <label class="opt"><input type="radio" name="slot" value="7:30 - 9 AM"><span class="box"></span>7:30 - 9 AM</label>
+            <label class="opt"><input type="radio" name="slot" value="7 - 10 PM"><span class="box"></span>7 - 10 PM</label>
+            <label class="opt"><input type="radio" name="slot" value="Weekend (anytime)"><span class="box"></span>Weekend (anytime)</label>
+            <label class="opt"><input type="radio" name="slot" value="Other"><span class="box"></span>Other</label>
+          </div>
+        </div>
+
+        <div class="fgroup" id="other-wrap" style="display:none">
+          <label class="flbl" for="otherSlot">Tell us your preferred timing</label>
+          <input class="finp" id="otherSlot" name="otherSlot" type="text" maxlength="120" placeholder="e.g. Weekdays after 8 PM IST">
+        </div>
+
+        <div class="fgroup">
+          <label class="flbl">I'm interested in</label>
+          <div class="optg">
+            <label class="opt"><input type="checkbox" name="practiceServer" value="Yes" checked><span class="box"></span>Practice Server</label>
+            <label class="opt"><input type="checkbox" name="expertTraining" value="Yes" checked><span class="box"></span>Expert-Led Training</label>
+            <label class="opt"><input type="checkbox" name="placementAssistance" value="Yes" checked><span class="box"></span>Placement Assistance</label>
+            <label class="opt"><input type="checkbox" name="internship" value="Yes"><span class="box"></span>Internship (3-6 months)</label>
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label class="flbl" for="source">How did you hear about us?</label>
+          <select class="fsel" id="source" name="source">
+            <option value="">— optional —</option>
+            <option>Instagram</option>
+            <option>YouTube</option>
+            <option>Google Search</option>
+            <option>Friend / Referral</option>
+            <option>College / Faculty</option>
+            <option>LinkedIn</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="fsubmit">
+          <button type="submit" class="bg" id="btn">Submit Enquiry →</button>
+          <span style="font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.06em">YOUR DATA STAYS WITH SAPZCODES</span>
+        </div>
+      </form>
+
     </div>
   </div>
 </section>
 
-<!-- ═══════════ ENROLLMENTS PAGE ═══════════ -->
-<main class="enroll-pg" id="enroll-pg">
-
-  <div class="strip">
-    <div class="scell"><div class="sn" id="stat-total">0</div><div class="sl">Total Enquiries</div></div>
-    <div class="scell"><div class="sn" id="stat-new">0</div><div class="sl">New / Pending</div></div>
-    <div class="scell"><div class="sn" id="stat-week">0</div><div class="sl">This Week</div></div>
-    <div class="scell"><div class="sn" id="stat-enrolled">0</div><div class="sl">Enrolled</div></div>
-  </div>
-
-  <div class="toolbar">
-    <div class="tb-l">
-      <div class="search"><input type="text" id="eq" placeholder="Search name, phone, email, dept…"></div>
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAPZ<span class="z">CODES</span></div>
+      <p class="ftag">Industrial expert-led SAP training with real practice servers, internships and 100% placement assistance.</p>
     </div>
-    <div class="tb-r">
-      <button class="fchip on" data-ef="all">All <span class="ct" id="c-all">0</span></button>
-      <button class="fchip" data-ef="New">New <span class="ct" id="c-new">0</span></button>
-      <button class="fchip" data-ef="Contacted">Contacted <span class="ct" id="c-c">0</span></button>
-      <button class="fchip" data-ef="Enrolled">Enrolled <span class="ct" id="c-e">0</span></button>
-      <button class="fchip" data-ef="Dropped">Dropped <span class="ct" id="c-d">0</span></button>
+    <div class="fco">
+      <h4>Site</h4>
+      <ul>
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About Us</a></li>
+        <li><a href="services">Services</a></li>
+        <li><a href="academy">Academy</a></li>
+        <li><a href="contact">Contact</a></li>
+        <li><a href="enroll" class="on">Enroll</a></li>
+        <li><a href="https://wa.me/919952227377" target="_blank" class="cta">Enquire Now ↗</a></li>
+      </ul>
     </div>
-  </div>
-
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>Student</th>
-          <th class="hide-sm">Phone</th>
-          <th class="hide-sm">Mode / Slot</th>
-          <th class="hide-sm">Year</th>
-          <th>Status</th>
-          <th class="hide-sm">Submitted</th>
-        </tr>
-      </thead>
-      <tbody id="e-rows"></tbody>
-    </table>
-    <div class="empty" id="e-empty" style="display:none"><div class="empty-i">∅</div><div>No enquiries match your filters.</div></div>
-  </div>
-</main>
-
-<!-- Enrollment detail drawer -->
-<div class="bd-back" id="e-bdback"></div>
-<aside class="drw" id="e-drw">
-  <div class="drw-h">
-    <div><div class="name" id="ed-name">—</div><div class="sub" id="ed-sub">—</div></div>
-    <button class="drw-x" id="ed-close">✕</button>
-  </div>
-  <div class="drw-b" id="ed-body"></div>
-</aside>
-
-<!-- Enrollment add modal -->
-<div class="modal-back" id="e-modal-back">
-  <div class="modal">
-    <div class="modal-h">
-      <div><div class="title">Add Enrollment</div><div class="subtitle">Manually add a student · Emails sent automatically</div></div>
-      <button class="modal-x" id="em-close">✕</button>
+    <div class="fco">
+      <h4>Programs</h4>
+      <ul>
+        <li>SAP FICO</li>
+        <li>SAP MM</li>
+        <li>SAP SD</li>
+        <li>SAP ABAP</li>
+      </ul>
     </div>
-    <div class="modal-body">
-      <div class="section-label">Personal Information</div>
-      <div class="form-grid">
-        <div class="fg"><label>Full Name *</label><input type="text" id="ef-name" placeholder="e.g. Arjun Sharma"></div>
-        <div class="fg"><label>Father's Name *</label><input type="text" id="ef-father" placeholder="e.g. Suresh Sharma"></div>
-        <div class="fg"><label>Phone *</label><input type="tel" id="ef-phone" placeholder="10-digit number"></div>
-        <div class="fg"><label>Email *</label><input type="email" id="ef-email" placeholder="student@email.com"></div>
-        <div class="fg full"><label>Address *</label><textarea id="ef-address" placeholder="Full address"></textarea></div>
-      </div>
-      <div class="section-label">Academic Details</div>
-      <div class="form-grid">
-        <div class="fg"><label>Department *</label><input type="text" id="ef-dept" placeholder="e.g. CSE, ECE, MBA"></div>
-        <div class="fg"><label>Year *</label>
-          <select id="ef-year"><option value="">Select year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Passed Out</option></select>
-        </div>
-      </div>
-      <div class="section-label">Course Preferences</div>
-      <div class="form-grid">
-        <div class="fg"><label>Mode *</label>
-          <select id="ef-mode"><option value="">Select mode</option><option>Online</option><option>Offline</option><option>Hybrid</option></select>
-        </div>
-        <div class="fg"><label>Slot *</label>
-          <select id="ef-slot"><option value="">Select slot</option><option>Morning (9 AM – 12 PM)</option><option>Afternoon (1 PM – 4 PM)</option><option>Evening (5 PM – 8 PM)</option><option>Weekend</option><option>Other</option></select>
-        </div>
-        <div class="fg full" id="ef-other-slot-group" style="display:none"><label>Specify Slot</label><input type="text" id="ef-other-slot" placeholder="Describe preferred slot"></div>
-        <div class="fg"><label>Source</label>
-          <select id="ef-source"><option value="">Select source</option><option>Walk-in</option><option>Website</option><option>Referral</option><option>Social Media</option><option>College Campaign</option><option>Other</option></select>
-        </div>
-        <div class="fg"><label>Status</label>
-          <select id="ef-status"><option value="New">New</option><option value="Contacted">Contacted</option><option value="Enrolled">Enrolled</option><option value="Dropped">Dropped</option></select>
-        </div>
-      </div>
-      <div class="section-label">Additional Interests</div>
-      <div class="check-grid">
-        <label class="chk-item"><input type="checkbox" id="ef-ps"> <span>Practice Server</span></label>
-        <label class="chk-item"><input type="checkbox" id="ef-et"> <span>Expert Training</span></label>
-        <label class="chk-item"><input type="checkbox" id="ef-pa"> <span>Placement Assistance</span></label>
-        <label class="chk-item"><input type="checkbox" id="ef-in"> <span>Internship</span></label>
-      </div>
-      <div class="section-label" style="margin-top:20px">Internal Notes</div>
-      <div class="fg"><textarea id="ef-notes" placeholder="Optional internal notes (not sent in emails)"></textarea></div>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-err" id="em-err"></div>
-      <button class="btn-cancel" id="em-cancel">Cancel</button>
-      <button class="btn-submit" id="em-submit"><span id="em-submit-txt">Submit Enrollment</span></button>
+    <div class="fco">
+      <h4>Reach</h4>
+      <ul>
+        <li><a href="mailto:hello@sapzcodes.com">hello@sapzcodes.com</a></li>
+        <li><a href="https://wa.me/">WhatsApp</a></li>
+        <li><a href="https://instagram.com/">Instagram</a></li>
+      </ul>
     </div>
   </div>
-</div>
-
-<!-- ═══════════ STUDENTS PAGE ═══════════ -->
-<main class="students-pg" id="students-pg">
-
-  <div class="strip">
-    <div class="scell"><div class="sn" id="ss-total">0</div><div class="sl">Total Students</div></div>
-    <div class="scell"><div class="sn" id="ss-paid">0</div><div class="sl">Fee Paid</div></div>
-    <div class="scell"><div class="sn" id="ss-partial">0</div><div class="sl">Partial / Installment</div></div>
-    <div class="scell"><div class="sn" id="ss-pending">0</div><div class="sl">Pending / Overdue</div></div>
+  <div class="fb">
+    <div class="fc-copy">© <span id="yr"></span> SAPZCODES — ALL RIGHTS RESERVED</div>
+    <div class="fc-copy">BUILT FOR SAP CAREERS</div>
   </div>
-
-  <div class="toolbar">
-    <div class="tb-l">
-      <div class="search"><input type="text" id="sq" placeholder="Search name or student ID…"></div>
-    </div>
-    <div class="tb-r">
-      <button class="fchip on" data-sf="all">All <span class="ct" id="sc-all">0</span></button>
-      <button class="fchip" data-sf="Paid">Paid <span class="ct" id="sc-paid">0</span></button>
-      <button class="fchip" data-sf="Partial">Partial <span class="ct" id="sc-partial">0</span></button>
-      <button class="fchip" data-sf="Pending">Pending <span class="ct" id="sc-pending">0</span></button>
-      <button class="fchip" data-sf="Overdue">Overdue <span class="ct" id="sc-overdue">0</span></button>
-    </div>
-  </div>
-
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Student</th>
-          <th class="hide-sm">Phone</th>
-          <th class="hide-sm">Trainer</th>
-          <th class="hide-sm">Fee</th>
-          <th>Fee Status</th>
-        </tr>
-      </thead>
-      <tbody id="s-rows"></tbody>
-    </table>
-    <div class="empty" id="s-empty" style="display:none"><div class="empty-i">∅</div><div>No students match your filters.</div></div>
-  </div>
-</main>
-
-<!-- Student detail drawer -->
-<div class="bd-back" id="s-bdback"></div>
-<aside class="drw" id="s-drw">
-  <div class="drw-h">
-    <div><div class="name" id="sd-name">—</div><div class="sub" id="sd-sub">—</div></div>
-    <button class="drw-x" id="sd-close">✕</button>
-  </div>
-  <div class="drw-b" id="sd-body"></div>
-</aside>
-
-<!-- Student add/edit modal -->
-<div class="modal-back" id="s-modal-back">
-  <div class="modal" id="s-modal">
-    <div class="modal-h">
-      <div><div class="title" id="sm-title">Add Student</div><div class="subtitle" id="sm-subtitle">All fields are editable</div></div>
-      <button class="modal-x" id="sm-close">✕</button>
-    </div>
-    <div class="modal-body">
-
-      <div class="section-label">Student Information</div>
-      <div class="form-grid">
-        <div class="fg"><label>Student ID</label><input type="text" id="sf-id" placeholder="Auto-generated" readonly style="opacity:.6;cursor:not-allowed"></div>
-        <div class="fg"><label>Full Name *</label><input type="text" id="sf-name" placeholder="e.g. Priya Rajesh"></div>
-        <div class="fg"><label>Email *</label><input type="email" id="sf-email" placeholder="student@email.com"></div>
-        <div class="fg"><label>Phone *</label><input type="tel" id="sf-phone" placeholder="10-digit number"></div>
-        <div class="fg full"><label>Address</label><textarea id="sf-address" placeholder="Full address"></textarea></div>
-        <div class="fg"><label>Department *</label>
-          <select id="sf-dept">
-            <option value="">Select department</option>
-            <optgroup label="Engineering">
-              <option>B.E / B.Tech – CSE</option>
-              <option>B.E / B.Tech – IT</option>
-              <option>B.E / B.Tech – ECE</option>
-              <option>B.E / B.Tech – EEE</option>
-              <option>B.E / B.Tech – Mechanical</option>
-              <option>B.E / B.Tech – Civil</option>
-              <option>B.E / B.Tech – Aeronautical</option>
-              <option>B.E / B.Tech – Biomedical</option>
-              <option>B.E / B.Tech – Chemical</option>
-              <option>B.E / B.Tech – Automobile</option>
-            </optgroup>
-            <optgroup label="Postgraduate Engineering">
-              <option>M.E / M.Tech – CSE</option>
-              <option>M.E / M.Tech – VLSI</option>
-              <option>M.E / M.Tech – Embedded Systems</option>
-              <option>M.E / M.Tech – Power Electronics</option>
-            </optgroup>
-            <optgroup label="Management">
-              <option>MBA – Finance</option>
-              <option>MBA – HR</option>
-              <option>MBA – Marketing</option>
-              <option>MBA – Operations</option>
-              <option>MBA – Systems / IT</option>
-              <option>BBA</option>
-            </optgroup>
-            <optgroup label="Computer Applications">
-              <option>MCA</option>
-              <option>BCA</option>
-              <option>M.Sc – Computer Science</option>
-              <option>B.Sc – Computer Science</option>
-              <option>B.Sc – IT</option>
-            </optgroup>
-            <optgroup label="Science">
-              <option>M.Sc – Mathematics</option>
-              <option>M.Sc – Physics</option>
-              <option>M.Sc – Chemistry</option>
-              <option>B.Sc – Mathematics</option>
-            </optgroup>
-            <optgroup label="Commerce &amp; Arts">
-              <option>B.Com</option>
-              <option>M.Com</option>
-              <option>B.A</option>
-              <option>M.A</option>
-            </optgroup>
-            <optgroup label="Other">
-              <option>Diploma – CSE</option>
-              <option>Diploma – ECE</option>
-              <option>Diploma – Mechanical</option>
-              <option>Working Professional</option>
-              <option>Other</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="fg"><label>Batch *</label><input type="text" id="sf-batch" placeholder="e.g. Batch 2025-A"></div>
-        <div class="fg"><label>Trainer Name *</label>
-          <select id="sf-trainer">
-            <option value="">Select trainer</option>
-            <option>Gautham</option>
-            <option>Manoj</option>
-            <option>Ashok</option>
-            <option>Suraj</option>
-            <option>Sathish</option>
-            <option>Arjun</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="section-label">Fee Details</div>
-      <div class="form-grid">
-        <div class="fg"><label>Total Fee (₹) *</label><input type="number" id="sf-fee" placeholder="e.g. 15000" min="0" oninput="updateInstSum()"></div>
-        <div class="fg"><label>Fee Mode *</label>
-          <select id="sf-feemode">
-            <option value="">Select mode</option>
-            <option>Cash</option>
-            <option>GPay</option>
-            <option>Card</option>
-          </select>
-        </div>
-        <div class="fg"><label>Fee Date</label><input type="date" id="sf-feedate"></div>
-        <div class="fg"><label>Fee Status *</label>
-          <select id="sf-feestatus">
-            <option value="Pending">Pending</option>
-            <option value="Partial">Partial</option>
-            <option value="Paid">Paid</option>
-            <option value="Overdue">Overdue</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="section-label">Installment</div>
-      <label class="chk-item" style="display:inline-flex;width:auto;margin-bottom:14px">
-        <input type="checkbox" id="sf-installment"> <span>Enable Installment Plan</span>
-      </label>
-      <div id="sf-inst-group" style="display:none">
-        <div class="fg" style="margin-bottom:14px">
-          <label>Installment Type *</label>
-          <select id="sf-insttype">
-            <option value="">Select</option>
-            <option value="2">2 Installments</option>
-            <option value="3">3 Installments</option>
-            <option value="4">4 Installments</option>
-          </select>
-        </div>
-        <div class="inst-rows" id="sf-inst-rows"></div>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <div class="modal-err" id="sm-err"></div>
-      <button class="btn-cancel" id="sm-cancel">Cancel</button>
-      <button class="btn-submit" id="sm-submit"><span id="sm-submit-txt">Save Student</span></button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ TOAST ═══════════ -->
-<div class="toast" id="toast"></div>
+</footer>
 
 <script>
-/* ═══ CONFIG ═══ */
-const ENDPOINT   = 'https://script.google.com/macros/s/AKfycbwZBgDSCGHJUlCuCcnWbsUqY6DJrgSQlJLqvXRLMkkh-9gThhwH9bznY19hw9J-B8k7cA/exec';
-const STORAGE_KEY = 'sapz_admin_key_v2';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwZBgDSCGHJUlCuCcnWbsUqY6DJrgSQlJLqvXRLMkkh-9gThhwH9bznY19hw9J-B8k7cA/exec';
 
-const $ = id => document.getElementById(id);
-let adminKey = '';
-let allEnrollRows = [];
-let allStudentRows = [];
-let activeEnrollFilter = 'all', activeEnrollQuery = '';
-let activeStudentFilter = 'all', activeStudentQuery = '';
-let editingStudentId = null;   // null = add mode, string = edit mode
+document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* ════════════════════════════════
-   LOGIN
-═══════════════════════════════ */
-function showGate()  { $('gate').style.display='flex'; $('hdr').style.display='none'; hideAllPages(); }
-function hideAllPages(){ ['portal','enroll-pg','students-pg'].forEach(id=>$(id).classList.remove('show')); }
-
-async function tryLogin(key) {
-  $('gate-err').textContent = '';
-  if (!key) { $('gate-err').textContent = 'Please enter the admin key.'; return; }
-  $('login-btn').textContent = 'Verifying…'; $('login-btn').disabled = true;
-  try {
-    const res  = await fetch(`${ENDPOINT}?action=list&key=${encodeURIComponent(key)}`);
-    const data = await res.json();
-    if (data.ok) {
-      adminKey = key;
-      sessionStorage.setItem(STORAGE_KEY, key);
-      allEnrollRows = data.rows || [];
-      $('gate').style.display = 'none';
-      $('hdr').style.display  = 'flex';
-      showPortal();
-    } else {
-      $('gate-err').textContent = data.error || 'Invalid admin key.';
-    }
-  } catch { $('gate-err').textContent = 'Network error. Try again.'; }
-  finally  { $('login-btn').textContent = 'Sign In'; $('login-btn').disabled = false; }
-}
-$('login-btn').addEventListener('click', () => tryLogin($('key-in').value.trim()));
-$('key-in').addEventListener('keydown', e => { if (e.key==='Enter') tryLogin($('key-in').value.trim()); });
-$('logout').addEventListener('click', () => { sessionStorage.removeItem(STORAGE_KEY); adminKey=''; $('key-in').value=''; showGate(); });
-
-/* ════════════════════════════════
-   NAVIGATION
-═══════════════════════════════ */
-function showPortal() {
-  hideAllPages();
-  $('portal').classList.add('show');
-  $('hdr-sub').textContent = 'Admin Portal';
-  setHdrButtons('portal');
-}
-function showEnrollPage() {
-  hideAllPages();
-  $('enroll-pg').classList.add('show');
-  $('hdr-sub').textContent = 'Enrollments';
-  setHdrButtons('enroll');
-  renderEnrollments();
-}
-function showStudentsPage() {
-  hideAllPages();
-  $('students-pg').classList.add('show');
-  $('hdr-sub').textContent = 'Student Details';
-  setHdrButtons('students');
-  loadStudents();
-}
-function setHdrButtons(page) {
-  const r = $('hdr-r');
-  r.innerHTML = '';
-  if (page === 'portal') {
-    // nothing extra
-  } else {
-    const back = document.createElement('button');
-    back.className = 'nav-breadcrumb'; back.textContent = '← Portal';
-    back.addEventListener('click', showPortal);
-    r.appendChild(back);
-    if (page === 'enroll') {
-      const ref = document.createElement('button'); ref.className='hdr-btn'; ref.textContent='↻ Refresh'; ref.addEventListener('click',refreshEnrollments); r.appendChild(ref);
-      const exp = document.createElement('button'); exp.className='hdr-btn'; exp.textContent='⇓ Export CSV'; exp.addEventListener('click',exportEnrollCSV); r.appendChild(exp);
-      const add = document.createElement('button'); add.className='hdr-btn pri'; add.textContent='+ Add Enrollment'; add.addEventListener('click',openEnrollModal); r.appendChild(add);
-    }
-    if (page === 'students') {
-      const ref = document.createElement('button'); ref.className='hdr-btn'; ref.textContent='↻ Refresh'; ref.addEventListener('click',loadStudents); r.appendChild(ref);
-      const add = document.createElement('button'); add.className='hdr-btn pri'; add.textContent='+ Add Student'; add.addEventListener('click',()=>openStudentModal(null)); r.appendChild(add);
-    }
-  }
-  const lo = document.createElement('button'); lo.className='hdr-btn'; lo.id='logout2'; lo.textContent='Sign Out';
-  lo.addEventListener('click',()=>{ sessionStorage.removeItem(STORAGE_KEY); adminKey=''; $('key-in').value=''; showGate(); });
-  r.appendChild(lo);
-}
-
-$('brand-home').addEventListener('click', showPortal);
-$('go-enrollments').addEventListener('click', showEnrollPage);
-$('go-students').addEventListener('click', showStudentsPage);
-
-/* ════════════════════════════════
-   ENROLLMENTS
-═══════════════════════════════ */
-function fmtDate(s) {
-  if (!s) return '—';
-  const d = new Date(s); if (isNaN(d)) return s;
-  const today = new Date(), yest = new Date(today); yest.setDate(today.getDate()-1);
-  if (d.toDateString()===today.toDateString()) return 'Today, '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  if (d.toDateString()===yest.toDateString())  return 'Yesterday, '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  return d.toLocaleDateString([],{day:'2-digit',month:'short'})+', '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-}
-function modeClass(m){ m=(m||'').toLowerCase(); if(m.includes('online')) return 'tp-online'; if(m.includes('offline')) return 'tp-offline'; return 'tp-hybrid'; }
-function statusClass(s){ s=(s||'').toLowerCase(); if(s==='contacted') return 'st-contacted'; if(s==='enrolled') return 'st-enrolled'; if(s==='dropped') return 'st-dropped'; return 'st-new'; }
-function feeClass(f){ f=(f||'').toLowerCase(); if(f==='paid') return 'fs-paid'; if(f==='partial') return 'fs-partial'; if(f==='overdue') return 'fs-overdue'; return 'fs-pending'; }
-function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function yes(v){ return v==='Yes'||v===true||v==='yes'; }
-
-async function refreshEnrollments() {
-  try {
-    const res = await fetch(`${ENDPOINT}?action=list&key=${encodeURIComponent(adminKey)}`);
-    const d = await res.json();
-    if (d.ok) { allEnrollRows = d.rows||[]; renderEnrollments(); }
-  } catch { showToast('Network error','err'); }
-}
-
-function renderEnrollments() {
-  const counts={all:0,New:0,Contacted:0,Enrolled:0,Dropped:0};
-  const now=Date.now(); let weekCount=0;
-  allEnrollRows.forEach(r=>{
-    counts.all++;
-    const s=r.status||'New'; if(counts[s]!==undefined) counts[s]++;
-    const t=new Date(r.timestamp).getTime();
-    if(!isNaN(t)&&now-t<7*24*3600*1000) weekCount++;
-  });
-  $('stat-total').textContent=counts.all; $('stat-new').textContent=counts.New;
-  $('stat-week').textContent=weekCount;   $('stat-enrolled').textContent=counts.Enrolled;
-  $('c-all').textContent=counts.all; $('c-new').textContent=counts.New;
-  $('c-c').textContent=counts.Contacted; $('c-e').textContent=counts.Enrolled; $('c-d').textContent=counts.Dropped;
-
-  const q=activeEnrollQuery.toLowerCase();
-  const visible=allEnrollRows.filter(r=>{
-    const pass=(activeEnrollFilter==='all')||String(r.status||'New').toLowerCase()===activeEnrollFilter.toLowerCase();
-    const qpass=!q||[r.name,r.phone,r.email,r.department,r.fatherName].some(v=>String(v||'').toLowerCase().includes(q));
-    return pass&&qpass;
-  }).sort((a,b)=>(new Date(b.timestamp).getTime()||0)-(new Date(a.timestamp).getTime()||0));
-
-  const tbody=$('e-rows'); tbody.innerHTML='';
-  $('e-empty').style.display=visible.length?'none':'block';
-  visible.forEach(r=>{
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td><div class="tnm">${esc(r.name)}</div><div class="tdept">${esc(r.department)} · ${esc(r.email)}</div></td>
-      <td class="hide-sm"><span style="font-family:var(--fm);font-size:.82rem;color:var(--text)">${esc(r.phone)}</span></td>
-      <td class="hide-sm"><span class="tag-pill ${modeClass(r.mode)}">${esc(r.mode)}</span><div class="tdept" style="margin-top:4px">${esc(r.slot)}${r.otherSlot?' · '+esc(r.otherSlot):''}</div></td>
-      <td class="hide-sm"><span style="font-size:.82rem">${esc(r.year)}</span></td>
-      <td><span class="st-pill ${statusClass(r.status)}">${esc(r.status||'New')}</span></td>
-      <td class="hide-sm"><span class="tts">${fmtDate(r.timestamp)}</span></td>`;
-    tr.addEventListener('click',()=>openEnrollDrawer(r));
-    tbody.appendChild(tr);
-  });
-}
-
-function openEnrollDrawer(r) {
-  $('ed-name').textContent=r.name||'—';
-  $('ed-sub').textContent=(r.department||'')+(r.year?' · '+r.year:'');
-  const interests=[]; if(yes(r.practiceServer)) interests.push('Practice Server'); if(yes(r.expertTraining)) interests.push('Expert Training'); if(yes(r.placementAssistance)) interests.push('Placement'); if(yes(r.internship)) interests.push('Internship');
-  const intHTML=interests.length?`<div class="tags-row">${interests.map(i=>`<span class="tag-pill tp-online">${esc(i)}</span>`).join('')}</div>`:`<span style="color:var(--mu);font-size:.85rem">None marked</span>`;
-  const ph=String(r.phone||'').replace(/\D/g,'');
-  const wa=ph?`https://wa.me/${ph.length===10?'91'+ph:ph}`:'#';
-  $('ed-body').innerHTML=`
-    <div class="dline"><div class="dico">📞</div><div><div class="dlbl">Phone</div><div class="dval"><a href="tel:${ph}">${esc(r.phone)}</a></div></div></div>
-    <div class="dline"><div class="dico">✉</div><div><div class="dlbl">Email</div><div class="dval"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div></div></div>
-    <div class="dline"><div class="dico">👤</div><div><div class="dlbl">Father's Name</div><div class="dval">${esc(r.fatherName)}</div></div></div>
-    <div class="dline"><div class="dico">📍</div><div><div class="dlbl">Address</div><div class="dval">${esc(r.address)}</div></div></div>
-    <div class="dline"><div class="dico">🎓</div><div><div class="dlbl">Department / Year</div><div class="dval">${esc(r.department)} · ${esc(r.year)}</div></div></div>
-    <div class="dline"><div class="dico">⚙</div><div><div class="dlbl">Mode</div><div class="dval"><span class="tag-pill ${modeClass(r.mode)}">${esc(r.mode)}</span></div></div></div>
-    <div class="dline"><div class="dico">🕒</div><div><div class="dlbl">Slot</div><div class="dval">${esc(r.slot)}${r.otherSlot?' — '+esc(r.otherSlot):''}</div></div></div>
-    <div class="dline"><div class="dico">★</div><div><div class="dlbl">Interests</div><div class="dval">${intHTML}</div></div></div>
-    <div class="dline"><div class="dico">↗</div><div><div class="dlbl">Source</div><div class="dval">${esc(r.source)||'—'}</div></div></div>
-    <div class="dline"><div class="dico">⏱</div><div><div class="dlbl">Submitted</div><div class="dval">${fmtDate(r.timestamp)}</div></div></div>
-    ${r.notes?`<div class="dline"><div class="dico">📝</div><div><div class="dlbl">Notes</div><div class="dval">${esc(r.notes)}</div></div></div>`:''}
-    <div class="drw-actions">
-      <a class="act-wa" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="act-call" href="tel:${ph}">Call</a>
-      <a class="act-mail" href="mailto:${esc(r.email)}">Email</a>
-    </div>
-    <div style="margin-top:18px;font-family:var(--fm);font-size:.7rem;color:var(--mu);letter-spacing:.06em">To change status / notes, edit row ${r._rowIndex} in the Google Sheet.</div>`;
-  $('e-drw').classList.add('show'); $('e-bdback').classList.add('show');
-}
-function closeEnrollDrawer(){ $('e-drw').classList.remove('show'); $('e-bdback').classList.remove('show'); }
-$('ed-close').addEventListener('click',closeEnrollDrawer);
-$('e-bdback').addEventListener('click',closeEnrollDrawer);
-
-document.querySelectorAll('[data-ef]').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('[data-ef]').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on'); activeEnrollFilter=b.dataset.ef; renderEnrollments();
-  });
+/* cursor */
+const cur = document.getElementById('cur'), ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
 });
-$('eq').addEventListener('input',e=>{ activeEnrollQuery=e.target.value.trim(); renderEnrollments(); });
-
-/* enroll modal */
-function openEnrollModal() { resetEnrollModal(); $('e-modal-back').classList.add('show'); }
-function closeEnrollModal(){ $('e-modal-back').classList.remove('show'); }
-function resetEnrollModal(){
-  ['ef-name','ef-father','ef-phone','ef-email','ef-address','ef-dept','ef-other-slot','ef-notes'].forEach(id=>$(id).value='');
-  ['ef-year','ef-mode','ef-slot','ef-source'].forEach(id=>$(id).value='');
-  $('ef-status').value='New';
-  ['ef-ps','ef-et','ef-pa','ef-in'].forEach(id=>$(id).checked=false);
-  $('em-err').textContent=''; $('em-submit-txt').textContent='Submit Enrollment'; $('em-submit').disabled=false;
-  $('ef-other-slot-group').style.display='none';
-}
-$('em-close').addEventListener('click',closeEnrollModal);
-$('em-cancel').addEventListener('click',closeEnrollModal);
-$('e-modal-back').addEventListener('click',e=>{ if(e.target===$('e-modal-back')) closeEnrollModal(); });
-$('ef-slot').addEventListener('change',()=>{ $('ef-other-slot-group').style.display=$('ef-slot').value==='Other'?'block':'none'; });
-
-$('em-submit').addEventListener('click', async ()=>{
-  const name=$('ef-name').value.trim(), fatherName=$('ef-father').value.trim(), phone=$('ef-phone').value.trim(), email=$('ef-email').value.trim(), address=$('ef-address').value.trim(), department=$('ef-dept').value.trim(), year=$('ef-year').value, mode=$('ef-mode').value, slot=$('ef-slot').value;
-  const missing=[];
-  if(!name) missing.push('Full Name'); if(!fatherName) missing.push("Father's Name"); if(!phone) missing.push('Phone'); if(!email) missing.push('Email'); if(!address) missing.push('Address'); if(!department) missing.push('Department'); if(!year) missing.push('Year'); if(!mode) missing.push('Mode'); if(!slot) missing.push('Slot');
-  if(missing.length){ $('em-err').textContent='Required: '+missing.join(', '); return; }
-  if(!/^\d{10}$/.test(phone.replace(/\D/g,''))){ $('em-err').textContent='Enter a valid 10-digit phone.'; return; }
-  if(!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)){ $('em-err').textContent='Enter a valid email address (e.g. name@gmail.com).'; return; }
-  $('em-err').textContent=''; $('em-submit-txt').textContent='Saving…'; $('em-submit').disabled=true;
-  const payload={ action:'add', name,fatherName,phone,email,address,department,year,mode,slot, otherSlot:$('ef-other-slot').value.trim(), source:$('ef-source').value, status:$('ef-status').value, notes:$('ef-notes').value.trim(), practiceServer:$('ef-ps').checked?'Yes':'No', expertTraining:$('ef-et').checked?'Yes':'No', placementAssistance:$('ef-pa').checked?'Yes':'No', internship:$('ef-in').checked?'Yes':'No', adminKey };
-  try {
-    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
-    const d=await res.json();
-    if(d.ok){ closeEnrollModal(); showToast('Enrollment added ✓','ok'); await refreshEnrollments(); }
-    else { $('em-err').textContent=d.error||'Failed.'; $('em-submit-txt').textContent='Submit Enrollment'; $('em-submit').disabled=false; }
-  } catch { $('em-err').textContent='Network error.'; $('em-submit-txt').textContent='Submit Enrollment'; $('em-submit').disabled=false; }
+(function loop(){
+  rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,input,select,textarea,label.opt').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });
 
-function exportEnrollCSV(){
-  if(!allEnrollRows.length){ alert('No data'); return; }
-  const cols=['timestamp','name','fatherName','phone','email','department','year','address','mode','slot','otherSlot','practiceServer','expertTraining','placementAssistance','internship','source','status','notes'];
-  const csv=[cols.join(',')].concat(allEnrollRows.map(r=>cols.map(c=>`"${String(r[c]??'').replace(/"/g,'""')}"`).join(','))).join('\n');
-  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
-  const a=document.createElement('a'); a.href=url; a.download=`sapzcodes-enrollments-${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(url);
-}
+/* nav scroll */
+const nv = document.getElementById('nv');
+addEventListener('scroll', () => nv.classList.toggle('sc', scrollY > 30));
 
-/* ════════════════════════════════
-   STUDENTS
-═══════════════════════════════ */
-async function loadStudents(){
-  try {
-    const res=await fetch(`${ENDPOINT}?action=students&key=${encodeURIComponent(adminKey)}`);
-    const d=await res.json();
-    if(d.ok){ allStudentRows=d.rows||[]; renderStudents(); }
-    else showToast(d.error||'Failed','err');
-  } catch { showToast('Network error','err'); }
-}
+/* hamburger */
+const hb = document.getElementById('hb'), mm = document.getElementById('mm');
+hb.addEventListener('click', () => { hb.classList.toggle('op'); mm.classList.toggle('op') });
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('op'); mm.classList.remove('op') }));
 
-function renderStudents(){
-  const counts={all:0,Paid:0,Partial:0,Pending:0,Overdue:0};
-  allStudentRows.forEach(r=>{
-    counts.all++;
-    const fs=r.feeStatus||'Pending';
-    if(counts[fs]!==undefined) counts[fs]++;
-  });
-  $('ss-total').textContent=counts.all; $('ss-paid').textContent=counts.Paid;
-  $('ss-partial').textContent=counts.Partial; $('ss-pending').textContent=counts.Pending+counts.Overdue;
-  $('sc-all').textContent=counts.all; $('sc-paid').textContent=counts.Paid;
-  $('sc-partial').textContent=counts.Partial; $('sc-pending').textContent=counts.Pending; $('sc-overdue').textContent=counts.Overdue;
+/* reveal */
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('vis')), {threshold:.1});
+document.querySelectorAll('.fu').forEach(el => io.observe(el));
 
-  const q=activeStudentQuery.toLowerCase();
-  const visible=allStudentRows.filter(r=>{
-    const fpass=(activeStudentFilter==='all')||String(r.feeStatus||'Pending')===activeStudentFilter;
-    const qpass=!q||[r.name,r.id].some(v=>String(v||'').toLowerCase().includes(q));
-    return fpass&&qpass;
-  });
-
-  const tbody=$('s-rows'); tbody.innerHTML='';
-  $('s-empty').style.display=visible.length?'none':'block';
-  visible.forEach(r=>{
-    const tr=document.createElement('tr');
-    const fee=r.fee?'₹'+Number(r.fee).toLocaleString('en-IN'):'—';
-    tr.innerHTML=`
-      <td><span style="font-family:var(--fm);font-size:.72rem;color:var(--mu)">${esc(r.id)}</span></td>
-      <td><div class="tnm">${esc(r.name)}</div><div class="tdept">${esc(r.department)} · ${esc(r.batch)}</div></td>
-      <td class="hide-sm"><span style="font-family:var(--fm);font-size:.82rem;color:var(--text)">${esc(r.phone)}</span></td>
-      <td class="hide-sm"><span style="font-size:.85rem">${esc(r.trainerName)||'—'}</span></td>
-      <td class="hide-sm"><span style="font-family:var(--fm);font-size:.82rem">${fee}</span>${r.installment==='Yes'?'<div class="tdept" style="margin-top:3px">'+esc(r.installmentType)+' installments</div>':''}</td>
-      <td><span class="st-pill ${feeClass(r.feeStatus)}">${esc(r.feeStatus||'Pending')}</span></td>`;
-    tr.addEventListener('click',()=>openStudentDrawer(r));
-    tbody.appendChild(tr);
-  });
-}
-
-function openStudentDrawer(r){
-  $('sd-name').textContent=r.name||'—';
-  $('sd-sub').textContent=r.id+' · '+(r.department||'')+(r.batch?' · '+r.batch:'');
-
-  let instHTML='';
-  if(r.installment==='Yes'){
-    let amounts=[];
-    try{ amounts=JSON.parse(r.installmentAmounts||'[]'); }catch(e){}
-    const n=parseInt(r.installmentType)||amounts.length;
-    instHTML=`<table class="inst-table"><thead><tr><th>#</th><th>Amount (₹)</th><th>Status</th></tr></thead><tbody>`;
-    for(let i=0;i<n;i++){
-      const amt=amounts[i]||{amount:'',paid:false};
-      const amtVal=typeof amt==='object'?amt.amount:amt;
-      const isPaid=typeof amt==='object'?(amt.paid===true||amt.paid==='true'):false;
-      const badge=isPaid?`<span class="st-pill fs-paid">✓ Paid</span>`:`<span class="st-pill fs-pending">✗ Unpaid</span>`;
-      instHTML+=`<tr><td>Installment ${i+1}</td><td>₹${esc(String(amtVal))||'—'}</td><td>${badge}</td></tr>`;
-    }
-    instHTML+='</tbody></table>';
-  }
-
-  $('sd-body').innerHTML=`
-    <div class="dline"><div class="dico">🆔</div><div><div class="dlbl">Student ID</div><div class="dval" style="font-family:var(--fm)">${esc(r.id)}</div></div></div>
-    <div class="dline"><div class="dico">📞</div><div><div class="dlbl">Phone</div><div class="dval"><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></div></div></div>
-    <div class="dline"><div class="dico">✉</div><div><div class="dlbl">Email</div><div class="dval"><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></div></div></div>
-    <div class="dline"><div class="dico">📍</div><div><div class="dlbl">Address</div><div class="dval">${esc(r.address)||'—'}</div></div></div>
-    <div class="dline"><div class="dico">🎓</div><div><div class="dlbl">Department / Batch</div><div class="dval">${esc(r.department)} · ${esc(r.batch)}</div></div></div>
-    <div class="dline"><div class="dico">👨‍🏫</div><div><div class="dlbl">Trainer</div><div class="dval">${esc(r.trainerName)||'—'}</div></div></div>
-    <div class="dline"><div class="dico">💰</div><div><div class="dlbl">Fee</div><div class="dval">₹${r.fee?Number(r.fee).toLocaleString('en-IN'):'—'} · ${esc(r.feeMode)||'—'} · ${esc(r.feeDate)||'—'}</div></div></div>
-    <div class="dline"><div class="dico">🏷</div><div><div class="dlbl">Fee Status</div><div class="dval"><span class="st-pill ${feeClass(r.feeStatus)}">${esc(r.feeStatus||'Pending')}</span></div></div></div>
-    ${r.installment==='Yes'?`<div class="dline"><div class="dico">📊</div><div><div class="dlbl">Installment Plan · ${esc(r.installmentType)} Installments</div><div class="dval">${instHTML}</div></div></div>`:''}
-    <button class="drw-edit-btn" onclick="openStudentModal('${esc(r.id)}')">✏ Edit Student</button>
-    <button class="drw-del-btn" onclick="deleteStudent('${esc(r.id)}','${esc(r.name)}')">🗑 Delete Student</button>`;
-  $('s-drw').classList.add('show'); $('s-bdback').classList.add('show');
-}
-function closeStudentDrawer(){ $('s-drw').classList.remove('show'); $('s-bdback').classList.remove('show'); }
-$('sd-close').addEventListener('click',closeStudentDrawer);
-$('s-bdback').addEventListener('click',closeStudentDrawer);
-
-document.querySelectorAll('[data-sf]').forEach(b=>{
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('[data-sf]').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on'); activeStudentFilter=b.dataset.sf; renderStudents();
+/* slot "Other" toggle */
+const otherWrap = document.getElementById('other-wrap');
+document.querySelectorAll('input[name="slot"]').forEach(r => {
+  r.addEventListener('change', () => {
+    otherWrap.style.display = (r.value === 'Other' && r.checked) ? 'block' : 'none';
   });
 });
-$('sq').addEventListener('input',e=>{ activeStudentQuery=e.target.value.trim(); renderStudents(); });
 
-/* student modal open */
-function openStudentModal(idOrNull){
-  editingStudentId=idOrNull;
-  resetStudentModal();
-  if(idOrNull){
-    const r=allStudentRows.find(s=>s.id===idOrNull);
-    if(!r) return;
-    $('sm-title').textContent='Edit Student';
-    $('sm-subtitle').textContent='Update student record';
-    $('sf-id').value=r.id;
-    $('sf-name').value=r.name; $('sf-email').value=r.email; $('sf-phone').value=r.phone;
-    $('sf-address').value=r.address; 
-    // dept is now a select; set value, if no match leave as-is (browser keeps empty)
-    $('sf-dept').value=r.department;
-    $('sf-batch').value=r.batch;
-    $('sf-trainer').value=r.trainerName; $('sf-fee').value=r.fee; $('sf-feemode').value=r.feeMode;
-    $('sf-feedate').value=r.feeDate; $('sf-feestatus').value=r.feeStatus||'Pending';
-    $('sf-installment').checked=r.installment==='Yes';
-    if(r.installment==='Yes'){
-      $('sf-inst-group').style.display='block';
-      $('sf-insttype').value=r.installmentType||'';
-      buildInstRows(parseInt(r.installmentType)||0, r.installmentAmounts);
-    }
-  } else {
-    $('sm-title').textContent='Add Student';
-    $('sm-subtitle').textContent='All fields editable';
-    $('sf-id').value='Auto-generated';
-  }
-  $('s-modal-back').classList.add('show');
-}
-function closeStudentModal(){ $('s-modal-back').classList.remove('show'); }
-function resetStudentModal(){
-  ['sf-name','sf-email','sf-phone','sf-address','sf-dept','sf-batch'].forEach(id=>$(id).value='');
-  $('sf-id').value=''; $('sf-fee').value=''; $('sf-feedate').value='';
-  ['sf-trainer','sf-feemode','sf-insttype'].forEach(id=>$(id).value='');
-  $('sf-feestatus').value='Pending';
-  $('sf-installment').checked=false; $('sf-inst-group').style.display='none';
-  $('sf-inst-rows').innerHTML='';
-  const sumEl=$('sf-inst-sum'); if(sumEl) sumEl.remove();
-  $('sm-err').textContent=''; $('sm-submit-txt').textContent='Save Student'; $('sm-submit').disabled=false;
-}
-$('sm-close').addEventListener('click',closeStudentModal);
-$('sm-cancel').addEventListener('click',closeStudentModal);
-$('s-modal-back').addEventListener('click',e=>{ if(e.target===$('s-modal-back')) closeStudentModal(); });
+/* form submit */
+const frm    = document.getElementById('frm');
+const btn    = document.getElementById('btn');
+const stOk   = document.getElementById('st-ok');
+const stErr  = document.getElementById('st-err');
+const stLod  = document.getElementById('st-lod');
+const thanks = document.getElementById('thanks');
 
-$('sf-installment').addEventListener('change',()=>{
-  $('sf-inst-group').style.display=$('sf-installment').checked?'block':'none';
-  if(!$('sf-installment').checked){ $('sf-insttype').value=''; $('sf-inst-rows').innerHTML=''; }
-});
-$('sf-insttype').addEventListener('change',()=>{
-  buildInstRows(parseInt($('sf-insttype').value)||0, null);
-});
+function hideStatus(){ stOk.style.display=stErr.style.display=stLod.style.display='none'; }
+function showErr(msg){ hideStatus(); stErr.style.display='flex'; stErr.querySelector('span').textContent=msg; window.scrollTo({top:stErr.getBoundingClientRect().top+scrollY-80,behavior:'smooth'}); }
+function showOk(msg){ hideStatus(); stOk.style.display='flex'; stOk.querySelector('span').textContent=msg; }
 
-function buildInstRows(n, existingJSON){
-  let existing=[];
-  if(existingJSON){ try{ existing=JSON.parse(existingJSON); }catch(e){} }
-  const container=$('sf-inst-rows');
-  container.innerHTML='';
-  for(let i=0;i<n;i++){
-    const e=existing[i]||{amount:'',paid:false};
-    const amt=typeof e==='object'?e.amount:e;
-    const isPaid=typeof e==='object'?e.paid===true||e.paid==='true':false;
-    const row=document.createElement('div'); row.className='inst-row';
-    row.innerHTML=`<span class="inst-row-lbl">Installment ${i+1}</span>
-      <input type="number" min="0" placeholder="Amount (₹)" value="${esc(String(amt))}" data-inst-idx="${i}" oninput="updateInstSum()">
-      <button type="button" class="inst-row-status ${isPaid?'paid':'unpaid'}" data-paid="${isPaid}" onclick="toggleInstPaid(this)">${isPaid?'✓ Paid':'✗ Unpaid'}</button>`;
-    container.appendChild(row);
-  }
-  // sum display
-  let sumEl=$('sf-inst-sum');
-  if(!sumEl){
-    sumEl=document.createElement('div'); sumEl.id='sf-inst-sum'; sumEl.className='inst-sum-info';
-    container.parentNode.appendChild(sumEl);
-  }
-  updateInstSum();
-}
+frm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  hideStatus();
 
-function toggleInstPaid(btn){
-  const isPaid=btn.dataset.paid==='true';
-  btn.dataset.paid=String(!isPaid);
-  btn.className='inst-row-status '+((!isPaid)?'paid':'unpaid');
-  btn.textContent=(!isPaid)?'✓ Paid':'✗ Unpaid';
-}
+  const fd = new FormData(frm);
 
-function updateInstSum(){
-  const inputs=[...$('sf-inst-rows').querySelectorAll('input[type=number]')];
-  const total=parseFloat($('sf-fee').value)||0;
-  const sum=inputs.reduce((a,inp)=>a+(parseFloat(inp.value)||0),0);
-  const el=$('sf-inst-sum');
-  if(!el||!inputs.length) return;
-  const diff=total-sum;
-  if(total===0){ el.className='inst-sum-info'; el.textContent='Enter total fee above first.'; return; }
-  if(Math.abs(diff)<0.01){ el.className='inst-sum-info ok'; el.textContent=`✓ Installments sum ₹${sum.toLocaleString('en-IN')} matches total fee.`; }
-  else if(diff>0){ el.className='inst-sum-info bad'; el.textContent=`✗ Sum ₹${sum.toLocaleString('en-IN')} — short by ₹${diff.toLocaleString('en-IN')} vs total ₹${total.toLocaleString('en-IN')}.`; }
-  else{ el.className='inst-sum-info bad'; el.textContent=`✗ Sum ₹${sum.toLocaleString('en-IN')} exceeds total fee ₹${total.toLocaleString('en-IN')} by ₹${(-diff).toLocaleString('en-IN')}.`; }
-}
+  // Required field check
+  const _name   = (fd.get('name') || '').trim();
+  const _father = (fd.get('fatherName') || '').trim();
+  const _addr   = (fd.get('address') || '').trim();
+  const _phone  = (fd.get('phone') || '').trim();
+  const _email  = (fd.get('email') || '').trim();
+  const _dept   = (fd.get('department') || '').trim();
+  const _year   = fd.get('year') || '';
+  const _mode   = fd.get('mode') || '';
+  const _slot   = fd.get('slot') || '';
 
-function collectInstAmounts(){
-  const rows=[...$('sf-inst-rows').querySelectorAll('.inst-row')];
-  return JSON.stringify(rows.map(row=>{
-    const inp=row.querySelector('input[type=number]');
-    const btn=row.querySelector('.inst-row-status');
-    return { amount:(inp?inp.value.trim():''), paid:(btn?btn.dataset.paid==='true':false) };
-  }));
-}
+  if (!_name)   { showErr('Full name is required.'); return; }
+  if (!_father) { showErr("Father's name is required."); return; }
+  if (!_addr)   { showErr('Address is required.'); return; }
+  if (!_dept)   { showErr('Department is required.'); return; }
+  if (!_year)   { showErr('Please select your year.'); return; }
+  if (!_mode)   { showErr('Please select a preferred mode — Online, Offline, or Hybrid.'); return; }
+  if (!_slot)   { showErr('Please select a preferred time slot.'); return; }
 
-$('sm-submit').addEventListener('click', async ()=>{
-  const name=$('sf-name').value.trim(), email=$('sf-email').value.trim(), phone=$('sf-phone').value.trim();
-  const department=$('sf-dept').value.trim(), batch=$('sf-batch').value.trim(), trainerName=$('sf-trainer').value;
-  const fee=$('sf-fee').value.trim(), feeMode=$('sf-feemode').value, feeDate=$('sf-feedate').value;
-  const feeStatus=$('sf-feestatus').value;
-  const installment=$('sf-installment').checked?'Yes':'No';
-  const installmentType=$('sf-insttype').value;
-
-  const missing=[];
-  if(!name) missing.push('Name'); if(!email) missing.push('Email'); if(!phone) missing.push('Phone');
-  if(!department) missing.push('Department'); if(!batch) missing.push('Batch'); if(!trainerName) missing.push('Trainer');
-  if(!fee) missing.push('Fee'); if(!feeMode) missing.push('Fee Mode');
-  if(installment==='Yes'&&!installmentType) missing.push('Installment Type');
-  if(missing.length){ $('sm-err').textContent='Required: '+missing.join(', '); return; }
-  // email: must have @ and a valid TLD (at least 2 chars after last dot)
-  if(!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)){ $('sm-err').textContent='Enter a valid email address (e.g. name@gmail.com).'; return; }
-  // installment sum must match total fee
-  if(installment==='Yes'){
-    const inputs=[...$('sf-inst-rows').querySelectorAll('input[type=number]')];
-    const sum=inputs.reduce((a,inp)=>a+(parseFloat(inp.value)||0),0);
-    const totalFee=parseFloat(fee)||0;
-    if(Math.abs(sum-totalFee)>0.01){ $('sm-err').textContent=`Installment amounts sum ₹${sum.toLocaleString('en-IN')} must equal total fee ₹${totalFee.toLocaleString('en-IN')}.`; return; }
+  // Phone: must have at least 10 digits
+  if (_phone.replace(/\D/g,'').length < 10) {
+    showErr('Enter a valid 10-digit phone number.');
+    return;
   }
 
-  $('sm-err').textContent=''; $('sm-submit-txt').textContent='Saving…'; $('sm-submit').disabled=true;
+  // Email: must have @ and a valid TLD (min 2 chars)
+  if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(_email)) {
+    showErr('Enter a valid email address (e.g. name@gmail.com).');
+    return;
+  }
 
-  const payload={
-    adminKey, name, email, phone, address:$('sf-address').value.trim(),
-    department, batch, trainerName, fee, feeMode, feeDate, feeStatus,
-    installment, installmentType,
-    installmentAmounts: installment==='Yes'?collectInstAmounts():'[]',
-    action: editingStudentId?'student_update':'student_add',
+  const payload = {
+    name:               _name,
+    fatherName:         _father,
+    address:            _addr,
+    phone:              _phone,
+    department:         _dept,
+    year:               _year,
+    email:              _email,
+    mode:               _mode,
+    slot:               _slot,
+    otherSlot:          fd.get('otherSlot') || '',
+    practiceServer:     fd.get('practiceServer') ? 'Yes' : 'No',
+    expertTraining:     fd.get('expertTraining') ? 'Yes' : 'No',
+    placementAssistance:fd.get('placementAssistance') ? 'Yes' : 'No',
+    internship:         fd.get('internship') ? 'Yes' : 'No',
+    source:             fd.get('source') || ''
   };
-  if(editingStudentId) payload.id=editingStudentId;
+
+  btn.setAttribute('disabled','disabled');
+  stLod.style.display = 'flex';
 
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    const d=await res.json();
-    if(d.ok){
-      closeStudentModal(); closeStudentDrawer();
-      showToast(editingStudentId?'Student updated ✓':'Student added ✓','ok');
-      await loadStudents();
+    // No Content-Type header — avoids CORS preflight on GAS
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      document.getElementById('thanks-name').textContent = _name.split(' ')[0] || 'there';
+      frm.style.display = 'none';
+      thanks.classList.add('show');
+      window.scrollTo({ top: thanks.getBoundingClientRect().top + scrollY - 100, behavior:'smooth' });
     } else {
-      $('sm-err').textContent=d.error||'Failed.'; $('sm-submit-txt').textContent='Save Student'; $('sm-submit').disabled=false;
+      showErr(data.error || 'Something went wrong. Please try again.');
     }
-  } catch { $('sm-err').textContent='Network error.'; $('sm-submit-txt').textContent='Save Student'; $('sm-submit').disabled=false; }
+  } catch (err) {
+    showErr('Network error. Please check your connection and retry.');
+  } finally {
+    btn.removeAttribute('disabled');
+    stLod.style.display = 'none';
+  }
 });
-
-async function deleteStudent(id, name){
-  if(!confirm(`Delete student "${name}" (${id})? This cannot be undone.`)) return;
-  try {
-    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({action:'student_delete',id,adminKey})});
-    const d=await res.json();
-    if(d.ok){ closeStudentDrawer(); showToast('Student deleted','ok'); await loadStudents(); }
-    else showToast(d.error||'Failed','err');
-  } catch { showToast('Network error','err'); }
-}
-
-/* ════════════════════════════════
-   TOAST / MISC
-═══════════════════════════════ */
-function showToast(msg, type='ok'){
-  const t=$('toast'); t.textContent=msg; t.className='toast '+type+' show';
-  setTimeout(()=>t.className='toast',3200);
-}
-addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeEnrollDrawer(); closeStudentDrawer(); closeEnrollModal(); closeStudentModal(); } });
-
-/* auto-login */
-const cached=sessionStorage.getItem(STORAGE_KEY);
-if(cached) tryLogin(cached);
 </script>
+
 </body>
 </html>
