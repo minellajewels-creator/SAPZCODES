@@ -282,9 +282,63 @@
 
         <div class="fgrid2">
           <div class="fgroup">
-            <label class="flbl" for="department">Department<span class="req">*</span></label>
-            <input class="finp" id="department" name="department" type="text" required placeholder="e.g. B.Tech CSE / MBA / B.Com">
-          </div>
+  <label class="flbl" for="department">Department<span class="req">*</span></label>
+  <select class="fsel" id="department" name="department" required>
+    <option value="" disabled selected>Select department</option>
+    <optgroup label="Engineering">
+      <option>B.E / B.Tech – CSE</option>
+      <option>B.E / B.Tech – IT</option>
+      <option>B.E / B.Tech – ECE</option>
+      <option>B.E / B.Tech – EEE</option>
+      <option>B.E / B.Tech – Mechanical</option>
+      <option>B.E / B.Tech – Civil</option>
+      <option>B.E / B.Tech – Aeronautical</option>
+      <option>B.E / B.Tech – Biomedical</option>
+      <option>B.E / B.Tech – Chemical</option>
+      <option>B.E / B.Tech – Automobile</option>
+    </optgroup>
+    <optgroup label="Postgraduate Engineering">
+      <option>M.E / M.Tech – CSE</option>
+      <option>M.E / M.Tech – VLSI</option>
+      <option>M.E / M.Tech – Embedded Systems</option>
+      <option>M.E / M.Tech – Power Electronics</option>
+    </optgroup>
+    <optgroup label="Management">
+      <option>MBA – Finance</option>
+      <option>MBA – HR</option>
+      <option>MBA – Marketing</option>
+      <option>MBA – Operations</option>
+      <option>MBA – Systems / IT</option>
+      <option>BBA</option>
+    </optgroup>
+    <optgroup label="Computer Applications">
+      <option>MCA</option>
+      <option>BCA</option>
+      <option>M.Sc – Computer Science</option>
+      <option>B.Sc – Computer Science</option>
+      <option>B.Sc – IT</option>
+    </optgroup>
+    <optgroup label="Science">
+      <option>M.Sc – Mathematics</option>
+      <option>M.Sc – Physics</option>
+      <option>M.Sc – Chemistry</option>
+      <option>B.Sc – Mathematics</option>
+    </optgroup>
+    <optgroup label="Commerce &amp; Arts">
+      <option>B.Com</option>
+      <option>M.Com</option>
+      <option>B.A</option>
+      <option>M.A</option>
+    </optgroup>
+    <optgroup label="Other">
+      <option>Diploma – CSE</option>
+      <option>Diploma – ECE</option>
+      <option>Diploma – Mechanical</option>
+      <option>Working Professional</option>
+      <option>Other</option>
+    </optgroup>
+  </select>
+</div>
           <div class="fgroup">
             <label class="flbl" for="year">Year<span class="req">*</span></label>
             <select class="fsel" id="year" name="year" required>
