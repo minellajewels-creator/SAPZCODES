@@ -885,7 +885,7 @@ $('em-submit').addEventListener('click', async ()=>{
   $('em-err').textContent=''; $('em-submit-txt').textContent='Saving…'; $('em-submit').disabled=true;
   const payload={ name,fatherName,phone,email,address,department,year,mode,slot, otherSlot:$('ef-other-slot').value.trim(), source:$('ef-source').value, status:$('ef-status').value, notes:$('ef-notes').value.trim(), practiceServer:$('ef-ps').checked?'Yes':'No', expertTraining:$('ef-et').checked?'Yes':'No', placementAssistance:$('ef-pa').checked?'Yes':'No', internship:$('ef-in').checked?'Yes':'No', adminKey };
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
     const d=await res.json();
     if(d.ok){ closeEnrollModal(); showToast('Enrollment added ✓','ok'); await refreshEnrollments(); }
     else { $('em-err').textContent=d.error||'Failed.'; $('em-submit-txt').textContent='Submit Enrollment'; $('em-submit').disabled=false; }
@@ -1136,7 +1136,7 @@ $('sm-submit').addEventListener('click', async ()=>{
   if(editingStudentId) payload.id=editingStudentId;
 
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
     const d=await res.json();
     if(d.ok){
       closeStudentModal(); closeStudentDrawer();
@@ -1151,7 +1151,7 @@ $('sm-submit').addEventListener('click', async ()=>{
 async function deleteStudent(id, name){
   if(!confirm(`Delete student "${name}" (${id})? This cannot be undone.`)) return;
   try {
-    const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'student_delete',id,adminKey})});
+    const res=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({action:'student_delete',id,adminKey})});
     const d=await res.json();
     if(d.ok){ closeStudentDrawer(); showToast('Student deleted','ok'); await loadStudents(); }
     else showToast(d.error||'Failed','err');
