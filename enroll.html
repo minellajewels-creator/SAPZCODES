@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="favicon.png" type="image/png">
 <title>Enroll — SAPZCODES</title>
 <meta name="description" content="Enroll for SAP industrial expert-led training at SAPZCODES. 100% placement assistance, 3-6 month internships, flexible online/offline/hybrid slots.">
 
@@ -28,7 +28,6 @@
 }
 .fgroup { margin-bottom:22px }
 .fgrid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px }
-.fgrid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px }
 .flbl {
   display:block;
   font-family:var(--fm);
@@ -52,11 +51,10 @@
   transition:border-color .2s, box-shadow .2s;
   outline:none;
 }
-.finp:focus, .fsel:focus, .ftxt:focus {
+.finp:focus, .fsel:focus {
   border-color:var(--g);
   box-shadow:0 0 0 3px rgba(34,160,50,.1);
 }
-.ftxt { resize:vertical; min-height:80px; font-family:var(--fb) }
 .fsel { appearance:none; -webkit-appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2322a032' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;
@@ -64,75 +62,6 @@
   padding-right:36px;
 }
 .fhint { font-size:.74rem; color:var(--mu); margin-top:6px; font-family:var(--fm) }
-
-.optg { display:flex; flex-wrap:wrap; gap:10px }
-.opt {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  background:var(--bg);
-  border:1px solid var(--bd2);
-  border-radius:7px;
-  padding:11px 18px;
-  cursor:none;
-  transition:all .2s;
-  font-size:.88rem;
-  color:var(--gr);
-  user-select:none;
-}
-.opt:hover { border-color:rgba(34,160,50,.3); color:var(--text) }
-.opt input { position:absolute; opacity:0; pointer-events:none }
-.opt .box {
-  width:16px; height:16px; flex-shrink:0;
-  border:1.5px solid var(--bd2);
-  border-radius:4px;
-  background:var(--bg);
-  transition:all .2s;
-  position:relative;
-}
-.opt input[type="radio"] + .box { border-radius:50% }
-.opt input:checked + .box {
-  background:var(--g);
-  border-color:var(--g);
-}
-.opt input:checked + .box::after {
-  content:'';
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-}
-.opt input[type="checkbox"]:checked + .box::after {
-  width:9px; height:5px;
-  border-left:2px solid #fff;
-  border-bottom:2px solid #fff;
-  transform:translate(-50%,-65%) rotate(-45deg);
-}
-.opt input[type="radio"]:checked + .box::after {
-  width:6px; height:6px;
-  background:#fff;
-  border-radius:50%;
-}
-.opt:has(input:checked) {
-  border-color:var(--g);
-  background:rgba(34,160,50,.06);
-  color:var(--text);
-}
-
-.perks {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:12px; margin-bottom:34px;
-}
-.perk {
-  display:flex; align-items:center; gap:12px;
-  background:var(--bg);
-  border:1px solid var(--bd2);
-  border-radius:8px;
-  padding:14px 16px;
-  font-size:.85rem;
-  color:var(--gr);
-}
-.perk-i { font-size:1.1rem; flex-shrink:0 }
-.perk strong { color:var(--text); display:block; font-family:var(--fh); font-size:.92rem; margin-bottom:2px; letter-spacing:.03em }
 
 .stat {
   display:none;
@@ -174,8 +103,52 @@
 }
 .thanks p { color:var(--gr); font-size:.95rem; line-height:1.7; max-width:460px; margin:0 auto 28px }
 
+/* Perks with course content tile */
+.perks {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:12px; margin-bottom:34px;
+}
+.perk {
+  display:flex; align-items:center; gap:12px;
+  background:var(--bg);
+  border:1px solid var(--bd2);
+  border-radius:8px;
+  padding:14px 16px;
+  font-size:.85rem;
+  color:var(--gr);
+  transition:border-color .2s, background .2s;
+}
+.perk-i { font-size:1.1rem; flex-shrink:0 }
+.perk strong { color:var(--text); display:block; font-family:var(--fh); font-size:.92rem; margin-bottom:2px; letter-spacing:.03em }
+
+/* Course content tile — clickable */
+.perk-link {
+  text-decoration:none;
+  cursor:pointer;
+  border-color:rgba(34,160,50,.3);
+  background:rgba(34,160,50,.04);
+  position:relative;
+  overflow:hidden;
+}
+.perk-link::after {
+  content:'→';
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--g);
+  font-size:1rem;
+  transition:right .2s;
+}
+.perk-link:hover {
+  border-color:var(--g);
+  background:rgba(34,160,50,.09);
+}
+.perk-link:hover::after { right:10px }
+.perk-link strong { color:var(--g) }
+
 @media(max-width:700px){
-  .fgrid2, .fgrid3 { grid-template-columns:1fr }
+  .fgrid2 { grid-template-columns:1fr }
   .fcard { padding:32px 22px }
 }
 </style>
@@ -209,7 +182,7 @@
   <a href="services">Services</a>
   <a href="academy">Academy</a>
   <a href="contact">Contact</a>
-  <a href="enroll"  class="cta">Enroll</a>
+  <a href="enroll" class="cta">Enroll</a>
 </div>
 
 <section class="ih">
@@ -225,10 +198,14 @@
   <div class="fwrap">
 
     <div class="perks fu">
-      <div class="perk"><div class="perk-i">🖥️</div><div><strong>Practice Server</strong>Hands-on real SAP environment</div></div>
+      <div class="perk"><div class="perk-i">🖥️</div><div><strong>Practice Server</strong>Real SAP environment access</div></div>
       <div class="perk"><div class="perk-i">👨‍🏫</div><div><strong>Expert-Led</strong>SAP industrial trainers</div></div>
       <div class="perk"><div class="perk-i">🎯</div><div><strong>100% Placement</strong>Dedicated placement assistance</div></div>
-      <div class="perk"><div class="perk-i">💼</div><div><strong>Internship</strong>3 - 6 month structured programs</div></div>
+      <div class="perk"><div class="perk-i">💼</div><div><strong>Internship</strong>3 – 6 month programs</div></div>
+      <a href="academy#course-content" class="perk perk-link">
+        <div class="perk-i">📚</div>
+        <div><strong>Course Content</strong>View detailed curriculum</div>
+      </a>
     </div>
 
     <div class="fcard fu">
@@ -239,7 +216,7 @@
         <p>Thanks <span id="thanks-name">there</span> — your details are with us. Our team will reach out within 24 hours on the phone number you've shared. For urgent queries, ping us on WhatsApp.</p>
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
           <a href="/" class="bo">Back to Home</a>
-          <a href="https://wa.me/" class="bg" id="wa-link">WhatsApp Us →</a>
+          <a href="https://wa.me/919952227377" class="bg">WhatsApp Us →</a>
         </div>
       </div>
 
@@ -252,153 +229,78 @@
         <div class="fgrid2">
           <div class="fgroup">
             <label class="flbl" for="name">Full Name<span class="req">*</span></label>
-            <input class="finp" id="name" name="name" type="text" required maxlength="80" autocomplete="name">
+            <input class="finp" id="name" name="name" type="text" required maxlength="80" autocomplete="name" placeholder="Your full name">
           </div>
           <div class="fgroup">
-            <label class="flbl" for="fatherName">Father's Name<span class="req">*</span></label>
-            <input class="finp" id="fatherName" name="fatherName" type="text" required maxlength="80">
+            <label class="flbl" for="email">Email ID<span class="req">*</span></label>
+            <input class="finp" id="email" name="email" type="email" required autocomplete="email" placeholder="name@gmail.com">
           </div>
-        </div>
-
-        <div class="fgroup">
-          <label class="flbl" for="address">Address<span class="req">*</span></label>
-          <textarea class="ftxt" id="address" name="address" required rows="2" maxlength="240"></textarea>
         </div>
 
         <div class="fgrid2">
           <div class="fgroup">
             <label class="flbl" for="phone">Phone Number<span class="req">*</span></label>
-            <input class="finp" id="phone" name="phone" type="tel" required maxlength="15" autocomplete="tel">
+            <input class="finp" id="phone" name="phone" type="tel" required maxlength="15" autocomplete="tel" placeholder="10-digit mobile number">
             <div class="fhint">10 digits, with or without country code.</div>
           </div>
           <div class="fgroup">
-            <label class="flbl" for="email">Email ID<span class="req">*</span></label>
-            <input class="finp" id="email" name="email" type="email" required autocomplete="email">
-            <div class="fhint">e.g. name@gmail.com</div>
-          </div>
-        </div>
-
-        <div class="fgrid2">
-          <div class="fgroup">
-  <label class="flbl" for="department">Department<span class="req">*</span></label>
-  <select class="fsel" id="department" name="department" required>
-    <option value="" disabled selected>Select department</option>
-    <optgroup label="Engineering">
-      <option>B.E / B.Tech – CSE</option>
-      <option>B.E / B.Tech – IT</option>
-      <option>B.E / B.Tech – ECE</option>
-      <option>B.E / B.Tech – EEE</option>
-      <option>B.E / B.Tech – Mechanical</option>
-      <option>B.E / B.Tech – Civil</option>
-      <option>B.E / B.Tech – Aeronautical</option>
-      <option>B.E / B.Tech – Biomedical</option>
-      <option>B.E / B.Tech – Chemical</option>
-      <option>B.E / B.Tech – Automobile</option>
-    </optgroup>
-    <optgroup label="Postgraduate Engineering">
-      <option>M.E / M.Tech – CSE</option>
-      <option>M.E / M.Tech – VLSI</option>
-      <option>M.E / M.Tech – Embedded Systems</option>
-      <option>M.E / M.Tech – Power Electronics</option>
-    </optgroup>
-    <optgroup label="Management">
-      <option>MBA – Finance</option>
-      <option>MBA – HR</option>
-      <option>MBA – Marketing</option>
-      <option>MBA – Operations</option>
-      <option>MBA – Systems / IT</option>
-      <option>BBA</option>
-    </optgroup>
-    <optgroup label="Computer Applications">
-      <option>MCA</option>
-      <option>BCA</option>
-      <option>M.Sc – Computer Science</option>
-      <option>B.Sc – Computer Science</option>
-      <option>B.Sc – IT</option>
-    </optgroup>
-    <optgroup label="Science">
-      <option>M.Sc – Mathematics</option>
-      <option>M.Sc – Physics</option>
-      <option>M.Sc – Chemistry</option>
-      <option>B.Sc – Mathematics</option>
-    </optgroup>
-    <optgroup label="Commerce &amp; Arts">
-      <option>B.Com</option>
-      <option>M.Com</option>
-      <option>B.A</option>
-      <option>M.A</option>
-    </optgroup>
-    <optgroup label="Other">
-      <option>Diploma – CSE</option>
-      <option>Diploma – ECE</option>
-      <option>Diploma – Mechanical</option>
-      <option>Working Professional</option>
-      <option>Other</option>
-    </optgroup>
-  </select>
-</div>
-          <div class="fgroup">
-            <label class="flbl" for="year">Year<span class="req">*</span></label>
-            <select class="fsel" id="year" name="year" required>
-              <option value="" disabled selected>Select year</option>
-              <option>1st Year</option>
-              <option>2nd Year</option>
-              <option>3rd Year</option>
-              <option>4th Year / Final Year</option>
-              <option>Post Graduate</option>
-              <option>Working Professional</option>
-              <option>Graduated / Job Seeker</option>
+            <label class="flbl" for="department">Department<span class="req">*</span></label>
+            <select class="fsel" id="department" name="department" required>
+              <option value="" disabled selected>Select department</option>
+              <optgroup label="Engineering">
+                <option>B.E / B.Tech – CSE</option>
+                <option>B.E / B.Tech – IT</option>
+                <option>B.E / B.Tech – ECE</option>
+                <option>B.E / B.Tech – EEE</option>
+                <option>B.E / B.Tech – Mechanical</option>
+                <option>B.E / B.Tech – Civil</option>
+                <option>B.E / B.Tech – Aeronautical</option>
+                <option>B.E / B.Tech – Biomedical</option>
+                <option>B.E / B.Tech – Chemical</option>
+                <option>B.E / B.Tech – Automobile</option>
+              </optgroup>
+              <optgroup label="Postgraduate Engineering">
+                <option>M.E / M.Tech – CSE</option>
+                <option>M.E / M.Tech – VLSI</option>
+                <option>M.E / M.Tech – Embedded Systems</option>
+                <option>M.E / M.Tech – Power Electronics</option>
+              </optgroup>
+              <optgroup label="Management">
+                <option>MBA – Finance</option>
+                <option>MBA – HR</option>
+                <option>MBA – Marketing</option>
+                <option>MBA – Operations</option>
+                <option>MBA – Systems / IT</option>
+                <option>BBA</option>
+              </optgroup>
+              <optgroup label="Computer Applications">
+                <option>MCA</option>
+                <option>BCA</option>
+                <option>M.Sc – Computer Science</option>
+                <option>B.Sc – Computer Science</option>
+                <option>B.Sc – IT</option>
+              </optgroup>
+              <optgroup label="Science">
+                <option>M.Sc – Mathematics</option>
+                <option>M.Sc – Physics</option>
+                <option>M.Sc – Chemistry</option>
+                <option>B.Sc – Mathematics</option>
+              </optgroup>
+              <optgroup label="Commerce &amp; Arts">
+                <option>B.Com</option>
+                <option>M.Com</option>
+                <option>B.A</option>
+                <option>M.A</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option>Diploma – CSE</option>
+                <option>Diploma – ECE</option>
+                <option>Diploma – Mechanical</option>
+                <option>Working Professional</option>
+                <option>Other</option>
+              </optgroup>
             </select>
           </div>
-        </div>
-
-        <div class="fgroup">
-          <label class="flbl">Preferred Mode<span class="req">*</span></label>
-          <div class="optg" role="radiogroup">
-            <label class="opt"><input type="radio" name="mode" value="Online"><span class="box"></span>Online</label>
-            <label class="opt"><input type="radio" name="mode" value="Offline"><span class="box"></span>Offline</label>
-            <label class="opt"><input type="radio" name="mode" value="Hybrid"><span class="box"></span>Hybrid</label>
-          </div>
-        </div>
-
-        <div class="fgroup">
-          <label class="flbl">Preferred Slot<span class="req">*</span></label>
-          <div class="optg" role="radiogroup">
-            <label class="opt"><input type="radio" name="slot" value="9 - 11 AM"><span class="box"></span>9 - 11 AM</label>
-            <label class="opt"><input type="radio" name="slot" value="7:30 - 9 AM"><span class="box"></span>7:30 - 9 AM</label>
-            <label class="opt"><input type="radio" name="slot" value="7 - 10 PM"><span class="box"></span>7 - 10 PM</label>
-            <label class="opt"><input type="radio" name="slot" value="Weekend (anytime)"><span class="box"></span>Weekend (anytime)</label>
-            <label class="opt"><input type="radio" name="slot" value="Other"><span class="box"></span>Other</label>
-          </div>
-        </div>
-
-        <div class="fgroup" id="other-wrap" style="display:none">
-          <label class="flbl" for="otherSlot">Tell us your preferred timing</label>
-          <input class="finp" id="otherSlot" name="otherSlot" type="text" maxlength="120" placeholder="e.g. Weekdays after 8 PM IST">
-        </div>
-
-        <div class="fgroup">
-          <label class="flbl">I'm interested in</label>
-          <div class="optg">
-            <label class="opt"><input type="checkbox" name="practiceServer" value="Yes" checked><span class="box"></span>Practice Server</label>
-            <label class="opt"><input type="checkbox" name="expertTraining" value="Yes" checked><span class="box"></span>Expert-Led Training</label>
-            <label class="opt"><input type="checkbox" name="placementAssistance" value="Yes" checked><span class="box"></span>Placement Assistance</label>
-            <label class="opt"><input type="checkbox" name="internship" value="Yes"><span class="box"></span>Internship (3-6 months)</label>
-          </div>
-        </div>
-
-        <div class="fgroup">
-          <label class="flbl" for="source">How did you hear about us?</label>
-          <select class="fsel" id="source" name="source">
-            <option value="">— optional —</option>
-            <option>Instagram</option>
-            <option>YouTube</option>
-            <option>Google Search</option>
-            <option>Friend / Referral</option>
-            <option>College / Faculty</option>
-            <option>LinkedIn</option>
-            <option>Other</option>
-          </select>
         </div>
 
         <div class="fsubmit">
@@ -425,7 +327,7 @@
         <li><a href="services">Services</a></li>
         <li><a href="academy">Academy</a></li>
         <li><a href="contact">Contact</a></li>
-        <li><a href="enroll"  class="cta">Enroll</a></li>
+        <li><a href="enroll" class="cta">Enroll</a></li>
       </ul>
     </div>
     <div class="fco">
@@ -440,9 +342,9 @@
     <div class="fco">
       <h4>Reach</h4>
       <ul>
-        <li><a href="mailto:hello@sapzcodes.com">hello@sapzcodes.com</a></li>
-        <li><a href="https://wa.me/">WhatsApp</a></li>
-        <li><a href="https://instagram.com/">Instagram</a></li>
+        <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+        <li><a href="https://wa.me/919952227377">WhatsApp</a></li>
+        <li><a href="https://instagram.com/sapzcodes">Instagram</a></li>
       </ul>
     </div>
   </div>
@@ -469,7 +371,7 @@ addEventListener('mousemove', e => {
   ring.style.left = rx+'px'; ring.style.top = ry+'px';
   requestAnimationFrame(loop);
 })();
-document.querySelectorAll('a,button,input,select,textarea,label.opt').forEach(el=>{
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
 });
@@ -487,14 +389,6 @@ mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.cla
 const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('vis')), {threshold:.1});
 document.querySelectorAll('.fu').forEach(el => io.observe(el));
 
-/* slot "Other" toggle */
-const otherWrap = document.getElementById('other-wrap');
-document.querySelectorAll('input[name="slot"]').forEach(r => {
-  r.addEventListener('change', () => {
-    otherWrap.style.display = (r.value === 'Other' && r.checked) ? 'block' : 'none';
-  });
-});
-
 /* form submit */
 const frm    = document.getElementById('frm');
 const btn    = document.getElementById('btn');
@@ -505,74 +399,30 @@ const thanks = document.getElementById('thanks');
 
 function hideStatus(){ stOk.style.display=stErr.style.display=stLod.style.display='none'; }
 function showErr(msg){ hideStatus(); stErr.style.display='flex'; stErr.querySelector('span').textContent=msg; window.scrollTo({top:stErr.getBoundingClientRect().top+scrollY-80,behavior:'smooth'}); }
-function showOk(msg){ hideStatus(); stOk.style.display='flex'; stOk.querySelector('span').textContent=msg; }
 
 frm.addEventListener('submit', async (e) => {
   e.preventDefault();
   hideStatus();
 
   const fd = new FormData(frm);
+  const _name  = (fd.get('name') || '').trim();
+  const _email = (fd.get('email') || '').trim();
+  const _phone = (fd.get('phone') || '').trim();
+  const _dept  = (fd.get('department') || '').trim();
 
-  // Required field check
-  const _name   = (fd.get('name') || '').trim();
-  const _father = (fd.get('fatherName') || '').trim();
-  const _addr   = (fd.get('address') || '').trim();
-  const _phone  = (fd.get('phone') || '').trim();
-  const _email  = (fd.get('email') || '').trim();
-  const _dept   = (fd.get('department') || '').trim();
-  const _year   = fd.get('year') || '';
-  const _mode   = fd.get('mode') || '';
-  const _slot   = fd.get('slot') || '';
+  if (!_name)  { showErr('Full name is required.'); return; }
+  if (_phone.replace(/\D/g,'').length < 10) { showErr('Enter a valid 10-digit phone number.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(_email)) { showErr('Enter a valid email address (e.g. name@gmail.com).'); return; }
+  if (!_dept)  { showErr('Department is required.'); return; }
 
-  if (!_name)   { showErr('Full name is required.'); return; }
-  if (!_father) { showErr("Father's name is required."); return; }
-  if (!_addr)   { showErr('Address is required.'); return; }
-  if (!_dept)   { showErr('Department is required.'); return; }
-  if (!_year)   { showErr('Please select your year.'); return; }
-  if (!_mode)   { showErr('Please select a preferred mode — Online, Offline, or Hybrid.'); return; }
-  if (!_slot)   { showErr('Please select a preferred time slot.'); return; }
-
-  // Phone: must have at least 10 digits
-  if (_phone.replace(/\D/g,'').length < 10) {
-    showErr('Enter a valid 10-digit phone number.');
-    return;
-  }
-
-  // Email: must have @ and a valid TLD (min 2 chars)
-  if (!/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(_email)) {
-    showErr('Enter a valid email address (e.g. name@gmail.com).');
-    return;
-  }
-
-  const payload = {
-    name:               _name,
-    fatherName:         _father,
-    address:            _addr,
-    phone:              _phone,
-    department:         _dept,
-    year:               _year,
-    email:              _email,
-    mode:               _mode,
-    slot:               _slot,
-    otherSlot:          fd.get('otherSlot') || '',
-    practiceServer:     fd.get('practiceServer') ? 'Yes' : 'No',
-    expertTraining:     fd.get('expertTraining') ? 'Yes' : 'No',
-    placementAssistance:fd.get('placementAssistance') ? 'Yes' : 'No',
-    internship:         fd.get('internship') ? 'Yes' : 'No',
-    source:             fd.get('source') || ''
-  };
+  const payload = { name:_name, email:_email, phone:_phone, department:_dept };
 
   btn.setAttribute('disabled','disabled');
   stLod.style.display = 'flex';
 
   try {
-    // No Content-Type header — avoids CORS preflight on GAS
-    const res = await fetch(ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
+    const res = await fetch(ENDPOINT, { method:'POST', body:JSON.stringify(payload) });
     const data = await res.json();
-
     if (data.ok) {
       document.getElementById('thanks-name').textContent = _name.split(' ')[0] || 'there';
       frm.style.display = 'none';
