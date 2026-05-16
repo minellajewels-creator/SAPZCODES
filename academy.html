@@ -10,6 +10,195 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<style>
+/* ── Course Content Section ── */
+#course-content { scroll-margin-top: 80px }
+
+.cc-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.cc-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: 1.5px solid var(--bd2);
+  background: var(--bg);
+  color: var(--gr);
+  font-family: var(--fh);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .22s;
+  position: relative;
+  overflow: hidden;
+}
+.cc-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--g);
+  opacity: 0;
+  transition: opacity .22s;
+}
+.cc-tab:hover { border-color: rgba(34,160,50,.4); color: var(--text) }
+.cc-tab.active {
+  border-color: var(--g);
+  background: rgba(34,160,50,.08);
+  color: var(--g);
+  box-shadow: 0 0 0 1px var(--g);
+}
+.cc-tab .tab-ico { font-size: 1.25rem; position:relative; z-index:1 }
+.cc-tab span { position:relative; z-index:1 }
+
+/* Panel */
+.cc-panels { position:relative }
+.cc-panel { display:none }
+.cc-panel.active { display:block }
+
+.cc-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding: 28px 32px;
+  background: var(--s1);
+  border: 1px solid var(--bd);
+  border-radius: var(--r);
+  position: relative;
+  overflow: hidden;
+}
+.cc-panel-header::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:2px; background:var(--g);
+}
+.cc-panel-header::after {
+  content: attr(data-module);
+  position: absolute;
+  right: -10px; bottom: -18px;
+  font-family: var(--fh);
+  font-size: 5rem;
+  font-weight: 700;
+  color: rgba(34,160,50,.05);
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+.cc-ph-left h3 {
+  font-family: var(--fh);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .04em;
+  margin-bottom: 6px;
+}
+.cc-ph-left p { color: var(--gr); font-size: .88rem; line-height: 1.6; max-width: 520px }
+.cc-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.cc-badge {
+  padding: 5px 13px;
+  border-radius: 20px;
+  font-size: .7rem;
+  font-family: var(--fm);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: rgba(34,160,50,.1);
+  border: 1px solid rgba(34,160,50,.2);
+  color: var(--g);
+}
+.cc-enroll-btn {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Curriculum grid */
+.cc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.cc-module {
+  background: var(--bg);
+  border: 1px solid var(--bd2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+}
+.cc-module:hover {
+  border-color: rgba(34,160,50,.3);
+  transform: translateY(-2px);
+}
+.cc-module-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--s1);
+  border-bottom: 1px solid var(--bd2);
+}
+.cc-mod-num {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: rgba(34,160,50,.12);
+  border: 1px solid rgba(34,160,50,.2);
+  display: flex; align-items:center; justify-content:center;
+  font-family: var(--fm);
+  font-size: .65rem;
+  color: var(--g);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.cc-mod-title {
+  font-family: var(--fh);
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .03em;
+}
+.cc-module ul {
+  list-style: none;
+  padding: 14px 18px;
+  margin: 0;
+}
+.cc-module ul li {
+  font-size: .82rem;
+  color: var(--gr);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--bd2);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+.cc-module ul li:last-child { border-bottom: none }
+.cc-module ul li::before {
+  content: '›';
+  color: var(--g);
+  font-size: 1rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+@media(max-width:600px){
+  .cc-tabs { gap:8px }
+  .cc-tab { padding:11px 16px; font-size:.85rem }
+  .cc-panel-header { padding:20px 18px }
+  .cc-grid { grid-template-columns:1fr }
+}
+</style>
 </head>
 <body>
 
@@ -45,36 +234,16 @@
   <div class="tag c fu">SAPZCODES Academy</div>
   <h1 class="fu" style="text-align:center">Your SAP Career<br>Starts <span class="g">Right Here.</span></h1>
   <p class="fu" style="color:var(--gr);font-size:1.05rem;line-height:1.8;max-width:580px;margin:16px auto 0;text-align:center">
-    Courses, fees and batch schedules coming soon.
-    In the meantime, WhatsApp us for the latest batch details and a free counselling session.
+    Expert-led SAP training with real practice servers, 100% placement assistance and structured internship programs.
   </p>
   <div style="margin-top:36px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="fu">
     <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 Get Batch Details</a>
-    <a href="contact" class="bo">Enquire Now →</a>
+    <a href="#course-content" class="bo">View Course Content ↓</a>
   </div>
 </section>
 
-<!-- COMING SOON -->
-<section class="sec" style="padding-top:20px;text-align:center">
-  <div style="max-width:700px;margin:0 auto">
-    <div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:72px 40px" class="fu">
-      <div style="font-size:3rem;margin-bottom:20px">🚧</div>
-      <div class="tag c" style="justify-content:center;margin-bottom:16px">Coming Soon</div>
-      <h2 class="h1" style="font-size:1.8rem;margin-bottom:16px">Full Course Catalogue<br>is Being Built</h2>
-      <p style="color:var(--gr);line-height:1.8;margin-bottom:32px;font-size:.95rem">
-        We're putting together detailed course pages with curriculum, fees, batch schedules and trainer profiles.
-        Until then, reach out directly — our counsellors will walk you through everything personally.
-      </p>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp for Details</a>
-        <a href="mailto:hr@sapzcodes.com" class="bo">✉ Email Us</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MODULES -->
-<section class="sec" style="padding-top:0">
+<!-- MODULES OVERVIEW -->
+<section class="sec" style="padding-top:20px">
   <div class="tag fu">What You Can Learn</div>
   <h2 class="h1 fu">10+ SAP Modules.<br>One <span class="g">Academy.</span></h2>
   <div class="mg">
@@ -87,6 +256,531 @@
     <div class="mc fu"><div class="mi">🏭</div><div class="mt_">Functional</div><div class="mn">SAP PP</div><div class="md2">MRP, BOM, Work Centers, Production Orders and Capacity Planning.</div></div>
     <div class="mc fu"><div class="mi">✅</div><div class="mt_">Functional</div><div class="mn">SAP QM</div><div class="md2">Inspection Plans, Quality Certs, Notifications and QM Reporting.</div></div>
     <div class="mc fu"><div class="mi">⚡</div><div class="mt_">Next-Gen</div><div class="mn">SAP S/4HANA</div><div class="md2">In-memory computing, Fiori UX, real-time analytics and migration paths.</div></div>
+  </div>
+</section>
+
+<!-- ══ COURSE CONTENT SECTION ══ -->
+<section class="sec t0" id="course-content">
+  <div class="tag fu">Detailed Curriculum</div>
+  <h2 class="h1 fu">Course <span class="g">Content.</span></h2>
+  <p class="fu" style="color:var(--gr);max-width:540px;line-height:1.8;margin-bottom:36px;font-size:.95rem">
+    Select a course below to explore the full topic-by-topic curriculum. All programs include hands-on SAP server access from day one.
+  </p>
+
+  <!-- Tabs -->
+  <div class="cc-tabs fu" role="tablist">
+    <button class="cc-tab active" data-tab="abap" role="tab" aria-selected="true">
+      <span class="tab-ico">💻</span><span>SAP ABAP</span>
+    </button>
+    <button class="cc-tab" data-tab="fi" role="tab">
+      <span class="tab-ico">💰</span><span>SAP FI</span>
+    </button>
+    <button class="cc-tab" data-tab="sd" role="tab">
+      <span class="tab-ico">🛒</span><span>SAP SD</span>
+    </button>
+    <button class="cc-tab" data-tab="hcm" role="tab">
+      <span class="tab-ico">👥</span><span>SAP HCM</span>
+    </button>
+  </div>
+
+  <!-- Panels -->
+  <div class="cc-panels">
+
+    <!-- ── ABAP ── -->
+    <div class="cc-panel active" id="panel-abap">
+      <div class="cc-panel-header" data-module="ABAP">
+        <div class="cc-ph-left">
+          <h3>SAP ABAP Development</h3>
+          <p>Our flagship technical program. From ABAP fundamentals to S/4HANA RAP development, covering every concept you'll encounter on a real SAP project.</p>
+          <div class="cc-meta">
+            <span class="cc-badge">Technical</span>
+            <span class="cc-badge">3–4 Months</span>
+            <span class="cc-badge">S/4HANA Ready</span>
+            <span class="cc-badge">Placement Assured</span>
+          </div>
+        </div>
+        <a href="enroll" class="bg cc-enroll-btn">Enroll Now →</a>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">01</div><div class="cc-mod-title">ABAP Fundamentals</div></div>
+          <ul>
+            <li>Introduction to SAP & ABAP Workbench</li>
+            <li>Data types, variables & constants</li>
+            <li>Control statements & loops</li>
+            <li>Modularisation: FMs, Subroutines, Macros</li>
+            <li>Internal tables & structures</li>
+            <li>String operations & system fields</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">02</div><div class="cc-mod-title">Database & Open SQL</div></div>
+          <ul>
+            <li>Open SQL SELECT, INSERT, UPDATE, DELETE</li>
+            <li>Joins, subqueries & aggregates</li>
+            <li>FOR ALL ENTRIES technique</li>
+            <li>Database performance best practices</li>
+            <li>SE11 – Data Dictionary objects</li>
+            <li>Domains, data elements, tables, views</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">03</div><div class="cc-mod-title">Reports & ALV</div></div>
+          <ul>
+            <li>Classical & interactive reports</li>
+            <li>Selection screens — parameters & select-options</li>
+            <li>ALV Grid & List using REUSE_ALV</li>
+            <li>OO-ALV with CL_GUI_ALV_GRID</li>
+            <li>Drill-down & hotspot events</li>
+            <li>Layout, sorting, filtering, totals</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">04</div><div class="cc-mod-title">Dialog Programming</div></div>
+          <ul>
+            <li>Module pool development</li>
+            <li>Screen painter & flow logic</li>
+            <li>PAI / PBO events</li>
+            <li>Table controls & step loops</li>
+            <li>GUI status & title bar</li>
+            <li>Transaction code assignment</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">05</div><div class="cc-mod-title">Forms & Smartforms</div></div>
+          <ul>
+            <li>SAPscript layout sets</li>
+            <li>Smartforms — windows, pages & composer</li>
+            <li>Adobe Interactive Forms (basics)</li>
+            <li>Logo, barcode & signature handling</li>
+            <li>PDF output configuration</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">06</div><div class="cc-mod-title">BDC & Data Migration</div></div>
+          <ul>
+            <li>Batch Data Communication concepts</li>
+            <li>Call transaction & session methods</li>
+            <li>LSMW step-by-step</li>
+            <li>Error log handling & restart</li>
+            <li>Legacy data migration scenarios</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">07</div><div class="cc-mod-title">BAPI & RFC</div></div>
+          <ul>
+            <li>Function module types & RFC calls</li>
+            <li>Standard BAPI usage (BAPI_PO_CREATE, etc.)</li>
+            <li>BAPI transaction handling & commit</li>
+            <li>Remote-enabled FM development</li>
+            <li>Trusted RFC & destination config</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">08</div><div class="cc-mod-title">User Exits & Enhancements</div></div>
+          <ul>
+            <li>User exits vs. BADIs vs. Enhancement spots</li>
+            <li>Classic user exits (SMOD/CMOD)</li>
+            <li>BAdI — classic & kernel</li>
+            <li>Enhancement framework (SE18/SE19)</li>
+            <li>Implicit vs. explicit enhancements</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">09</div><div class="cc-mod-title">ABAP OOP</div></div>
+          <ul>
+            <li>Classes, objects, methods & attributes</li>
+            <li>Inheritance, polymorphism & interfaces</li>
+            <li>Exception classes</li>
+            <li>Design patterns in ABAP</li>
+            <li>Local vs. global classes</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">10</div><div class="cc-mod-title">S/4HANA & CDS Views</div></div>
+          <ul>
+            <li>ABAP 7.4/7.5 new syntax</li>
+            <li>CDS View basics & annotations</li>
+            <li>Associations & joins in CDS</li>
+            <li>AMDP — ABAP Managed DB Procedures</li>
+            <li>Virtual elements & value helps</li>
+            <li>Eclipse ADT — developer setup</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">11</div><div class="cc-mod-title">OData & Fiori Basics</div></div>
+          <ul>
+            <li>OData service generation from CDS</li>
+            <li>SEGW — service builder walkthrough</li>
+            <li>Fiori app types overview</li>
+            <li>Launchpad configuration basics</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">12</div><div class="cc-mod-title">RAP — Restful ABAP</div></div>
+          <ul>
+            <li>RAP architecture & concepts</li>
+            <li>Behavior definition & implementation</li>
+            <li>Managed vs. unmanaged scenarios</li>
+            <li>Validations, determinations & actions</li>
+            <li>Draft handling</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FI ── -->
+    <div class="cc-panel" id="panel-fi">
+      <div class="cc-panel-header" data-module="FI">
+        <div class="cc-ph-left">
+          <h3>SAP Financial Accounting (FI)</h3>
+          <p>The most in-demand functional module. Master GL, AP, AR, Asset Accounting and integration with CO — everything a FICO consultant needs on day one.</p>
+          <div class="cc-meta">
+            <span class="cc-badge">Functional</span>
+            <span class="cc-badge">3 Months</span>
+            <span class="cc-badge">FICO</span>
+            <span class="cc-badge">Placement Assured</span>
+          </div>
+        </div>
+        <a href="enroll" class="bg cc-enroll-btn">Enroll Now →</a>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">01</div><div class="cc-mod-title">SAP FI Overview</div></div>
+          <ul>
+            <li>SAP ERP & S/4HANA architecture</li>
+            <li>Enterprise structure — Company code, Chart of Accounts</li>
+            <li>Fiscal year & posting period configuration</li>
+            <li>Field status groups & tolerance groups</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">02</div><div class="cc-mod-title">General Ledger (GL)</div></div>
+          <ul>
+            <li>GL account master creation & maintenance</li>
+            <li>Document types & number ranges</li>
+            <li>Journal entries — FB50, F-02</li>
+            <li>Recurring entries & accruals</li>
+            <li>Parking & holding documents</li>
+            <li>Financial statements (F.01)</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">03</div><div class="cc-mod-title">Accounts Payable (AP)</div></div>
+          <ul>
+            <li>Vendor master data management</li>
+            <li>Invoice posting — FB60, MIRO</li>
+            <li>Payment run — F110 automatic payments</li>
+            <li>Down payments & advance handling</li>
+            <li>Credit memos & adjustments</li>
+            <li>Vendor ageing & open item analysis</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">04</div><div class="cc-mod-title">Accounts Receivable (AR)</div></div>
+          <ul>
+            <li>Customer master data management</li>
+            <li>Customer invoice posting — FB70</li>
+            <li>Incoming payment processing — F-28</li>
+            <li>Dunning configuration & run</li>
+            <li>Credit management basics</li>
+            <li>Customer ageing & reconciliation</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">05</div><div class="cc-mod-title">Asset Accounting (AA)</div></div>
+          <ul>
+            <li>Chart of depreciation & depreciation areas</li>
+            <li>Asset class & asset master creation</li>
+            <li>Asset acquisition, transfer & retirement</li>
+            <li>Depreciation run — AFAB</li>
+            <li>Asset reports & year-end closing</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">06</div><div class="cc-mod-title">Bank Accounting</div></div>
+          <ul>
+            <li>House bank & bank account configuration</li>
+            <li>Manual bank statement processing</li>
+            <li>Electronic bank statement — MT940</li>
+            <li>Cash journal (FBCJ)</li>
+            <li>Bank reconciliation</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">07</div><div class="cc-mod-title">Controlling (CO) Integration</div></div>
+          <ul>
+            <li>CO org structure — Controlling area, Cost centres</li>
+            <li>Cost element accounting</li>
+            <li>Internal orders — KO01, KO88</li>
+            <li>Profit centre accounting</li>
+            <li>FI-CO reconciliation</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">08</div><div class="cc-mod-title">Period-End & Year-End Closing</div></div>
+          <ul>
+            <li>GR/IR clearing — F.13</li>
+            <li>Foreign currency revaluation — F.05</li>
+            <li>Balance sheet adjustments</li>
+            <li>Carry-forward balances — F.16, F.07</li>
+            <li>Month-end checklist walkthrough</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">09</div><div class="cc-mod-title">Taxation (GST / TDS)</div></div>
+          <ul>
+            <li>Tax configuration — tax codes, condition types</li>
+            <li>Indian GST setup in SAP</li>
+            <li>TDS / withholding tax configuration</li>
+            <li>Tax reporting & reconciliation</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">10</div><div class="cc-mod-title">Reporting & S/4HANA Finance</div></div>
+          <ul>
+            <li>Standard FI reports (F.01, FBL1N, FBL5N, FBL3N)</li>
+            <li>Universal Journal (ACDOCA) overview</li>
+            <li>Fiori apps for finance</li>
+            <li>New GL vs. Classic GL</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SD ── -->
+    <div class="cc-panel" id="panel-sd">
+      <div class="cc-panel-header" data-module="SD">
+        <div class="cc-ph-left">
+          <h3>SAP Sales & Distribution (SD)</h3>
+          <p>Complete Order-to-Cash cycle mastery. Configure sales processes, pricing, billing and customer management in a real SAP landscape.</p>
+          <div class="cc-meta">
+            <span class="cc-badge">Functional</span>
+            <span class="cc-badge">3 Months</span>
+            <span class="cc-badge">Order-to-Cash</span>
+            <span class="cc-badge">Placement Assured</span>
+          </div>
+        </div>
+        <a href="enroll" class="bg cc-enroll-btn">Enroll Now →</a>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">01</div><div class="cc-mod-title">SAP SD Overview</div></div>
+          <ul>
+            <li>SD module overview & business process</li>
+            <li>Organisational structure — Sales org, Distribution channel, Division</li>
+            <li>Assignments between org units</li>
+            <li>SD integration with FI, MM, PP</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">02</div><div class="cc-mod-title">Master Data</div></div>
+          <ul>
+            <li>Customer master — general, company code, sales area</li>
+            <li>Material master — sales & sales org views</li>
+            <li>Customer-material info records</li>
+            <li>Condition records for pricing</li>
+            <li>Credit master data</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">03</div><div class="cc-mod-title">Sales Documents</div></div>
+          <ul>
+            <li>Inquiry & Quotation (VA11, VA21)</li>
+            <li>Sales order — VA01, VA02, VA03</li>
+            <li>Sales document types & item categories</li>
+            <li>Schedule lines & schedule line categories</li>
+            <li>Copy control between documents</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">04</div><div class="cc-mod-title">Shipping & Delivery</div></div>
+          <ul>
+            <li>Delivery processing — VL01N, VL02N</li>
+            <li>Shipping point & route determination</li>
+            <li>Picking, packing & goods issue</li>
+            <li>Transfer order creation</li>
+            <li>Partial deliveries & batch splits</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">05</div><div class="cc-mod-title">Pricing & Condition Technique</div></div>
+          <ul>
+            <li>Condition types, tables & access sequence</li>
+            <li>Pricing procedure — step, counter, requirements</li>
+            <li>Discounts, surcharges & freight</li>
+            <li>Tax condition types</li>
+            <li>Manual price changes & price limits</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">06</div><div class="cc-mod-title">Billing</div></div>
+          <ul>
+            <li>Billing document types</li>
+            <li>Invoice creation — VF01, VF04 (collective)</li>
+            <li>Credit & debit memos</li>
+            <li>Pro-forma invoices</li>
+            <li>Revenue account determination</li>
+            <li>FI posting from billing</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">07</div><div class="cc-mod-title">Credit Management</div></div>
+          <ul>
+            <li>Credit control area configuration</li>
+            <li>Static vs. dynamic credit check</li>
+            <li>Credit limit assignment & release</li>
+            <li>Risk categories & credit groups</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">08</div><div class="cc-mod-title">Returns & Special Processes</div></div>
+          <ul>
+            <li>Returns order — VA01 with REN doc type</li>
+            <li>Return delivery & credit memo process</li>
+            <li>Consignment — fill-up, issue, returns, pick-up</li>
+            <li>Third-party order processing</li>
+            <li>Intercompany sales</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">09</div><div class="cc-mod-title">Output & Correspondence</div></div>
+          <ul>
+            <li>Output determination — condition technique</li>
+            <li>Message types: order confirm, invoice, delivery note</li>
+            <li>Print, fax & email output</li>
+            <li>Smartforms integration</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">10</div><div class="cc-mod-title">Reporting & S/4HANA SD</div></div>
+          <ul>
+            <li>Standard SD reports — VA05, VF05, VL06</li>
+            <li>Sales information system (SIS)</li>
+            <li>Fiori apps for sales processing</li>
+            <li>S/4HANA changes in SD</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HCM ── -->
+    <div class="cc-panel" id="panel-hcm">
+      <div class="cc-panel-header" data-module="HCM">
+        <div class="cc-ph-left">
+          <h3>SAP Human Capital Management (HCM)</h3>
+          <p>Full HR lifecycle on SAP — from hiring to payroll processing. Covers Personnel Administration, Time Management, Payroll and Organisational Management.</p>
+          <div class="cc-meta">
+            <span class="cc-badge">Functional</span>
+            <span class="cc-badge">3 Months</span>
+            <span class="cc-badge">Payroll & HR</span>
+            <span class="cc-badge">Placement Assured</span>
+          </div>
+        </div>
+        <a href="enroll" class="bg cc-enroll-btn">Enroll Now →</a>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">01</div><div class="cc-mod-title">SAP HCM Overview</div></div>
+          <ul>
+            <li>HCM module landscape & sub-modules</li>
+            <li>Enterprise structure — Company, Personnel area, Subarea</li>
+            <li>Employee subgroup & pay scale structure</li>
+            <li>HCM integration with FI, CO</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">02</div><div class="cc-mod-title">Organisational Management (OM)</div></div>
+          <ul>
+            <li>Org objects — O, S, P, C, A</li>
+            <li>Org unit, position & job creation</li>
+            <li>Reporting relationships & matrix structures</li>
+            <li>Expert mode vs. simple maintenance</li>
+            <li>Plan version & active plan</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">03</div><div class="cc-mod-title">Personnel Administration (PA)</div></div>
+          <ul>
+            <li>Infotype concept & PA40 hiring action</li>
+            <li>Key infotypes — 0001, 0002, 0006, 0007, 0008, 0009</li>
+            <li>Personnel actions & dynamic actions</li>
+            <li>Feature ABKRS for payroll area defaulting</li>
+            <li>Master data reports</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">04</div><div class="cc-mod-title">Time Management</div></div>
+          <ul>
+            <li>Work schedules — daily WS rule, period WS rule</li>
+            <li>Time recording methods — positive vs. negative</li>
+            <li>Attendance & absence types</li>
+            <li>Leave entitlement & quota configuration</li>
+            <li>Time evaluation — schema TM00/TM04</li>
+            <li>CATS — cross-application time sheet</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">05</div><div class="cc-mod-title">Payroll Configuration</div></div>
+          <ul>
+            <li>Payroll area & control record</li>
+            <li>Pay scale groups & levels</li>
+            <li>Wage types — primary & secondary</li>
+            <li>Payroll schema (IN00) & processing rules</li>
+            <li>Statutory deductions — PF, ESI, PT, TDS</li>
+            <li>Off-cycle payroll basics</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">06</div><div class="cc-mod-title">Payroll Run & Posting</div></div>
+          <ul>
+            <li>PC00_M40_CALC — payroll driver</li>
+            <li>Simulation vs. live payroll run</li>
+            <li>Remuneration statement (payslip)</li>
+            <li>Bank transfer medium — RFFOUS_T</li>
+            <li>Posting to FI — PC00_M40_CIPE</li>
+            <li>Payroll reconciliation reports</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">07</div><div class="cc-mod-title">Benefits & Loans</div></div>
+          <ul>
+            <li>Loan infotype 0045 configuration</li>
+            <li>Loan repayment wage type setup</li>
+            <li>Benefits plan types (basic)</li>
+            <li>Flexible spending accounts overview</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">08</div><div class="cc-mod-title">Recruitment & Training</div></div>
+          <ul>
+            <li>Recruitment — vacancy, advertisement, applicants</li>
+            <li>Applicant actions & status management</li>
+            <li>Training & Event Management (TEM) overview</li>
+            <li>Course types, business events & booking</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">09</div><div class="cc-mod-title">ESS / MSS Basics</div></div>
+          <ul>
+            <li>Employee Self-Service portal overview</li>
+            <li>Manager Self-Service overview</li>
+            <li>Leave application & approval workflow</li>
+            <li>Fiori HR apps overview</li>
+          </ul>
+        </div>
+        <div class="cc-module">
+          <div class="cc-module-head"><div class="cc-mod-num">10</div><div class="cc-mod-title">HR Reporting & Analytics</div></div>
+          <ul>
+            <li>Standard HCM reports — S_PH9_46000172, RPLICO10</li>
+            <li>Ad-hoc query — SQ00, SQ01, SQ02</li>
+            <li>Logical databases PNP & PNPCE</li>
+            <li>Headcount, turnover & payroll cost reports</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -118,12 +812,12 @@
 <!-- CTA -->
 <div class="cta-b fu">
   <div>
-    <div class="ct">Don't wait for the page — talk to us now.</div>
+    <div class="ct">Ready to start? Talk to us today.</div>
     <p class="cs">Free counselling. Honest answers. No pressure to enrol.</p>
   </div>
   <div class="cbs">
     <a href="https://wa.me/919952227377" target="_blank" class="bg">📲 WhatsApp Now</a>
-    <a href="contact" class="bo">Contact Page →</a>
+    <a href="enroll" class="bo">Enroll Now →</a>
   </div>
 </div>
 
@@ -146,9 +840,10 @@
       <li><a href="terms">Terms &amp; Conditions</a></li>
     </ul></div>
     <div class="fco"><h4>SAP Modules</h4><ul>
-      <li><a href="academy">SAP ABAP</a></li><li><a href="academy">SAP FICO</a></li>
-      <li><a href="academy">SAP MM</a></li><li><a href="academy">SAP SD</a></li>
-      <li><a href="academy">SAP HCM</a></li><li><a href="academy">SAP S/4HANA</a></li>
+      <li><a href="academy#course-content" onclick="setTimeout(()=>switchTab('abap'),300)">SAP ABAP</a></li>
+      <li><a href="academy#course-content" onclick="setTimeout(()=>switchTab('fi'),300)">SAP FICO</a></li>
+      <li><a href="academy#course-content" onclick="setTimeout(()=>switchTab('sd'),300)">SAP SD</a></li>
+      <li><a href="academy#course-content" onclick="setTimeout(()=>switchTab('hcm'),300)">SAP HCM</a></li>
     </ul></div>
     <div class="fco"><h4>Contact</h4><ul>
       <li><a href="tel:+919952227377">+91 99522 27377</a></li>
@@ -164,5 +859,34 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+/* ── Course Content Tab Switcher ── */
+function switchTab(tabId) {
+  document.querySelectorAll('.cc-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tabId);
+    t.setAttribute('aria-selected', t.dataset.tab === tabId);
+  });
+  document.querySelectorAll('.cc-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'panel-' + tabId);
+  });
+}
+
+document.querySelectorAll('.cc-tab').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+/* ── Deep-link: academy#course-content?tab=abap ── */
+(function(){
+  const params = new URLSearchParams(location.search);
+  const tab = params.get('tab');
+  if (tab) switchTab(tab);
+
+  /* also support hash-only deep link from enroll page */
+  if (location.hash === '#course-content') {
+    const el = document.getElementById('course-content');
+    if (el) setTimeout(() => el.scrollIntoView({ behavior:'smooth', block:'start' }), 300);
+  }
+})();
+</script>
 </body>
 </html>
