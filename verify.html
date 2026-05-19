@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Certificate – SAPZCODES</title>
+<meta name="description" content="Verify the authenticity of a SAPZCODES course completion certificate."/>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ---- page-specific styles ---- */
+  .verify-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .verify-hero .hgrid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(34,160,50,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,160,50,.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridDrift 20s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes gridDrift {
+    0% { background-position: 0 0; }
+    100% { background-position: 48px 48px; }
+  }
+  .verify-hero .hrad {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(34,160,50,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .vc-wrap {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 560px;
+    text-align: center;
+  }
+
+  .vc-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, rgba(34,160,50,.18), rgba(61,220,80,.08));
+    border: 1px solid rgba(34,160,50,.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 32px;
+  }
+
+  .vc-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #e8f5e8;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: .02em;
+  }
+
+  .vc-sub {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1rem;
+    color: rgba(200,230,200,.65);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  /* Search box */
+  .vc-box {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(34,160,50,.2);
+    border-radius: 14px;
+    padding: 32px 28px;
+    backdrop-filter: blur(6px);
+  }
+
+  .vc-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: rgba(34,160,50,.8);
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .vc-input-wrap {
+    display: flex;
+    gap: 10px;
+  }
+
+  .vc-input {
+    flex: 1;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(34,160,50,.25);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .95rem;
+    color: #d0f0d0;
+    outline: none;
+    transition: border .2s, box-shadow .2s;
+    letter-spacing: .05em;
+  }
+  .vc-input::placeholder { color: rgba(200,230,200,.3); }
+  .vc-input:focus {
+    border-color: rgba(34,160,50,.6);
+    box-shadow: 0 0 0 3px rgba(34,160,50,.12);
+  }
+
+  .vc-btn {
+    background: linear-gradient(135deg, #22a032, #3ddc50);
+    color: #050f05;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 22px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s;
+    white-space: nowrap;
+  }
+  .vc-btn:hover { opacity: .88; transform: translateY(-1px); }
+  .vc-btn:active { transform: scale(.97); }
+  .vc-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+  .vc-hint {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .78rem;
+    color: rgba(200,230,200,.4);
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  /* Result area */
+  #vc-result { margin-top: 28px; }
+
+  .vc-card {
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: left;
+    animation: slideIn .35s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .vc-card.valid {
+    background: rgba(34,160,50,.08);
+    border: 1px solid rgba(34,160,50,.35);
+  }
+  .vc-card.invalid {
+    background: rgba(220,50,50,.07);
+    border: 1px solid rgba(220,50,50,.3);
+  }
+
+  .vc-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .vc-badge {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .vc-badge.valid {
+    background: rgba(34,160,50,.2);
+    color: #3ddc50;
+    border: 1px solid rgba(34,160,50,.4);
+  }
+  .vc-badge.invalid {
+    background: rgba(220,50,50,.15);
+    color: #ff7070;
+    border: 1px solid rgba(220,50,50,.35);
+  }
+
+  .vc-stamp {
+    font-size: 28px;
+  }
+
+  .vc-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #d0f0d0;
+    margin-bottom: 4px;
+    letter-spacing: .02em;
+  }
+  .vc-module {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .85rem;
+    color: rgba(34,160,50,.8);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: 20px;
+  }
+
+  .vc-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .vc-detail-item {}
+  .vc-dl {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(200,230,200,.4);
+    margin-bottom: 3px;
+  }
+  .vc-dv {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .85rem;
+    color: rgba(200,230,200,.8);
+  }
+
+  .vc-divider {
+    border: none;
+    border-top: 1px solid rgba(34,160,50,.15);
+    margin: 20px 0;
+  }
+
+  .vc-invalid-msg {
+    font-family: 'Exo 2', sans-serif;
+    font-size: .95rem;
+    color: rgba(255,160,160,.8);
+    line-height: 1.6;
+  }
+
+  .vc-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    color: rgba(200,230,200,.5);
+    font-family: 'Exo 2', sans-serif;
+    font-size: .9rem;
+  }
+  .vc-spinner {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(34,160,50,.2);
+    border-top-color: #22a032;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .vc-revoked {
+    background: rgba(200,150,0,.08);
+    border: 1px solid rgba(200,150,0,.3);
+  }
+  .vc-badge.revoked {
+    background: rgba(200,150,0,.15);
+    color: #f5c842;
+    border: 1px solid rgba(200,150,0,.35);
+  }
+
+  @media (max-width:480px) {
+    .vc-input-wrap { flex-direction: column; }
+    .vc-details { grid-template-columns: 1fr; }
+    .vc-box { padding: 24px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="ring"></div>
+
+<!-- NAV -->
+<nav id="nv">
+  <a class="logo" href="index">
+    <img src="logoforblack.png" alt="SAPZCODES">
+  </a>
+  <div class="nav-right">
+    <ul class="nl">
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+      <li><a href="enroll" class="cta">Enroll</a></li>
+    </ul>
+    <button class="hb" id="hb" onclick="togM()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mm" id="mob">
+  <a href="index">Home</a>
+  <a href="about">About Us</a>
+  <a href="services">Services</a>
+  <a href="academy">Academy</a>
+  <a href="contact">Contact</a>
+  <a href="enroll" class="cta">Enroll</a>
+</div>
+
+<!-- MAIN -->
+<section class="verify-hero">
+  <div class="hgrid"></div>
+  <div class="hrad"></div>
+
+  <div class="vc-wrap">
+    <div class="vc-icon">🏅</div>
+    <h1 class="vc-title">Verify<br><span class="g">Certificate</span></h1>
+    <p class="vc-sub">Enter the Certificate ID printed on the document or scan the QR code to instantly verify its authenticity.</p>
+
+    <div class="vc-box">
+      <div class="vc-label">Certificate ID</div>
+      <div class="vc-input-wrap">
+        <input
+          class="vc-input"
+          id="certInput"
+          type="text"
+          placeholder="e.g. SAPZ-2025-ABAP-001"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="vc-btn" id="verifyBtn" onclick="verifyCert()">Verify →</button>
+      </div>
+      <div class="vc-hint">Certificate IDs are printed below the QR code on your certificate.</div>
+    </div>
+
+    <div id="vc-result"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="fbl">SAP<span class="z">Z</span>CODES</div>
+      <p class="ftag">Coimbatore's premier SAP training & consulting institute.</p>
+      <div class="sr_">
+        <a href="https://instagram.com/sapzcodes" target="_blank" class="sb_">📸</a>
+        <a href="https://wa.me/919952227377" target="_blank" class="sb_">💬</a>
+        <a href="mailto:hr@sapzcodes.com" class="sb_">✉️</a>
+      </div>
+    </div>
+    <div class="fco"><h4>Navigate</h4><ul>
+      <li><a href="index">Home</a></li>
+      <li><a href="about">About Us</a></li>
+      <li><a href="academy">Academy</a></li>
+      <li><a href="contact">Contact</a></li>
+    </ul></div>
+    <div class="fco"><h4>Contact</h4><ul>
+      <li><a href="tel:+919952227377">+91 99522 27377</a></li>
+      <li><a href="mailto:hr@sapzcodes.com">hr@sapzcodes.com</a></li>
+      <li><a href="contact">R.S. Puram, Coimbatore</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2025 SAPZCODES · All Rights Reserved</div>
+    <div class="fc-copy">Made for SAP Aspirants Everywhere ⚡</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
+// Replace with your deployed Apps Script URL
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ─── AUTO-FILL FROM URL PARAM ─────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (id) {
+    document.getElementById('certInput').value = id.trim().toUpperCase();
+    verifyCert();
+  }
+});
+
+// ─── ENTER KEY ────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('certInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') verifyCert();
+  });
+});
+
+// ─── VERIFY ──────────────────────────────────────────────────────────────────
+async function verifyCert() {
+  const raw = document.getElementById('certInput').value.trim().toUpperCase();
+  const btn = document.getElementById('verifyBtn');
+  const result = document.getElementById('vc-result');
+
+  if (!raw) {
+    showError(result, 'Please enter a Certificate ID.');
+    return;
+  }
+
+  btn.disabled = true;
+  result.innerHTML = `
+    <div class="vc-loader">
+      <div class="vc-spinner"></div>
+      Verifying certificate…
+    </div>`;
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?action=certificate&id=${encodeURIComponent(raw)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.ok) {
+      showValid(result, data);
+    } else {
+      showInvalid(result, raw);
+    }
+  } catch (err) {
+    showError(result, 'Could not connect to verification server. Please try again.');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ─── RENDER VALID ─────────────────────────────────────────────────────────
+function showValid(el, d) {
+  const isRevoked = String(d.status).toLowerCase() === 'revoked';
+  const cardClass = isRevoked ? 'vc-revoked' : 'valid';
+  const badgeClass = isRevoked ? 'revoked' : 'valid';
+  const stamp = isRevoked ? '⚠️' : '✅';
+  const statusLabel = isRevoked ? 'Revoked' : 'Verified';
+
+  el.innerHTML = `
+    <div class="vc-card ${cardClass}">
+      <div class="vc-status-row">
+        <span class="vc-stamp">${stamp}</span>
+        <span class="vc-badge ${badgeClass}">${statusLabel}</span>
+      </div>
+      <div class="vc-name">${esc(d.studentName)}</div>
+      <div class="vc-module">${esc(d.module)}</div>
+      <hr class="vc-divider">
+      <div class="vc-details">
+        <div class="vc-detail-item">
+          <div class="vc-dl">Certificate ID</div>
+          <div class="vc-dv">${esc(d.certId)}</div>
+        </div>
+        <div class="vc-detail-item">
+          <div class="vc-dl">Issue Date</div>
+          <div class="vc-dv">${esc(d.issueDate)}</div>
+        </div>
+        <div class="vc-detail-item">
+          <div class="vc-dl">Trainer</div>
+          <div class="vc-dv">${esc(d.trainerName)}</div>
+        </div>
+        <div class="vc-detail-item">
+          <div class="vc-dl">Issued By</div>
+          <div class="vc-dv">SAPZCODES, Coimbatore</div>
+        </div>
+      </div>
+      ${isRevoked ? `<hr class="vc-divider"><p class="vc-invalid-msg">This certificate has been revoked. Contact <a href="mailto:hr@sapzcodes.com" style="color:#f5c842">hr@sapzcodes.com</a> for clarification.</p>` : ''}
+    </div>`;
+}
+
+// ─── RENDER INVALID ───────────────────────────────────────────────────────
+function showInvalid(el, id) {
+  el.innerHTML = `
+    <div class="vc-card invalid">
+      <div class="vc-status-row">
+        <span class="vc-stamp">❌</span>
+        <span class="vc-badge invalid">Not Found</span>
+      </div>
+      <p class="vc-invalid-msg">
+        No certificate found with ID <strong style="color:#ffaaaa;font-family:'JetBrains Mono',monospace">${esc(id)}</strong>.<br><br>
+        Please double-check the ID and try again. If you believe this is an error, contact us at
+        <a href="mailto:hr@sapzcodes.com" style="color:#ff9090">hr@sapzcodes.com</a>.
+      </p>
+    </div>`;
+}
+
+// ─── RENDER ERROR ─────────────────────────────────────────────────────────
+function showError(el, msg) {
+  el.innerHTML = `
+    <div class="vc-card invalid">
+      <p class="vc-invalid-msg">${esc(msg)}</p>
+    </div>`;
+}
+
+function esc(str) {
+  return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
