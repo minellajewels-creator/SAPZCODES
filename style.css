@@ -38,21 +38,23 @@ body {
 
 /* ── CURSOR ── */
 #cur {
-  width: 10px; height: 10px;
-  background: var(--g);
+  width: 24px; height: 24px;
   position: fixed; top: 0; left: 0;
   pointer-events: none; z-index: 99999;
-  /* Sharp diamond shape perfectly centered on the mouse */
-  transform: translate(-50%, -50%) rotate(45deg);
-  box-shadow: 0 0 10px var(--glt), 0 0 4px var(--glt);
-  transition: width 0.15s, height 0.15s, transform 0.2s ease;
+  
+  /* Standard pointer shape via SVG. Fill is dark (#1a1a1a), stroke is green (#3ddc50 / var(--glt)) */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3,3 L3,17 L6.5,13.5 L10,20 L13,18.5 L9.5,12 L14,12 Z" fill="%231a1a1a" stroke="%233ddc50" stroke-width="2" stroke-linejoin="round" /></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  /* Translating -3px offsets the stroke width so the very tip of the arrow acts as the true click point */
+  transform: translate(-3px, -3px);
+  transition: transform 0.15s ease;
 }
 
 body.hov #cur { 
-  width: 14px; height: 14px; 
-  /* Spins and scales up slightly on hover */
-  transform: translate(-50%, -50%) rotate(135deg);
-  background: var(--glt);
+  /* Scales up slightly when hovering over links to give visual feedback */
+  transform: translate(-3px, -3px) scale(1.15);
 }
 
 /* Hide the ring completely */
