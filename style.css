@@ -37,13 +37,14 @@ body {
 }
 
 /* ── CURSOR ── */
+/* ── CURSOR ── */
 #cur {
   width: 24px; height: 24px;
   position: fixed; top: 0; left: 0;
   pointer-events: none; z-index: 99999;
   
   /* Standard pointer shape via SVG. Fill is dark (#1a1a1a), stroke is green (#3ddc50 / var(--glt)) */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3,3 L3,17 L6.5,13.5 L10,20 L13,18.5 L9.5,12 L14,12 Z" fill="%231a1a1a" stroke="%233ddc50" stroke-width="2" stroke-linejoin="round" /></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3,3 L3,17 L6.5,13.5 L10,20 L13,18.5 L9.5,12 L14,12 Z" fill="%231a1a1a" stroke="%233ddc50" stroke-width="1" stroke-linejoin="round" /></svg>');
   background-size: contain;
   background-repeat: no-repeat;
   
