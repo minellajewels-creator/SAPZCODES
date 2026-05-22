@@ -38,24 +38,27 @@ body {
 
 /* ── CURSOR ── */
 #cur {
-  width:10px; height:10px;
-  background:var(--g);
-  border-radius:50%;
-  position:fixed; top:0; left:0;
-  pointer-events:none; z-index:99999;
-  transform:translate(-50%,-50%);
-  box-shadow:0 0 10px var(--glt),0 0 4px var(--glt);
-  transition:width .15s,height .15s;
+  width: 10px; height: 10px;
+  background: var(--g);
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 99999;
+  /* Sharp diamond shape perfectly centered on the mouse */
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-shadow: 0 0 10px var(--glt), 0 0 4px var(--glt);
+  transition: width 0.15s, height 0.15s, transform 0.2s ease;
 }
+
+body.hov #cur { 
+  width: 14px; height: 14px; 
+  /* Spins and scales up slightly on hover */
+  transform: translate(-50%, -50%) rotate(135deg);
+  background: var(--glt);
+}
+
+/* Hide the ring completely */
 #ring {
-  width:32px; height:32px;
-  border:1.5px solid rgba(34,160,50,.4);
-  border-radius:50%;
-  position:fixed; top:0; left:0;
-  pointer-events:none; z-index:99998;
-  transform:translate(-50%,-50%);
+  display: none;
 }
-body.hov #cur { width:18px; height:18px }
 
 /* ── DOT MATRIX ── */
 .dots {
